@@ -1,0 +1,13 @@
+.media-video {
+  margin-bottom: 35px;
+}
+
+.media-video__iframe-wrapper {
+  margin-bottom: 60px;
+
+  iframe {
+    width: 100%;
+    height: calc((#{$site-max-width} / 16) * 9);
+    max-width: $site-max-width;
+  }
+}

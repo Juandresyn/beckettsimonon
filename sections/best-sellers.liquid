@@ -1,0 +1,60 @@
+<div class="best-sellers" style="background-color: {{ section.settings.color_bg }};">
+  <header class="layout-section__header">
+    <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+  </header>
+  <div class="best-sellers__content">
+    {% assign collection = collections['all-products-noindex'] %}
+    <ul class="best-sellers__list">
+      {% for product in collection.products %}
+        {% unless forloop.index > section.settings.max %}
+          <li class="best-sellers__list-item">
+            <a class="best-sellers__list-item__link"
+              href="{{ product.url }}">
+              <img class="best-sellers__list-item__image"
+                src="{{ product.featured_image | img_url: '230x230', crop: 'center' }}" />
+              <h3 class="best-sellers__list-item__title">{{ product.title }}</h3>
+              {% comment %} <span class="best-sellers__list-item__variant">{{ product.variant }}</span> {% endcomment %}
+              <span class="best-sellers__list-item__price">{{ product.price | money_without_trailing_zeros }}</span>
+            </a>
+          </li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Best Sellers",
+  "class": "layout-section section--best-sellers",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "range",
+      "id": "max",
+      "min": 4,
+      "max": 40,
+      "step": 1,
+      "unit": "pdt",
+      "label": "Max products count",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}

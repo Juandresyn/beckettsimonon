@@ -17,17 +17,19 @@ var gulp = require('gulp'),
 	sourceMaps = require('gulp-sourcemaps'),
 	cssNano = require('gulp-cssnano'),
 	browserSync = require('browser-sync').create(),
+	prefix      = require('gulp-autoprefixer'),
 	watch = require('gulp-watch'),
 	fs = require("fs"),
-	cacheBuster = require("postcss-cachebuster");
+	cacheBuster = require("postcss-cachebuster")
+	shell = require('gulp-shell');
 
 
 // --------------------------------
 // 			Setup
 // --------------------------------
-var storeName = 'Store Name',
+var storeName = 'Beckett Simonon',
 	projectName = storeName.toLowerCase().replace(/\s/g, '-'),
-	url = 'https://store-name.myshopify.com/', // Note: Url must be the actual shop url for BrowserSync to work properly
+	url = 'https://bec-sin-dev.myshopify.com/', // Note: Url must be the actual shop url for BrowserSync to work properly
 	jsfiles = [
 			'src/js/libs/jquery-2.2.4.min.js',
 			'src/js/libs/*.js',
@@ -44,6 +46,9 @@ var storeName = 'Store Name',
 	        cacheBuster({cssPath: '/assets', type:'mtime'})
 		];
 
+var prefixerOptions = {
+	browsers: ['last 2 versions']
+};
 
 // --------------------------------
 // 			Tasks
@@ -85,6 +90,7 @@ gulp.task('css:postsass', function(){
 		.pipe(sourceMaps.init())
 		.pipe(sass().on('error', handleSassError))
 		.pipe(postCss(devProcessors))
+		.pipe(prefix(prefixerOptions))
 		.pipe(sourceMaps.write())
 		.pipe(rename(projectName + '.css'))
 		.pipe(gulp.dest('assets/'))
@@ -115,7 +121,6 @@ function handleSassError(err){
 	}).write(err);
 }
 
-
 // --------------------------------
 // 			Executables
 // --------------------------------
@@ -127,6 +132,7 @@ gulp.task('default', ['js:hint','js:concat','css:postsass'], function() {
 
 		browserSync.init({
 		    proxy: url + '?preview_theme_id=' + themeId,
+			port: 8080,
 		    open: false,
 		    xip: false, // turn this on if using typekit, point your typekit to xip.io
 		    ghostMode: { // turn this off if you don't want people on the same IP scrolling on you
@@ -143,6 +149,8 @@ gulp.task('default', ['js:hint','js:concat','css:postsass'], function() {
 	// watch for sass changes
 	gulp.watch('src/css/scss/**/*.scss', ['css:postsass']);
 
+	// Run Shopify Theme Kit
+	shell.task('theme watch --env=develop');
 });
 
 // Command: `gulp build`

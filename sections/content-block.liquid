@@ -1,0 +1,56 @@
+<div id="block-{{ section.id }}" class="content-block section--content-block--{{ section.settings.position }} js-on-show"
+  style="background-color: {{ section.settings.color_bg }};"
+  data-onshow-target=".section--content-block__content" data-onshow-class="animation--fade-up animated">
+  <div class="section--content-block__content">
+    <img class="section--content-block__content-image" src="{{ section.settings.image | img_url: 'master' }}" />
+    <h3 class="section--content-block__title">{{ section.settings.title }}</h3>
+    <p class="layout-section__description section--content-block__description">{{ section.settings.description }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Why Buy From Us",
+  "class": "section--content-block",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Main Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Loprem ipsun..."
+    },
+    {
+      "type": "radio",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Block",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}

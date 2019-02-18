@@ -1,0 +1,229 @@
+<div class="collection-masonery" style="background-color: {{ section.settings.color_bg }};">
+  <header class="layout-section__header">
+    <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+  </header>
+  <div class="collection-masonery__content">
+    <div class="collection-masonery__list">
+      {% for i in (1..6) %}
+        {% capture item_id %}collection_id_{{ i }}{% endcapture %}
+        {% capture use_custom_image %}collection_{{ i }}_custom_image{% endcapture %}
+        {% capture custom_image %}collection_image_{{ i }}{% endcapture %}
+
+        {% if section.settings[item_id] != "" %}
+          {% assign collection = collections[section.settings[item_id]] %}
+
+          {% if section.settings[use_custom_image] %}
+            {% assign collection_image = collection.image.src %}
+          {% else %}
+            {% assign collection_image = section.settings[custom_image] %}
+          {% endif %}
+
+          <a href="{{ collection.url }}"
+            class="collection-masonery__list-item__link collection-masonery__list-item-wrapper animation-parent"
+            style="background-image: url({{ collection_image | img_url: 'master' }});" >
+            <article id="{{ collection.handle }}" class="collection-masonery__list-item">
+              <h3 class="collection-masonery__list-item__title">{{ collection.title }}</h3>
+              <span class="collection-masonery__list-item__cta">{{ section.settings.collections_cta }} <span class="animation--go-to icon icon--arrow"></span></span>
+            </article>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <a href="{{ section.settings.cta_link }}" class="btn btn--scarlet">{{ section.settings.cta_text }}</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Masonery",
+  "class": "layout-section section--collection-masonery",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "header",
+      "content": "Section CTA options"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Section CTA",
+      "default": "My link"
+    },
+    {
+      "type": "select",
+      "id": "button_type",
+      "options": [
+        { "value": "btn--white", "label": "White"},
+        { "value": "btn--scarlet", "label": "Scarlet (red)"},
+        { "value": "btn--outline", "label": "Transparent (black)"},
+        { "value": "btn--outline--white", "label": "Transparent (white)"}
+      ],
+      "label": "Button Style",
+      "default": "btn--scarlet"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Section CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "collections_cta",
+      "label": "Action Text on Collections"
+    },
+    {
+      "type": "header",
+      "content": "Collection Items.",
+      "info": "Order is important. Max 6"
+    },
+    {
+      "type": "header",
+      "content": "Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_id_1",
+      "label": "Pick a Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_1_custom_image",
+      "label": "Use Collection Image?",
+      "info": "If selected, custom image wont be used.",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_image_1",
+      "label": "Custom Collection Image",
+      "info": "Will be used ONLY if the checkbox above is not checked."
+    },
+    {
+      "type": "header",
+      "content": "Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "collection_id_2",
+      "label": "Pick a Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_2_custom_image",
+      "label": "Use Collection Image?",
+      "info": "If selected, custom image wont be used.",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_image_2",
+      "label": "Custom Collection Image",
+      "info": "Will be used ONLY if the checkbox above is not checked."
+    },
+    {
+      "type": "header",
+      "content": "Collection 3"
+    },
+    {
+      "type": "collection",
+      "id": "collection_id_3",
+      "label": "Pick a Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_3_custom_image",
+      "label": "Use Collection Image?",
+      "info": "If selected, custom image wont be used.",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_image_3",
+      "label": "Custom Collection Image",
+      "info": "Will be used ONLY if the checkbox above is not checked."
+    },
+    {
+      "type": "header",
+      "content": "Collection 4"
+    },
+    {
+      "type": "collection",
+      "id": "collection_id_4",
+      "label": "Pick a Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_4_custom_image",
+      "label": "Use Collection Image?",
+      "info": "If selected, custom image wont be used.",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_image_4",
+      "label": "Custom Collection Image",
+      "info": "Will be used ONLY if the checkbox above is not checked."
+    },
+    {
+      "type": "header",
+      "content": "Collection 5"
+    },
+    {
+      "type": "collection",
+      "id": "collection_id_5",
+      "label": "Pick a Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_5_custom_image",
+      "label": "Use Collection Image?",
+      "info": "If selected, custom image wont be used.",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_image_5",
+      "label": "Custom Collection Image",
+      "info": "Will be used ONLY if the checkbox above is not checked."
+    },
+    {
+      "type": "header",
+      "content": "Collection 6"
+    },
+    {
+      "type": "collection",
+      "id": "collection_id_6",
+      "label": "Pick a Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_6_custom_image",
+      "label": "Use Collection Image?",
+      "info": "If selected, custom image wont be used.",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_image_6",
+      "label": "Custom Collection Image",
+      "info": "Will be used ONLY if the checkbox above is not checked."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Masonery",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}

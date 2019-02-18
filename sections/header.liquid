@@ -1,0 +1,181 @@
+{% if template.name contains 'index' %}
+  {% assign header_image = section.settings.hero_image %}
+  {% assign header_title = section.settings.home_page_header_text %}
+  {% assign is_home = true %}
+{% elsif template contains 'collection' %}
+  {% assign header_image = collection.image %}
+  {% assign header_title = collection.title %}
+{% endif %}
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <header class="header-main {% if section.settings.top_bar_enable %}header-main--has-top-bar{% endif %}" style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({{ header_image | img_url: 'master' }});">
+    {% if section.settings.top_bar_enable %}
+      <section class="top-bar" style="background-color: {{ section.settings.top_bar_color_bg }};">
+          <div class="top-bar__content" style="color: {{ section.settings.top_bar_color_text }};">
+              <div class="top-bar__message">{{ section.settings.top_bar_message }}</div>
+              <div class="top-bar__contact"><span class="icon icon--phone"></span> {{ section.settings.top_bar_phone }}</div>
+          </div>
+      </section>
+    {% endif %}
+    <div class="header-main__nav-wrapper">
+      {% include 'site-nav',
+        id: 'main-menu-left',
+        menu: section.settings.main_linklist_left,
+        class: 'header-main',
+        is: 'left' %}
+
+      <div class="header-main__logo-wrapper">
+        <a href="/">
+          <img class="header-main__logo"
+            src="{{ section.settings.logo | img_url: '300x300' }}"
+            alt="Beckett Simonon Logo" />
+        </a>
+      </div>
+
+      {% include 'site-nav',
+        id: 'main-menu-right',
+        menu: section.settings.main_linklist_right,
+        class: 'header-main',
+        hasCart: true,
+        hasSearch: true,
+        is: 'right' %}
+    </div>
+    <section class="header-main__content">
+      {% if header_title %}
+        <h1 class="header-main__title">{{ header_title }}</h1>
+      {% endif %}
+      <div class="header-main__cta">
+        <a href="{{ section.settings.home_page_cta_link }}" class="btn btn--white">{{ section.settings.home_page_cta_text }}</a>
+      </div>
+      <button class="header-main__scroll animation-parent">
+        <span class="icon icon--arrow rotate-90 animation--go-to"></span>
+      </button>
+    </section>
+  </header>
+</div>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+  {% endif %}
+  "sameAs": [
+    "{{ settings.social_twitter_link }}",
+    "{{ settings.social_facebook_link }}",
+    "{{ settings.social_pinterest_link }}",
+    "{{ settings.social_instagram_link }}",
+    "{{ settings.social_tumblr_link }}",
+    "{{ settings.social_snapchat_link }}",
+    "{{ settings.social_youtube_link }}",
+    "{{ settings.social_vimeo_link }}"
+  ],
+  "url": "{{ shop.url }}{{ page.url }}"
+}
+</script>
+
+{% if template.name == 'index' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{ shop.name }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ shop.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "url": "{{ shop.url }}{{ page.url }}"
+    }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "main_linklist_left",
+      "label": "Main menu left",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "main_linklist_right",
+      "label": "Main menu right",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Show Top Bar content"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_bar_enable",
+      "label": "Show Top Bar",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "top_bar_message",
+      "label": "Message",
+      "default": "Message Here"
+    },
+    {
+      "type": "text",
+      "id": "top_bar_phone",
+      "label": "Phone",
+      "default": "1234567890"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_color_bg",
+      "label": "Bar Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_color_text",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Homepage Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "home_page_header_text",
+      "label": "Homepage Hero Text",
+      "default": "Message Here"
+    },
+    {
+      "type": "text",
+      "id": "home_page_cta_text",
+      "label": "Homepage Hero CTA",
+      "default": "My link"
+    },
+    {
+      "type": "url",
+      "id": "home_page_cta_link",
+      "label": "Homepage Hero CTA Link"
+    }
+  ]
+}
+{% endschema %}

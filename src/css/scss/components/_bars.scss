@@ -1,0 +1,13 @@
+.bar {
+  background-color: $light-gray;
+  border-radius: 4px;
+  color: $dark-gray;
+  font-family: $font-secondary;
+  font-size: 20px;
+  padding: 36px 25px;
+}
+
+.bar--scarlet {
+  background-color: $scarlet;
+  color: $white;
+}

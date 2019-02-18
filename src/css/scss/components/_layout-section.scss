@@ -1,0 +1,36 @@
+.layout-section {
+  padding: 60px 25px;
+  text-align: center;
+}
+
+.layout-section__wrapper {
+  max-width: $site-max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layout-section__header {
+  margin-bottom: 66px;
+}
+
+.layout-section__eyebrow {
+  color: $scarlet;
+  font-family: $font-secondary--bold;
+  font-size: 12px;
+  letter-spacing: 1px;
+  line-height: 18px;
+}
+
+.layout-section__title {
+  font-size: 30px;
+  line-height: 44px;
+  margin: 0 0 21px 0;
+}
+
+.layout-section__description {
+  font-family: $font-primary;
+  font-size: 17px;
+  line-height: 32px;
+  margin: 0 auto;
+  max-width: 620px;
+}

@@ -1,0 +1,26 @@
+.animation-parent:hover {
+  .animation--go-to {
+    padding: 0 5px 0 15px;
+  }
+}
+
+.animation--go-to {
+  padding: 0 10px;
+  transition: padding .3s ease;
+}
+
+.animation--fade-up {
+  animation: fadeup 1s;
+}
+
+@keyframes fadeup {
+  from {
+    margin-top: 35px;
+    opacity: 0;
+  }
+
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}

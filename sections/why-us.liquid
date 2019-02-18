@@ -1,0 +1,111 @@
+<div class="js-on-show" data-onshow-target=".bar" data-onshow-class="animate" style="background-color: {{ section.settings.color_bg }};">
+  <div class="section--why-us__wrapper">
+    <header class="layout-section__header">
+      <small class="layout-section__eyebrow">{{ section.settings.label }}</small>
+      <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+      <p class="layout-section__description section--why-us__description">{{ section.settings.description }}</p>
+      <a href="{{ section.settings.cta_link }}" class="btn {{ section.settings.button_type }}">{{ section.settings.cta_text }}</a>
+    </header>
+    <div class="section--why-us__container">
+      <div class="section--why-us__content">
+        <div class="section--why-us__bar-wrapper">
+          <span class="bar bar--scarlet section--why-us__bar section--why-us__bar--low">{{ section.settings.lower_price }}</span>
+          <h4 class="section--why-us__bar-title">{{ section.settings.lower_price_brand }}</h4>
+        </div>
+        <div class="section--why-us__bar-wrapper">
+          <span class="bar bar--gray section--why-us__bar section--why-us__bar--high">{{ section.settings.higher_price }}</span>
+          <h4 class="section--why-us__bar-title">{{ section.settings.higher_price_brand }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Why Buy From Us",
+  "class": "section--why-us",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "WHY BUY FROM US?"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Loprem ipsun..."
+    },
+    {
+      "type": "header",
+      "content": "Section CTA options"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Section CTA",
+      "default": "My link"
+    },
+    {
+      "type": "select",
+      "id": "button_type",
+      "options": [
+        { "value": "btn--white", "label": "White"},
+        { "value": "btn--scarlet", "label": "Scarlet (red)"},
+        { "value": "btn--outline", "label": "Transparent (black)"},
+        { "value": "btn--outline--white", "label": "Transparent (white)"}
+      ],
+      "label": "Button Style",
+      "default": "btn--scarlet"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Section CTA Link"
+    },
+    {
+      "type": "header",
+      "content": "Section Prices options"
+    },
+    {
+      "type": "text",
+      "id": "lower_price_brand",
+      "label": "Lower Price Brand"
+    },
+    {
+      "type": "text",
+      "id": "lower_price",
+      "label": "Lower Price"
+    },
+    {
+      "type": "text",
+      "id": "higher_price_brand",
+      "label": "Higher Price Brand"
+    },
+    {
+      "type": "text",
+      "id": "higher_price",
+      "label": "Higher Price"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Us",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}

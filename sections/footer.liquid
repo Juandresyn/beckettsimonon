@@ -1,0 +1,394 @@
+{%- assign social_icons = false -%}
+{%- assign inline_list = false -%}
+
+{%- if
+  settings.social_twitter_link != blank
+  or settings.social_facebook_link != blank
+  or settings.social_instagram_link != blank
+  or settings.social_youtube_link != blank
+  or settings.social_vimeo_link != blank
+  or template.name == 'article'
+  or template.name == 'blog'
+-%}
+  {%- assign social_icons = true -%}
+{%- endif -%}
+
+{% comment %} Create an appropriate hover color based on text color and brightness {% endcomment %}
+{%- assign footer_text_color = section.settings.color_footer_text -%}
+{%- assign footer_text_color_brightness = section.settings.color_footer_text | color_brightness -%}
+{%- if footer_text_color_brightness <= 26 -%}
+  {%- assign footer_text_color_hover = footer_text_color | color_lighten: 25 -%}
+{%- elsif footer_text_color_brightness <= 65 -%}
+  {%- assign footer_text_color_hover = footer_text_color | color_lighten: 15 -%}
+{%- else -%}
+  {%- assign footer_text_color_hover = footer_text_color | color_darken: 10 -%}
+{%- endif -%}
+
+<style>
+  .site-footer__hr {
+    border-bottom: 1px solid {{ section.settings.color_footer_bg | color_darken: 10 }};
+  }
+
+  .site-footer,
+  .site-footer a {
+    color: {{ section.settings.color_footer_text }};
+    background-color: {{ section.settings.color_footer_bg }};
+  }
+
+  .site-footer--prefooter {
+    background-color: {{ section.settings.color_prefooter_bg }};
+  }
+
+  .site-footer--prefooter p {
+    color: {{ section.settings.color_footer_text }};
+  }
+
+  .site-footer a:hover {
+    color: {{ footer_text_color_hover }};
+  }
+
+  .newsletter-form {
+    background-color: {{ section.settings.color_newsletter_bg }};
+  }
+</style>
+
+<section class="newsletter-form layout-section">
+  <h3 class="newsletter-form__label">{{ section.settings.newsletter_label }}</h3>
+  <h2 class="newsletter-form__title">{{ section.settings.newsletter_title }}</h2>
+
+  <form action="//beckettsimonon.us12.list-manage.com/subscribe/post?u=192a9525318e91231988ae830&amp;id=e727baad50"
+    id="subForm"
+    class="newsletter-form__form"
+    method="post"
+    name="mc-embedded-subscribe-form"
+    target="_blank"
+    novalidate="" >
+    <input id="mce-EMAIL"
+      type="email"
+      value=""
+      name="EMAIL"
+      class="newsletter-form__input"
+      placeholder="{{ section.settings.newsletter_placeholder}}" />
+
+    <button type="submit"
+      class="newsletter-form__submit animation-parent">
+      <span class="icon icon--arrow animation--go-to"></span>
+    </button>
+  </form>
+</section>
+
+<div class="site-footer--prefooter desktop--only">
+  <div class="site-footer--prefooter__container">
+      {% for i in (1..4) %}
+        {% capture item_icon %}prefooter_image_{{ i }}{% endcapture %}
+        {% capture item_description %}prefooter_description_{{ i }}{% endcapture %}
+
+        <article class="site-footer--prefooter__item">
+          <img class="site-footer--prefooter__item-image"
+            src="{{ section.settings[item_icon] | img_url: 'master' }}" />
+          <p class="site-footer--prefooter__item-description">{{ section.settings[item_description] }}</p>
+        </article>
+    {% endfor %}
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__container">
+    <div class="site-footer__brand">
+      {% if section.settings.logo %}
+        <div class="site-footer__logo-wrapper">
+          <a href="/">
+            <img class="site-footer__logo"
+              src="{{ section.settings.logo | img_url: 'master' }}" />
+          </a>
+        </div>
+
+        {% if social_icons %}
+          <div class="site-footer__social desktop--only">
+            <ul class="site-footer__social-list">
+              {% if settings.social_facebook_link %}
+                <li class="site-footer__social-item">
+                  <a href="{{ settings.social_facebook_link }}"
+                    class="site-footer__social-item__link"
+                    target="_blank">
+                    <span class="icon icon--facebook"></span>
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_twitter_link %}
+                <li class="site-footer__social-item">
+                  <a href="{{ settings.social_twitter_link }}"
+                    class="site-footer__social-item__link"
+                    target="_blank">
+                    <span class="icon icon--twitter"></span>
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_instagram_link %}
+                <li class="site-footer__social-item">
+                  <a href="{{ settings.social_instagram_link }}"
+                    class="site-footer__social-item__link"
+                    target="_blank">
+                    <span class="icon icon--instagram"></span>
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_youtube_link %}
+                <li class="site-footer__social-item">
+                  <a href="{{ settings.social_youtube_link }}"
+                    class="site-footer__social-item__link"
+                    target="_blank">
+                    <span class="icon icon--youtube"></span>
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="site-footer__navs">
+      {%- for block in section.blocks -%}
+          {%- if block.type == 'link_list' -%}
+          {%- assign footer_linklist = block.settings.menu -%}
+          <nav class="site-footer__nav">
+            <h2 class="site-footer__list-title">{{ block.settings.title }}</h2>
+            <ul class="site-footer__list">
+              {% for link in linklists[footer_linklist].links %}
+                <li class="site-footer__list-item">
+                  <a href="{{ link.url }}" class="site-footer__list-item__link">
+                    {{ link.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {% if social_icons %}
+        <div class="site-footer__social mobile--only">
+          <ul class="site-footer__social-list">
+            {% if settings.social_facebook_link %}
+              <li class="site-footer__social-item">
+                <a href="{{ settings.social_facebook_link }}"
+                  class="site-footer__social-item__link"
+                  target="_blank">
+                  <span class="icon icon--facebook"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_twitter_link %}
+              <li class="site-footer__social-item">
+                <a href="{{ settings.social_twitter_link }}"
+                  class="site-footer__social-item__link"
+                  target="_blank">
+                  <span class="icon icon--twitter"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_instagram_link %}
+              <li class="site-footer__social-item">
+                <a href="{{ settings.social_instagram_link }}"
+                  class="site-footer__social-item__link"
+                  target="_blank">
+                  <span class="icon icon--instagram"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_youtube_link %}
+              <li class="site-footer__social-item">
+                <a href="{{ settings.social_youtube_link }}"
+                  class="site-footer__social-item__link"
+                  target="_blank">
+                  <span class="icon icon--youtube"></span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="site-footer__copyright-wrapper">
+    <p class="site-footer__copyright">© {{ shop.name }} {{ "now" | date: "%Y" }} | <a href="{{ section.settings.copyright_link }}">{{ section.settings.copyright_link_text }}.</a></p>
+    <span class="site-author">Site by {{ section.settings.site_author }}</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "header",
+      "content": "Payment methods"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "color",
+      "id": "color_footer_bg",
+      "label": "Background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "color_footer_text",
+      "label": "Text",
+      "default": "#3d4246"
+    },
+    {
+      "type": "header",
+      "content": "Copyright"
+    },
+    {
+      "type": "url",
+      "id": "copyright_link",
+      "label": "Copyright Link"
+    },
+    {
+      "type": "text",
+      "id": "copyright_link_text",
+      "label": "Copyright Link Text"
+    },
+    {
+      "type": "text",
+      "id": "site_author",
+      "label": "Site Author"
+    },
+    {
+      "type": "header",
+      "content": "Prefooter",
+      "info": "The section above the footer"
+    },
+    {
+      "type": "color",
+      "id": "color_prefooter_bg",
+      "label": "Background",
+      "default": "#531111"
+    },
+    {
+      "type": "header",
+      "content": "Prefooter item 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "prefooter_image_1",
+      "label": "Button Style"
+    },
+    {
+      "type": "text",
+      "id": "prefooter_description_1",
+      "label": "Item Description"
+    },
+    {
+      "type": "header",
+      "content": "Prefooter item 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "prefooter_image_2",
+      "label": "Button Style"
+    },
+    {
+      "type": "text",
+      "id": "prefooter_description_2",
+      "label": "Item Description"
+    },
+    {
+      "type": "header",
+      "content": "Prefooter item 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "prefooter_image_3",
+      "label": "Button Style"
+    },
+    {
+      "type": "text",
+      "id": "prefooter_description_3",
+      "label": "Item Description"
+    },
+    {
+      "type": "header",
+      "content": "Prefooter item 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "prefooter_image_4",
+      "label": "Button Style"
+    },
+    {
+      "type": "text",
+      "id": "prefooter_description_4",
+      "label": "Item Description"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "color",
+      "id": "color_newsletter_bg",
+      "label": "Newsletter Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_label",
+      "label": "Newsletter Label"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Title"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Newsletter input placeholder"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Quick links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

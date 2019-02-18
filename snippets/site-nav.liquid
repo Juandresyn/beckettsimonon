@@ -1,0 +1,19 @@
+<nav class="site-menu {{ class }}__nav {{ class }}__nav--{{ is }}">
+	<ul class="inline-list site-menu__list {{ class }}__list" id="{{ id }}">
+		{% if hasSearch %}
+			<li class="site-menu__list-item {{ class }}__list-item">
+				<a class="site-menu__link {{ class }}__list-link" href="#"><span class="icon icon--search"></span></a>
+			</li>
+		{% endif %}
+		{% for link in linklists[menu].links %}
+			<li class="site-menu__list-item {{ class }}__list-item">
+				<a class="site-menu__link {{ class }}__list-link" href="{{ link.url }}">{{ link.title }}</a>
+			</li>
+		{% endfor %}
+		{% if hasCart %}
+      <li class="site-menu__list-item {{ class }}__list-item site-menu__list-search">
+        <a class="site-menu__link {{ class }}__list-link" href="#"><span class="icon icon--shop site-menu__cart"></span> {{ cart.item_count }}</a>
+      </li>
+		{% endif %}
+	</ul>
+</nav>

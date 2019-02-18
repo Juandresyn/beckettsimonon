@@ -1,0 +1,23 @@
+.top-bar {
+  background-color: $black;
+  color: $white;
+  padding: 12px 0;
+}
+
+.top-bar__content {
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-secondary;
+  margin: 0 auto;
+  max-width: calc(#{$site-max-width} + 50px);
+  padding: 0 25px;
+}
+
+.top-bar__contact {
+  display: flex;
+  align-items: center;
+
+  .icon {
+    padding-right: 6px;
+  }
+}
