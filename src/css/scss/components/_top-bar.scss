@@ -6,11 +6,23 @@
 
 .top-bar__content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   font-family: $font-secondary;
   margin: 0 auto;
   max-width: calc(#{$site-max-width} + 50px);
   padding: 0 25px;
+
+  @media screen and (min-width: $desktop) {
+    justify-content: space-between;
+  }
+}
+
+.top-bar__message {
+  font-size: 12px;
+
+  @media screen and (min-width: $desktop) {
+    font-size: 16px;
+  }
 }
 
 .top-bar__contact {

@@ -1,0 +1,21 @@
+<section class="product__shipping-details">
+  <header class="layout-section__header product-shipping-details__header">
+    <h2 class="layout-section__title">{{ shipping.shipping_title }}.</h2>
+    <p class="layout-section__description">{{ shipping.shipping_description }}</p>
+    <small class="product-shipping-details__date">Shipping: {{ shipping_date }}.</small>
+  </header>
+  <div class="product-shipping-details__list">
+      {% for i in (1..3) %}
+        {% capture item_icon %}shipping_icon_{{ i }}{% endcapture %}
+        {% capture item_title %}shipping_title_{{ i }}{% endcapture %}
+        {% capture item_description %}shipping_description_{{ i }}{% endcapture %}
+
+        <article class="product-shipping-details__item">
+          <img class="product-shipping-details__item-icon"
+            src="{{ section.settings[item_icon] | img_url: 'master' }}" />
+          <h3 class="product-shipping-details__item-title">{{ shipping[item_title] }}</h3>
+          <p class="product-shipping-details__item-description">{{ shipping[item_description] }}</p>
+        </article>
+      {% endfor %}
+  </div>
+</section>

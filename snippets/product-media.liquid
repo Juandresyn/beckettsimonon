@@ -1,0 +1,73 @@
+<section class="product-media">
+  <div class="product-media__wrapper">
+    <div class="product-media__carousel-wrapper">
+      <header class="layout-section__header product-media__carousel-header">
+        <h2 class="layout-section__title product-media__carousel-title">Handcrafted with integrity</h2>
+        <p class="layout-section__description product-media__carousel-description">Great value shouldn’t come at the expense of human dignity. Manufacturing directly allows us to ensure responsible and ethical working conditions. We are privileged to be working with this team of skilled artisans, and it’s our duty to honor their craft and humanity.</p>
+      </header>
+
+      <div class="product-media__carousel-container">
+        <div class="product-media__carousel js-slick-product-media">
+          <div class="product-media__carousel-item">
+            <img class="product-media__carousel-image"
+              src="{{ 'carousel.png' | asset_img_url: 'master' }}" />
+          </div>
+          <div class="product-media__carousel-item">
+            <img class="product-media__carousel-image"
+              src="http://via.placeholder.com/466x600/531111/ffffff" />
+          </div>
+          <div class="product-media__carousel-item">
+            <img class="product-media__carousel-image"
+              src="http://via.placeholder.com/466x600/34495E/ffffff" />
+          </div>
+        </div>
+        <div class="product-media__carousel-actions">
+          <p class="product-media__carousel-counter js-slick-product-media-counter"></p>
+
+          <div class="product-media__carousel-arrows">
+            <button class="animation-parent js-slick-product-media__prev">
+              <span class="animation--go-to rotate-180 icon icon--arrow"></span>
+            </button>
+
+            <button class="animation-parent js-slick-product-media__next">
+              <span class="animation--go-to icon icon--arrow"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-media__video-wrapper">
+      <div class="media-video__iframe-wrapper">
+        <iframe src="https://player.vimeo.com/video/113710095" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+  var mediaSlider = $('.js-slick-product-media');
+  var mediaSliderArrowPrev = $('.js-slick-product-media__prev');
+  var mediaSliderArrowNext = $('.js-slick-product-media__next');
+  var $status = $('.js-slick-product-media-counter');
+
+  mediaSlider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
+    var counter = (currentSlide ? currentSlide : 0) + 1;
+    $status.text('0' + counter + ' / 0' + slick.slideCount);
+  });
+
+  mediaSlider.slick({
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false
+  });
+
+  mediaSliderArrowPrev.on('click', function() {
+    mediaSlider.slick('slickPrev');
+  });
+
+  mediaSliderArrowNext.on('click', function() {
+    mediaSlider.slick('slickNext');
+  });
+</script>

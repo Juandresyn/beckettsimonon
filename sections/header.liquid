@@ -2,18 +2,35 @@
   {% assign header_image = section.settings.hero_image %}
   {% assign header_title = section.settings.home_page_header_text %}
   {% assign is_home = true %}
+{% elsif template contains 'product' %}
+  {% assign is_product = true %}
 {% elsif template contains 'collection' %}
   {% assign header_image = collection.image %}
   {% assign header_title = collection.title %}
 {% endif %}
 
+{% if is_home %}
+  {% assign header_logo = section.settings.logo %}
+{% else if %}
+  {% assign header_logo = section.settings.logo_black %}
+{% endif %}
+
+<style>
+  {% unless is_product %}
+    .header-main {
+      background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({{ header_image | img_url: 'master' }});
+    }
+  {% endunless %}
+</style>
+
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
-  <header class="header-main {% if section.settings.top_bar_enable %}header-main--has-top-bar{% endif %}" style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({{ header_image | img_url: 'master' }});">
+  <header class="header-main {% if is_product %}header-main--product{% endif %} {% if section.settings.top_bar_enable %}header-main--has-top-bar{% endif %}">
     {% if section.settings.top_bar_enable %}
       <section class="top-bar" style="background-color: {{ section.settings.top_bar_color_bg }};">
           <div class="top-bar__content" style="color: {{ section.settings.top_bar_color_text }};">
-              <div class="top-bar__message">{{ section.settings.top_bar_message }}</div>
-              <div class="top-bar__contact"><span class="icon icon--phone"></span> {{ section.settings.top_bar_phone }}</div>
+            <div class="top-bar__message desktop--only">{{ section.settings.top_bar_message_desktop }}</div>
+            <div class="top-bar__message mobile--only">{{ section.settings.top_bar_message_mobile }}</div>
+            <div class="top-bar__contact desktop--only"><span class="icon icon--phone"></span> {{ section.settings.top_bar_phone }}</div>
           </div>
       </section>
     {% endif %}
@@ -27,7 +44,7 @@
       <div class="header-main__logo-wrapper">
         <a href="/">
           <img class="header-main__logo"
-            src="{{ section.settings.logo | img_url: '300x300' }}"
+            src="{{ header_logo | img_url: 'master' }}"
             alt="Beckett Simonon Logo" />
         </a>
       </div>
@@ -39,18 +56,64 @@
         hasCart: true,
         hasSearch: true,
         is: 'right' %}
+
+        <div class="header-main--mobile">
+          <a class="site-menu__link site-menu__link--cart" href="#"><span class="icon icon--shop site-menu__cart"></span> {{ cart.item_count }}</a>
+          <span class="site-menu__link hamburger-menu js-on-click"
+            data-onclick-target="body"
+            data-onclick-class="menu-is-open">
+            <span class="icon icon--minus"></span>
+            <span class="icon icon--minus"></span>
+            <span class="icon icon--minus"></span>
+          </span>
+        </div>
+
+        <div class="header-main__modal">
+          <div class="header-main__modal--header">
+            <a href="/">
+              <img class="header-main__logo"
+                src="{{ section.settings.logo_black | img_url: 'master' }}"
+                alt="Beckett Simonon Logo" />
+            </a>
+
+            <div>
+              <a class="site-menu__link--cart" href="#">
+                <span class="icon icon--shop site-menu__cart"></span> {{ cart.item_count }}
+              </a>
+
+              <span class="js-on-click header-main--mobile__close"
+                data-onclick-target="body"
+                data-onclick-class="menu-is-open">
+                <span class="icon icon--close"></span>
+              </span>
+            </div>
+          </div>
+
+          {% include 'site-nav',
+            id: 'main-menu-left',
+            menu: section.settings.main_linklist_left,
+            class: 'header-main',
+            is: 'left' %}
+          {% include 'site-nav',
+            id: 'main-menu-right',
+            menu: section.settings.main_linklist_right,
+            class: 'header-main',
+            is: 'right' %}
+        </div>
     </div>
-    <section class="header-main__content">
-      {% if header_title %}
-        <h1 class="header-main__title">{{ header_title }}</h1>
-      {% endif %}
-      <div class="header-main__cta">
-        <a href="{{ section.settings.home_page_cta_link }}" class="btn btn--white">{{ section.settings.home_page_cta_text }}</a>
-      </div>
-      <button class="header-main__scroll animation-parent">
-        <span class="icon icon--arrow rotate-90 animation--go-to"></span>
-      </button>
-    </section>
+    {% unless is_home != true %}
+      <section class="header-main__content">
+        {% if header_title %}
+          <h1 class="header-main__title">{{ header_title }}</h1>
+        {% endif %}
+        <div class="header-main__cta">
+          <a href="{{ section.settings.home_page_cta_link }}" class="btn btn--white">{{ section.settings.home_page_cta_text }}</a>
+        </div>
+        <button class="header-main__scroll animation-parent">
+          <span class="icon icon--arrow rotate-90 animation--go-to"></span>
+        </button>
+      </section>
+    {% endunless %}
   </header>
 </div>
 
@@ -105,6 +168,11 @@
       "label": "Logo"
     },
     {
+      "type": "image_picker",
+      "id": "logo_black",
+      "label": "Logo"
+    },
+    {
       "type": "link_list",
       "id": "main_linklist_left",
       "label": "Main menu left",
@@ -128,8 +196,14 @@
     },
     {
       "type": "text",
-      "id": "top_bar_message",
-      "label": "Message",
+      "id": "top_bar_message_desktop",
+      "label": "Message Desktop",
+      "default": "Message Here"
+    },
+    {
+      "type": "text",
+      "id": "top_bar_message_mobile",
+      "label": "Message Mobile",
       "default": "Message Here"
     },
     {

@@ -214,7 +214,9 @@
 
   <div class="site-footer__copyright-wrapper">
     <p class="site-footer__copyright">© {{ shop.name }} {{ "now" | date: "%Y" }} | <a href="{{ section.settings.copyright_link }}">{{ section.settings.copyright_link_text }}.</a></p>
-    <span class="site-author">Site by {{ section.settings.site_author }}</span>
+    {% if section.settings.site_author != blank %}
+      <span class="site-author">Site by {{ section.settings.site_author }}</span>
+    {% endif %}
   </div>
 </footer>
 

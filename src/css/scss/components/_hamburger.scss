@@ -1,0 +1,9 @@
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+
+  .icon {
+    color: $white;
+    line-height: 6px;
+  }
+}

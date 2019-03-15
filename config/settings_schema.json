@@ -8,6 +8,21 @@
     "theme_support_url": "https:\/\/juandresyn.com"
   },
   {
+    "name": "color",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Mobile Browsers Color"
+      },
+      {
+        "type": "color",
+        "id": "browser_color",
+        "label": "Pick a Color",
+        "info": "This will change mobile browsers search bar color"
+      }
+    ]
+  },
+  {
     "name": "Social media",
     "settings": [
       {

@@ -1,0 +1,42 @@
+<section class="product-toolbar">
+  <div class="product-toolbar__wrapper">
+    <div class="product-toolbar__info">
+      <h2 class="product-header__title product-toolbar__title ">{{ product.title | split: ' -' | first }}</h2>
+      <p class="product-header__price product-toolbar__price">{{ price | money_without_trailing_zeros }}</p>
+    </div>
+    <div class="product-toolbar__actions">
+      <div class="product-toolbar__variants">
+        <div class="select-wrapper">
+          <select name="id" class="select product-header__variant-select">
+            <option>Select Size</option>
+            {% for variant in product.variants %}
+              <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} 
+                value="{{ variant.id }}"
+                data-object="{{ variant | json }}">
+                {{ variant.title }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        {% if section.settings.size_page %}
+          <a href="{{ section.settings.size_page }}" target="_blank" class="product-header__variant-instructions">What's my size?</a>
+        {% endif %}
+      </div>
+      <div class="product-toolbar__button">
+        <button type="submit"
+          name="add"
+          {% unless current_variant.available %}disabled="disabled"{% endunless %}
+          class="btn {{ section.settings.button_type }} product-header__button">
+          <span id="AddToCartText-{{ section.id }}">
+            {% unless current_variant.available %}
+              {{ 'products.product.sold_out' | t }}
+            {% else %}
+              {{ 'products.product.add_to_cart' | t }}
+            {% endunless %}
+          </span>
+        </button>
+        <p class="product-header__shipping-info">Free shipping. Free returns. Free exchanges!</p>
+      </div>
+    </div>
+  </div>
+</section>

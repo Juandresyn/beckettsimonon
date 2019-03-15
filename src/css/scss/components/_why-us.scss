@@ -4,8 +4,11 @@
 
 .section--why-us__description {
   margin: 0;
-  margin-bottom: 35px;
   max-width: 465px;
+
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 35px;
+  }
 }
 
 .section--why-us__wrapper {
@@ -25,15 +28,25 @@
 
 .section--why-us__container {
   display: flex;
+  justify-content: center;
 
   @media screen and (min-width: $desktop) {
     padding-bottom: 90px;
+    justify-content: flex-end;
   }
 }
 
 .section--why-us__content {
   align-items: flex-end;
   display: flex;
+}
+
+.section--why-us__btn {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 30px auto 0 auto;
+  max-width: 230px;
+  width: 100%;
 }
 
 .section--why-us__bar-wrapper {

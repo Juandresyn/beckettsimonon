@@ -1,33 +1,3 @@
-$('.js-on-click').on('click', function() {
-  var target = $(this).data('onclick-target');
-  var targetClass = $(this).data('onclick-class');
-
-  $(target).toggleClass(targetClass);
-});
-
-$(window).scroll(function(){
-  $('.js-on-show').each(function() {
-    var target = $(this).data('onshow-target');
-    var targetClass = $(this).data('onshow-class');
-    if (isScrolledIntoView($(this))) {
-      $(this).find(target).addClass(targetClass || 'animate');
-    }
-  });
-});
-
-function isScrolledIntoView(elem){
-  var $elem = $(elem);
-  var $window = $(window);
-
-  var docViewTop = $window.scrollTop();
-  var docViewBottom = docViewTop + $window.height();
-
-  var elemTop = $elem.offset().top;
-  var elemBottom = elemTop + $elem.height();
-
-  return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-}
-
 var siteHeaderHeight = $('[data-section-id="header"]').height() + 20;
 var productDetailsHeight = $('.product-header__details').height();
 var imagesOffset = $('.product-header__images').height();
@@ -75,21 +45,3 @@ if ($('body').hasClass(productPageClass)) {
     manageDetailsPosition();
   });
 }
-
-window.template = (function() {
-  var classes = {
-    domReady: 'dom-ready',
-  };
-
-  function domReady() {
-    $('html').addClass(classes.domReady);
-  }
-
-  function init() {
-    domReady();
-  }
-
-  return {
-    init: init,
-  };
-})();

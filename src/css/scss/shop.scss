@@ -28,6 +28,7 @@
     @import 'base/global';
     @import 'base/icons';
     @import 'base/animations';
+    @import 'base/rte';
 
     //   ,
     //  /|   |
@@ -38,23 +39,12 @@
     //
     // HELPERS - Tools & Config. - Ideally nothing here should output CSS
 
-      @import 'helpers/default';
-      @import 'helpers/functions';
-      @import 'helpers/mixins';
-      @import 'helpers/box-sizing';
-      @import 'helpers/normalize';
-      @import 'helpers/reset';
-      @import 'helpers/flexbox';
-      @import 'helpers/extends';
-      @import 'helpers/colors';
       @import 'helpers/utility';
 
 
     //DEPENDENCIES
       // Needs for development
-      @import "dependencies/ui";
-      @import "dependencies/intercom";
-      @import "dependencies/slick";
+      // @import "dependencies/";
 
 
     //    _
@@ -65,8 +55,7 @@
     //                 /|
     //                 \|
 
-      @import 'layout/flex';
-      @import 'layout/grid';
+      // @import 'layout';
 
 
     //    ___

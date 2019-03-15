@@ -24,6 +24,11 @@
   width: 80%;
 }
 
+.press-carousel__item-logo {
+  opacity: 0.3;
+  transition: opacity 0.5s ease;
+}
+
 .press-carousel__item-text {
   font-family: $font-primary;
   font-size: 22px;
@@ -52,5 +57,9 @@
 .slick-current {
   .press-carousel__item-logo-wrapper {
     border-color: $scarlet;
+  }
+
+  .press-carousel__item-logo {
+    opacity: 1;
   }
 }

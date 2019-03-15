@@ -1,19 +1,29 @@
-.input-group {
-  margin-bottom: $global-spacing-unit / 2;
+.input,
+.select {
+  color: $black;
+  background: $white;
+  border: 1px solid $black;
+  border-radius: 2px;
+  font-size: 15px;
+  font-family: $font-secondary;
+  line-height: 28px;
+  padding: 16px 10px;
 }
 
-.input-group input {
-  border: 1px solid $color-grey;
-  width: 100%;
-  padding: $global-size-base / 2;
-  border-radius: $global-radius;
+.select-wrapper {
+  position: relative;
+
+  &:before {
+    color: $black;
+    content: "\e903";
+    font-family: $font-icon;
+    font-size: 17px;
+    position: absolute;
+    right: 16px;
+    top: calc(50% - 9.5px);
+  }
 }
 
-.hidden-label {
-  position: absolute;
-  height: 0;
-  width: 0;
-  margin-bottom: 0;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
+.select {
+  appearance: textfield;
 }
