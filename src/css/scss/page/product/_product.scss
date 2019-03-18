@@ -24,8 +24,7 @@
   margin-left: 760px;
   opacity: 0;
   position: fixed;
-  transition: bottom 0.5s ease,
-              opacity 0.5s ease;
+  transition: opacity 0.5s ease;
   width: 100%;
 }
 
@@ -36,7 +35,7 @@
 }
 
 .images-viewed .product-header__details {
-  bottom: 10px !important;
+  bottom: 0 !important;
   position: absolute;
 }
 
