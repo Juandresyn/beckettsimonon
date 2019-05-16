@@ -1,0 +1,42 @@
+.header-main__logo--dark {
+  display: none;
+}
+
+.main-nav--sticky {
+  animation-duration: 0.4s;
+  animation-name: stickynav-in;
+  background-color: $white;
+  max-width: none;
+  padding: 15px calc((100vw - (1280px -50px))/2);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+
+  .header-main__list-link {
+    color: $black;
+  }
+
+  &.leaving {
+    animation-duration: 0.4s;
+    animation-name: stickynav-out;
+  }
+
+  .header-main__logo {
+    display: none;
+  }
+
+  .header-main__logo--dark {
+    display: inline-block;
+  }
+}
+
+@keyframes stickynav-in {
+  0% { top: -110px; }
+  100% { top: 0; }
+}
+
+@keyframes stickynav-out {
+  0% { top: 0; }
+  100% { top: -110px; }
+}

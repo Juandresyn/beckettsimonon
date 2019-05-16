@@ -2,7 +2,11 @@
 	<ul class="inline-list site-menu__list {{ class }}__list" id="{{ id }}">
 		{% if hasSearch %}
 			<li class="site-menu__list-item {{ class }}__list-item">
-				<a class="site-menu__link site-menu__link--icon {{ class }}__list-link" href="#"><span class="icon icon--search"></span></a>
+        <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"
+          data-onclick-target="html"
+          data-onclick-class="modal--open search-is-open">
+          <span class="icon icon--search"></span>
+        </span>
 			</li>
 		{% endif %}
 		{% for link in linklists[menu].links %}
@@ -12,7 +16,11 @@
 		{% endfor %}
 		{% if hasCart %}
       <li class="site-menu__list-item {{ class }}__list-item site-menu__list-search">
-        <a class="site-menu__link site-menu__link--icon {{ class }}__list-link" href="#"><span class="icon icon--shop site-menu__cart"></span> {{ cart.item_count }}</a>
+        <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"
+          data-onclick-target="html"
+          data-onclick-class="modal--open cart-is-open">
+          <span class="icon icon--shop site-menu__cart"></span> <span class="js-cart-count site-menu__cart-count">{{ cart.item_count }}</span>
+        </span>
       </li>
 		{% endif %}
 	</ul>

@@ -2,6 +2,16 @@
   padding: 80px 25px 100px 25px;
   margin: 0 auto;
   max-width: $sections-max-width;
+
+  @media screen and (max-width: $desktop) {
+    padding-bottom: 50px;
+  }
+
+  .layout-section__header {
+    @media screen and (max-width: $desktop) {
+      padding-bottom: 0;
+    }
+  }
 }
 
 .product-shipping-details__header {
@@ -19,12 +29,23 @@
 
 .product-shipping-details__list {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+
+  @media screen and (min-width: $desktop) {
+    flex-direction: row;
+  }
 }
 
 .product-shipping-details__item {
-  max-width: 30%;
+  margin-bottom: 55px;
+  max-width: 100%;
   text-align: center;
+
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 0;
+    max-width: 30%;
+  }
 }
 
 .product-shipping-details__item-icon {

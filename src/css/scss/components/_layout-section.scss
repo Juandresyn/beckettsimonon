@@ -22,9 +22,15 @@
 }
 
 .layout-section__title {
-  font-size: 30px;
-  line-height: 44px;
-  margin: 0 0 21px 0;
+  font-size: 27px;
+  line-height: 41px;
+  margin: 0 0 35px 0;
+
+  @media (min-width: $desktop) {
+    font-size: 30px;
+    line-height: 44px;
+    margin: 0 0 21px 0;
+  }
 }
 
 .layout-section__description {

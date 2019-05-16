@@ -1,66 +1,72 @@
 @font-face {
-    font-family: "playfair-bold";
-    font-weight: bold;
-    font-style: normal;
-    src: url("PlayfairDisplay-Bold.eot");
-    src: url("PlayfairDisplay-Bold.eot?#iefix") format("embedded-opentype"),
-        url("PlayfairDisplay-Bold.woff") format("woff"),
-        url("PlayfairDisplay-Bold.ttf") format("truetype");
+  font-family: "playfair-bold";
+  font-weight: bold;
+  font-style: normal;
+  src: url("PlayfairDisplay-Bold.eot");
+  src: url("PlayfairDisplay-Bold.eot?#iefix") format("embedded-opentype"),
+    url("PlayfairDisplay-Bold.woff") format("woff"),
+    url("PlayfairDisplay-Bold.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "playfair";
-    font-weight: 400;
-    font-style: normal;
-    src: url("PlayfairDisplay-Regular.eot");
-    src: url("PlayfairDisplay-Regular.eot?#iefix") format("embedded-opentype"),
-        url("PlayfairDisplay-Regular.woff") format("woff"),
-        url("PlayfairDisplay-Regular.ttf") format("truetype");
+  font-family: "playfair";
+  font-weight: 400;
+  font-style: normal;
+  src: url("PlayfairDisplay-Regular.eot");
+  src: url("PlayfairDisplay-Regular.eot?#iefix") format("embedded-opentype"),
+    url("PlayfairDisplay-Regular.woff") format("woff"),
+    url("PlayfairDisplay-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "georgia-bold";
-    font-weight: bold;
-    font-style: normal;
-    src: url("Georgia-Bold.woff") format("woff");
-    src: url("Georgia-Bold.woff2") format("woff2");
+  font-family: "georgia-bold";
+  font-weight: bold;
+  font-style: normal;
+  src: url("Georgia-Bold.woff") format("woff");
+  src: url("Georgia-Bold.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "georgia";
-    font-weight: normal;
-    font-style: normal;
-    src: url("Georgia.woff") format("woff");
-    src: url("Georgia.woff2") format("woff2");
+  font-family: "georgia";
+  font-weight: normal;
+  font-style: normal;
+  src: url("Georgia.woff") format("woff");
+  src: url("Georgia.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: 'nunito-bold';
-    src: url('Nunito-Bold.eot');
-    src: url('Nunito-Bold.eot?#iefix') format('embedded-opentype'),
-        url('Nunito-Bold.woff2') format('woff2'),
-        url('Nunito-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
+  font-family: 'nunito-sans--light';
+  src: url('NunitoSans-Light.eot');
+  src: url('NunitoSans-Light.eot?#iefix') format('embedded-opentype'),
+    url('NunitoSans-Light.woff2') format('woff2'),
+    url('NunitoSans-Light.woff') format('woff'),
+    url('NunitoSans-Light.ttf') format('truetype'),
+    url('NunitoSans-Light.svg#NunitoSans-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'nunito';
-    src: url('Nunito-Regular.eot');
-    src: url('Nunito-Regular.eot?#iefix') format('embedded-opentype'),
-        url('Nunito-Regular.woff2') format('woff2'),
-        url('Nunito-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'nunito-sans--bold';
+  src: url('NunitoSans-Bold.eot');
+  src: url('NunitoSans-Bold.eot?#iefix') format('embedded-opentype'),
+    url('NunitoSans-Bold.woff2') format('woff2'),
+    url('NunitoSans-Bold.woff') format('woff'),
+    url('NunitoSans-Bold.ttf') format('truetype'),
+    url('NunitoSans-Bold.svg#NunitoSans-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'nunito-light';
-    src: url('Nunito-Light.eot');
-    src: url('Nunito-Light.eot?#iefix') format('embedded-opentype'),
-        url('Nunito-Light.woff2') format('woff2'),
-        url('Nunito-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
+  font-family: 'nunito-sans';
+  src: url('NunitoSans-SemiBold.eot');
+  src: url('NunitoSans-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('NunitoSans-SemiBold.woff2') format('woff2'),
+    url('NunitoSans-SemiBold.woff') format('woff'),
+    url('NunitoSans-SemiBold.ttf') format('truetype'),
+    url('NunitoSans-SemiBold.svg#NunitoSans-SemiBold') format('svg');
+  font-weight: 600;
+  font-style: normal;
 }
 

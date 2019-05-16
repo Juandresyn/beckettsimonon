@@ -32,11 +32,26 @@
 >
   <div class="product__header">
     <div class="product-header__images">
-      {% for image in product.images %}
-        <img class="product-header__image"
-          src="{{ image | img_url: '650x650' }}"
-          alt="{{ product.title }}" />
-      {% endfor %}
+      <div class="product-header__images-wrapper js-slick-product-images">
+        {% for image in product.images %}
+          <img class="product-header__image"
+            src="{{ image | img_url: '650x650' }}"
+            alt="{{ product.title }}" />
+        {% endfor %}
+      </div>
+      <div class="product-media__carousel-actions product-header__images-actions">
+        <p class="product-media__carousel-counter js-slick-product-images-counter"></p>
+
+        <div class="product-media__carousel-arrows">
+          <button class="animation-parent js-slick-product-images__prev">
+            <span class="animation--go-to rotate-180 icon icon--arrow"></span>
+          </button>
+
+          <button class="animation-parent js-slick-product-images__next">
+            <span class="animation--go-to icon icon--arrow"></span>
+          </button>
+        </div>
+      </div>
     </div>
     <div class="product-header__details">
       <div class="product-header__title">
@@ -102,22 +117,73 @@
   {% include 'product-toolbar' with product, price %}
 </div>
 
-{% include 'product-information' with product %}
+<span id="product-info">
+  {% include 'product-information' with product %}
 
-{% include 'product-more-details' with product %}
+  {% include 'product-more-details' with product %}
 
-{% include 'product-shipping-details' with shipping_date, { shipping: section.settings } %}
+  {% include 'product-shipping-details' with shipping_date, { shipping: section.settings } %}
 
-{% include 'product-media' with product %}
+  {% include 'product-media' with product %}
 
-{% include 'product-reviews' with { productId: product.id } %}
+  {% include 'product-reviews' with { productId: product.id } %}
 
-{% include 'product-faq' %}
+  {% include 'product-faq' %}
+</span>
+
+<script type="text/javascript">
+  var productImagesSlider = $('.js-slick-product-images');
+
+  function initializeImagesSlider() {
+    if (window.innerWidth < 1024) {
+      var productImagesSliderArrowPrev = $('.js-slick-product-images__prev');
+      var productImagesSliderArrowNext = $('.js-slick-product-images__next');
+      var $status = $('.js-slick-product-images-counter');
+
+      productImagesSlider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
+        var counter = (currentSlide ? currentSlide : 0) + 1;
+        $status.text('0' + counter + ' / 0' + slick.slideCount);
+      });
+
+      productImagesSlider.slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false
+      });
+
+      productImagesSliderArrowPrev.on('click', function() {
+        productImagesSlider.slick('slickPrev');
+      });
+
+      productImagesSliderArrowNext.on('click', function() {
+        productImagesSlider.slick('slickNext');
+      });
+    }
+  }
+
+  initializeImagesSlider();
+  $(window).on('resize', function() {
+    if (!productImagesSlider.hasClass('slick-initialized')) {
+      initializeImagesSlider();
+    }
+  });
+</script>
 
 {% unless product == empty %}
   {% assign productData = product | json %}
   <script type="application/json" id="ProductJson">
     {{ productData }}
+  </script>
+
+  <script type="application/javascript">
+    window.currentProduct = {{ productData }};
+
+    {% for coll in product.collections %}
+      {% unless coll.title contains '[NOINDEX]' %}
+        window.currentProduct.collection = '{{ coll.handle }}';
+      {% endunless %}
+    {% endfor %}
   </script>
 {% endunless %}
 
@@ -136,6 +202,7 @@
       "options": [
         { "value": "btn--white", "label": "White"},
         { "value": "btn--scarlet", "label": "Scarlet (red)"},
+        { "value": "btn--dark", "label": "Dark"},
         { "value": "btn--outline", "label": "Transparent (black)"},
         { "value": "btn--outline--white", "label": "Transparent (white)"}
       ],

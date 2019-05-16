@@ -1,0 +1,123 @@
+<style>
+  .section-with-carousel {
+    background-color: {{ section.settings.bgcolor }};
+  }
+</style>
+
+<div class="section-with-carousel__wrapper">
+  <div class="section-with-carousel__info">
+    <h3 class="section-with-carousel__title">{{ section.settings.title }}</h3>
+    <small class="section-with-carousel__small">{{ section.settings.small_text }}</small>
+    <p class="section-with-carousel__description">{{ section.settings.description }}</p>
+  </div>
+
+  <div class="section-with-carousel__carousel-wrapper">
+    <div class="product-media__carousel-container">
+
+      <div class="product-media__carousel js-section-with-carousel">
+        {% for block in section.blocks %}
+          <div class="product-media__carousel-item">
+            <img class="product-media__carousel-image"
+              src="{{ block.settings.image | img_url: 'master' }}"
+              alt="{{ block.settings.alt }}"/>
+          </div>
+        {% endfor%}
+      </div>
+
+      <div class="product-media__carousel-actions">
+        <p class="product-media__carousel-counter js-section-with-carousel-counter"></p>
+
+        <div class="product-media__carousel-arrows">
+          <button class="animation-parent js-section-with-carousel__prev">
+            <span class="animation--go-to rotate-180 icon icon--arrow"></span>
+          </button>
+
+          <button class="animation-parent js-section-with-carousel__next">
+            <span class="animation--go-to icon icon--arrow"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(window).on('load', function() {
+    var sectionCarousel = $('.js-section-with-carousel');
+    var sectionCarouselArrowPrev = $('.js-section-with-carousel__prev');
+    var sectionCarouselArrowNext = $('.js-section-with-carousel__next');
+    var $status = $('.js-section-with-carousel-counter');
+
+    sectionCarousel.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
+      var counter = (currentSlide ? currentSlide : 0) + 1;
+      $status.text('0' + counter + ' / 0' + slick.slideCount);
+    });
+
+    sectionCarousel.slick({
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false
+    });
+
+    sectionCarouselArrowPrev.on('click', function() {
+      sectionCarousel.slick('slickPrev');
+    });
+
+    sectionCarouselArrowNext.on('click', function() {
+      sectionCarousel.slick('slickNext');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Section With Carousel",
+  "class": "section-with-carousel",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Background Color",
+      "default": "#1c1c1c"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Loprem"
+    },
+    {
+      "type": "text",
+      "id": "small_text",
+      "label": "Small Text",
+      "default": "Loprem"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Loprem ipsun..."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "carousel_Image",
+      "name": "Carousel Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alternative Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

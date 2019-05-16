@@ -1,0 +1,144 @@
+<style>
+  .philosophy {
+    background-color: {{ section.settings.bgcolor }};
+  }
+</style>
+
+<header class="layout-section__header">
+  <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+  <p class="layout-section__description">{{ section.settings.description }}</p>
+</header>
+
+<div class="philosophy__items">
+  {% for block in section.blocks %}
+    <div class="philosophy-items__item">
+      <h3 class="philosophy-item__title">{{ block.settings.title }}</h3>
+
+      {% for i in (1..5) %}
+        {% capture itemSmallKey %}article_small_{{i}}{% endcapture %}
+        {% capture itemDescriptionKey %}article_description_{{i}}{% endcapture %}
+        {% assign itemSmall = block.settings[itemSmallKey] %}
+        {% assign itemDescription = block.settings[itemDescriptionKey] %}
+
+        {% if itemSmall != blank and itemDescription != blank %}
+          <article class="philosophy-item__article">
+            <small class="layout-section__eyebrow philosophy-item__eyebrow">{{ itemSmall }}</small>
+            <p class="layout-section__description philosophy-item__description">{{ itemDescription }}</p>
+            <span class="separator"></span>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Philosophy",
+  "class": "layout-section philosophy",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Background Color",
+      "default": "#1c1c1c"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Philosophy"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Loprem ipsun..."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "philosophy",
+      "name": "Philosophy Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Seciton Title"
+        },
+        {
+          "type": "header",
+          "content": "Article 1"
+        },
+        {
+          "type": "text",
+          "id": "article_small_1",
+          "label": "Upper text"
+        },
+        {
+          "type": "textarea",
+          "id": "article_description_1",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "Article 2"
+        },
+        {
+          "type": "text",
+          "id": "article_small_2",
+          "label": "Upper text"
+        },
+        {
+          "type": "textarea",
+          "id": "article_description_2",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "Article 3"
+        },
+        {
+          "type": "text",
+          "id": "article_small_3",
+          "label": "Upper text"
+        },
+        {
+          "type": "textarea",
+          "id": "article_description_3",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "Article 4"
+        },
+        {
+          "type": "text",
+          "id": "article_small_4",
+          "label": "Upper text"
+        },
+        {
+          "type": "textarea",
+          "id": "article_description_4",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "Article 5"
+        },
+        {
+          "type": "text",
+          "id": "article_small_5",
+          "label": "Upper text"
+        },
+        {
+          "type": "textarea",
+          "id": "article_description_5",
+          "label": "Description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

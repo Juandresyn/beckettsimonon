@@ -1,0 +1,127 @@
+{% assign productMetafields = product.metafields.product %}
+{% assign theCollection = '' %}
+
+{% for coll in product.collections %}
+  {% unless coll.title contains '[NOINDEX]' %}
+    {% assign theCollection = coll.handle %}
+  {% endunless %}
+{% endfor %}
+
+<script type="application/javascript">
+  window.productMoreInfo = {
+    '{{ product.id }}' : {
+      {% for block in section.blocks limit: section.blocks.size %}
+        {% if theCollection == block.settings.collection %}
+          '{{ block.settings.collection }}': {
+            'pii_1': {
+              'eyebrow': '{{ block.settings.pii_small_1 }}',
+              'title': '{{ block.settings.pii_title_1 }}',
+              'description': '{{ block.settings.pii_description_1 }}',
+              'image': '{{ productMetafields.PII1 }}',
+            },
+            'pii_2': {
+              'eyebrow': '{{ block.settings.pii_small_2 }}',
+              'title': '{{ block.settings.pii_title_2 }}',
+              'description': '{{ block.settings.pii_description_2 }}',
+              'image': '{{ productMetafields.PII2 }}',
+            },
+            'pii_3': {
+              'eyebrow': '{{ block.settings.pii_small_3 }}',
+              'title': '{{ block.settings.pii_title_3 }}',
+              'description': '{{ block.settings.pii_description_3 }}',
+              'image': '{{ productMetafields.PII3 }}',
+            }
+          },
+        {% endif %}
+      {% endfor %}
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Information Section"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "featured_collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Collection Information Section 1"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Pick a Collection"
+        },
+        {
+          "type": "text",
+          "id": "pii_small_1",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "pii_title_1",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "pii_description_1",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "Collection Information Section 2"
+        },
+        {
+          "type": "text",
+          "id": "pii_small_2",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "pii_title_2",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "pii_description_2",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "Collection Information Section 3"
+        },
+        {
+          "type": "text",
+          "id": "pii_small_3",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "pii_title_3",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "pii_description_3",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Block",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}

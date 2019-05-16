@@ -15,12 +15,12 @@
 
   &:before {
     color: $black;
-    content: "\e903";
+    content: "\e905";
     font-family: $font-icon;
     font-size: 17px;
     position: absolute;
     right: 16px;
-    top: calc(50% - 9.5px);
+    top: calc(50% - 13.5px);
   }
 }
 

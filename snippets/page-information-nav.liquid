@@ -1,0 +1,7 @@
+<ul class="information-nav">
+  {% for link in linklists['information'].links %}
+    <li class="information-nav__item">
+      <a class="information-nav__item-link {% if currentHandle == link.handle %}is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

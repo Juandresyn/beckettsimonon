@@ -1,0 +1,11 @@
+<div class="rte-wrapper">
+  <div class="rte">
+    {% if page.content contains '[!--header--!]' %}
+      {{ page.content | split: '[!--header--!]' | last }}
+    {% else %}
+      {{ page.content }}
+    {% endif %}
+  </div>
+
+  {% section 'signatures' %}
+</div>

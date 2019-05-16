@@ -1,34 +1,36 @@
-<ul class="list--inline pagination">
+<ul class="pagination">
   {% unless paginate.previous.is_link %}
-    <li aria-hidden="true">
-      <button class="btn btn--tertiary btn--narrow" disabled>
-        {% include 'icon-arrow-left' %}
-        <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
+    <li class="pagination__item" aria-hidden="true">
+      <button disabled>
+        <span class="icon icon--arrow rotate-180 animation--go-to"></span>
       </button>
     </li>
     {% else %}
-    <li>
-      <a href="{{ paginate.previous.url }}" class="btn btn--tertiary btn--narrow">
-        {% include 'icon-arrow-left' %}
-        <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
+    <li class="pagination__item">
+      <a href="{{ paginate.previous.url }}" class="animation-parent">
+        <span class="icon icon--arrow rotate-180 animation--go-to"></span>
       </a>
     </li>
   {% endunless %}
-  <li class="pagination__text">
-    {{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}
-  </li>
+
+  {% for page in paginate.parts %}
+    <li class="pagination__item {% if page.title == paginate.current_page %}is-active{% endif %}">
+      <a href="{{ page.url }}" class="pagination__item-link">
+        {{ page.title }}
+      </a>
+    </li>
+  {% endfor %}
+
   {% unless paginate.next.is_link %}
-    <li aria-hidden="true">
-      <button class="btn btn--tertiary btn--narrow" disabled>
-        {% include 'icon-arrow-right' %}
-        <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
+    <li class="pagination__item" aria-hidden="true">
+      <button disabled>
+        <span class="icon icon--arrow"></span>
       </button>
     </li>
   {% else %}
-    <li>
-      <a href="{{ paginate.next.url }}" class="btn btn--tertiary btn--narrow">
-        {% include 'icon-arrow-right' %}
-        <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
+    <li class="pagination__item">
+      <a href="{{ paginate.next.url }}" class="animation-parent">
+        <span class="icon icon--arrow animation--go-to"></span>
       </a>
     </li>
   {% endunless %}

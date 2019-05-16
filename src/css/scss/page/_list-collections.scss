@@ -1,0 +1,139 @@
+.page--list-collections {
+  .header-main__title {
+    margin-bottom: 0;
+  }
+
+  .header-main__content {
+    bottom: inherit;
+    top: inherit;
+  }
+}
+
+.all-products {
+  .product-grid {
+    margin-top: 40px;
+  }
+}
+
+.all-products__container {
+  background-color: $light-gray-3;
+  position: relative;
+}
+
+.all-products__content {
+  max-width: $sections-max-width;
+  margin: 0 auto;
+}
+
+.all-products__overlay {
+  background: rgba(242, 242, 242, .9);
+  bottom: 0;
+  display: none;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 53px;
+  z-index: 1;
+}
+
+.all-products__filters--active {
+  .all-products__overlay {
+    display: block;
+  }
+}
+
+.all-products__filters {
+  background-color: $white;
+  padding: 17px 25px;
+
+  .all-products__content {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.all-products__filter {
+  margin: 0 10px;
+  min-width: 100px;
+  position: relative;
+
+  @media (min-width: $desktop-large) {
+    margin: 0 43px;
+  }
+}
+
+.all-products__filter-title {
+  align-items: baseline;
+  color: $black;
+  cursor: pointer;
+  display: flex;
+  font-family: $font-secondary;
+  font-size: 13px;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.all-products__filter-icon {
+  padding: 0 10px;
+  transition: transform ease 0.3s;
+}
+
+.all-products__filter-list {
+  background: $white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, .2);
+  display: none;
+  left: calc(50% - 75px);
+  max-width: max-content;
+  padding: 15px 30px;
+  position: absolute;
+  right: calc(50% - 75px);
+  top: 53px;
+  z-index: 2;
+
+  &::before {
+    border-bottom: 12px solid $white;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    content: "";
+    height: 0px;
+    left: calc(50% - 12px);
+    position: absolute;
+    right: calc(50% - 12px);
+    top: -10px;
+    width: 0px;
+  }
+}
+
+.all-products__filter-item {
+  padding: 15px 5px 0 5px;
+  white-space: nowrap;
+}
+
+.all-products__filter-item {
+  &.is-active,
+  &:hover {
+    .all-products__filter-link {
+      border-color: $scarlet;
+    }
+  }
+}
+
+.all-products__filter-link {
+  border-bottom: 2px solid $white;
+  display: inline-block;
+  font-family: $font-secondary--light;
+  font-size: 15px;
+  padding-bottom: 10px;
+  transition: border-color ease 0.2s;
+}
+
+.all-products__filter--active {
+  & + .all-products__filter-list {
+    display: block;
+  }
+
+  .all-products__filter-icon {
+    transform: rotate(180deg);
+  }
+}

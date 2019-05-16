@@ -1,0 +1,47 @@
+.quote {
+  padding: 0;
+}
+
+.quote__wrapper {
+  margin: 0 auto;
+  max-width: $sections-max-width;
+  padding: 41px 20px 57px;
+  text-align: left;
+
+  @media (min-width: $desktop) {
+    padding: 36px 0 73px 100px;
+  }
+}
+
+.quote__icon {
+  font-family: $font-primary--bold;
+  font-size: 120px;
+  line-height: 95px;
+}
+
+.quote__content {
+  font-family: $font-primary;
+  font-size: 24px;
+  line-height: 40px;
+  margin-bottom: 59px;
+  margin-top: -10px;
+  max-width: 630px;
+
+  @media (min-width: $desktop) {
+    margin-bottom: 45px;
+    margin-top: 0;
+  }
+}
+
+.quote__author {
+  display: block;
+  font-family: $font-secondary--bold;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.quote__author-backline {
+  font-family: $font-secondary--light;
+  font-size: 12px;
+  line-height: 18px;
+}

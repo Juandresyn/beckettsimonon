@@ -2,4 +2,16 @@
   The contents of the blog.liquid template can be found in /sections/blog-template.liquid
 {% endcomment %}
 
+<div class="blog__container page-block">
+  <div class="blog__search">
+    <form class="blog__search-form" method="get" action="/search">
+      <input type="hidden" name="type" value="article" />
+      <label for="blog-search-input" class="visually-hidden">Search article</label>
+      <input id="blog-search-input" class="blog__search-input" placeholder="Search" name="q" />
+      <button class="icon icon--search blog__search-icon"></button>
+    </form>
+  </div>
+</div>
+
+{% section 'blog-most-popular' %}
 {% section 'blog-template' %}

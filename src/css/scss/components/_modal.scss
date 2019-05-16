@@ -1,0 +1,65 @@
+.modal--right {
+  background: rgba(0, 0, 0, 0.4);
+  bottom: 0;
+  display: none;
+  justify-content: flex-end;
+  left: 0;
+  max-height: calc(100vh - #{$top-bar-height-small});
+  position: absolute;
+  right: 0;
+  top: $top-bar-height-small;
+  z-index: 5;
+
+  @media (min-width: $desktop) {
+    top: $top-bar-height-desktop;
+  }
+
+  &__header {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
+
+    .icon {
+      cursor: pointer;
+      line-height: 16px;
+    }
+  }
+
+  &__container {
+    background: $white;
+    max-width: 500px;
+    padding: 15px;
+    width: 100%;
+
+    @media (min-width: $desktop) {
+      padding: 30px;
+    }
+  }
+
+  &__close {
+    color: $black;
+    margin-left: 21px;
+  }
+}
+
+.modal--open {
+  &,
+  body {
+    overflow: hidden !important;
+  }
+
+  .modal--right__container {
+    animation: show-modal 0.3s;
+  }
+}
+
+@keyframes show-modal {
+  from {
+    transform: translateX(500px);
+  }
+
+  top {
+    transform: translateX(0);
+  }
+}

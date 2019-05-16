@@ -1,13 +1,25 @@
 .media-video {
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     margin-bottom: 35px;
+  }
+
+  .layout-section__title {
+    @media (min-width: $desktop) {
+      margin-bottom: 12px;
+    }
+  }
+
+  .layout-section__header {
+    @media (min-width: $desktop) {
+      margin-bottom: 50px;
+    }
   }
 }
 
 .media-video__iframe-wrapper {
-  margin: 0 -25px 40px -25px;
+  margin: 0 -20px 40px -20px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     margin: 0 0 60px 0;
   }
 
@@ -15,7 +27,7 @@
     width: 100vw;
     height: 56.25vw;
 
-    @media screen and (min-width: $desktop) {
+    @media (min-width: $desktop) {
       width: 100%;
       height: calc((#{$site-max-width} / 16) * 9);
       max-width: $site-max-width;

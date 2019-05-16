@@ -109,5 +109,141 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
+  },
+  {
+    "name": "Press",
+    "settings": [
+      {
+        "type": "color",
+        "id": "press_color_bg",
+        "label": "Background",
+        "default": "#F5F5F5"
+      },
+      {
+        "type": "text",
+        "id": "press_title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_1",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_1",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_2",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_2",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_3",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_3",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_4",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_4",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_5",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_5",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_6",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_6",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_7",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_7",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_8",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_8",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_9",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_9",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_logo_10",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "press_text_10",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "name": "Blog Page",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "blog_hero_image",
+        "label": "Blog Pages Hero"
+      },
+      {
+        "type": "text",
+        "id": "blog_hero_title",
+        "label": "Blog Pages Title"
+      },
+      {
+        "type": "textarea",
+        "id": "blog_hero_description",
+        "label": "Blog Pages Description"
+      }
+    ]
   }
 ]

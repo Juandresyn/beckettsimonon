@@ -1,0 +1,55 @@
+<header class="layout-section__header">
+  <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+</header>
+<div class="blog-article__list js-most-popular-articles-carousel">
+  {% for block in section.blocks %}
+    {% assign article = articles[block.settings.article] %}
+    {% include "article-card" with article %}
+  {% endfor %}
+</div>
+
+{% javascript %}
+  if (window.innerWidth < 1024) {
+    var $slickElement = $('.js-most-popular-articles-carousel');
+    $slickElement.slick({
+      slidesToShow: 2,
+      arrows: false,
+      prevArrow: false,
+      nextArrow: false,
+      centerMode: false,
+      useTransform: false
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Blog Most Popular",
+    "class": "blog__most-popular",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Blog"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "blog__post",
+        "name": "Most Popular Item",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Pick an Article"
+          },
+          {
+            "type": "article",
+            "id": "article",
+            "label": "Article"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

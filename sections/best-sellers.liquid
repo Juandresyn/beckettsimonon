@@ -4,17 +4,21 @@
   </header>
   <div class="best-sellers__content">
     {% assign collection = collections['all-products-noindex'] %}
-    <ul class="best-sellers__list">
+    <ul class="product-grid">
       {% for product in collection.products %}
         {% unless forloop.index > section.settings.max %}
-          <li class="best-sellers__list-item">
-            <a class="best-sellers__list-item__link"
+          <li class="product-grid__item">
+            <a class="product-grid__item-link"
               href="{{ product.url }}">
-              <img class="best-sellers__list-item__image"
-                src="{{ product.featured_image | img_url: '230x230', crop: 'center' }}" />
-              <h3 class="best-sellers__list-item__title">{{ product.title | split: ' -' | first }}</h3>
-              {% comment %} <span class="best-sellers__list-item__variant">{{ product.variant }}</span> {% endcomment %}
-              <span class="best-sellers__list-item__price">{{ product.price | money_without_trailing_zeros }}</span>
+              <img class="product-grid__item-image product-grid__item-image--primary"
+                src="{{ product.featured_image | img_url: '230x230', crop: 'center' }}"
+                alt="{{ product.title }}" />
+              <img class="product-grid__item-image product-grid__item-image--secondary"
+                src="{{ product.images[1] | img_url: '230x230', crop: 'center' }}"
+                alt="{{ product.title }} alternative" />
+              <h3 class="product-grid__item-title">{{ product.title | split: ' -' | first }}</h3>
+              {% comment %} <span class="product-grid__item-variant">{{ product.variant }}</span> {% endcomment %}
+              <span class="product-grid__item-price">{{ product.price | money_without_trailing_zeros }}</span>
             </a>
           </li>
         {% endunless %}

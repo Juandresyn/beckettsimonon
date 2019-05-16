@@ -7,20 +7,8 @@
       </header>
 
       <div class="product-media__carousel-container">
-        <div class="product-media__carousel js-slick-product-media">
-          <div class="product-media__carousel-item">
-            <img class="product-media__carousel-image"
-              src="{{ 'carousel.png' | asset_img_url: 'master' }}" />
-          </div>
-          <div class="product-media__carousel-item">
-            <img class="product-media__carousel-image"
-              src="http://via.placeholder.com/466x600/531111/ffffff" />
-          </div>
-          <div class="product-media__carousel-item">
-            <img class="product-media__carousel-image"
-              src="http://via.placeholder.com/466x600/34495E/ffffff" />
-          </div>
-        </div>
+        <product-media-images></product-media-images>
+
         <div class="product-media__carousel-actions">
           <p class="product-media__carousel-counter js-slick-product-media-counter"></p>
 
@@ -38,49 +26,7 @@
     </div>
 
     <div class="product-media__video-wrapper">
-      <div class="media-video__iframe-wrapper">
-        <script src="https://fast.wistia.com/embed/medias/cniz18luru.jsonp" async></script>
-        <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
-        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
-          <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
-            <div class="wistia_embed wistia_async_cniz18luru videoFoam=true" style="height:100%;position:relative;width:100%">
-              <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
-                <img src="https://fast.wistia.com/embed/medias/cniz18luru/swatch"
-                  style="filter:blur(5px);height:100%;object-fit:contain;width:100%;"
-                  alt=""
-                  onload="this.parentNode.style.opacity=1;" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <product-media-video></product-media-video>
     </div>
   </div>
 </section>
-
-<script type="text/javascript">
-  var mediaSlider = $('.js-slick-product-media');
-  var mediaSliderArrowPrev = $('.js-slick-product-media__prev');
-  var mediaSliderArrowNext = $('.js-slick-product-media__next');
-  var $status = $('.js-slick-product-media-counter');
-
-  mediaSlider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
-    var counter = (currentSlide ? currentSlide : 0) + 1;
-    $status.text('0' + counter + ' / 0' + slick.slideCount);
-  });
-
-  mediaSlider.slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false
-  });
-
-  mediaSliderArrowPrev.on('click', function() {
-    mediaSlider.slick('slickPrev');
-  });
-
-  mediaSliderArrowNext.on('click', function() {
-    mediaSlider.slick('slickNext');
-  });
-</script>

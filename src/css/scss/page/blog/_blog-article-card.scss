@@ -1,0 +1,92 @@
+.blog-article {
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 338px;
+
+  @media (min-width: $desktop) {
+    margin-bottom: 80px;
+    margin-left: 0;
+    margin-right: 25px;
+    max-width: 366px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: $sections-max-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    &.slick-slider {
+      margin-left: 20px;
+    }
+  }
+
+  &__all {
+    margin-bottom: 5px;
+
+    @media (min-width: $desktop) {
+      margin-bottom: 65px;
+
+      .blog-article:nth-child(3n),
+      .blog-article:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 18px;
+    line-height: 30px;
+    margin: 24px 0 18px;
+  }
+
+  &__description {
+    font-family: $font-primary;
+    font-size: 16px;
+    line-height: 28px;
+    margin-bottom: 23px;
+  }
+
+  &__read-more {
+    color: $scarlet;
+    display: inline-block;
+    font-family: $font-secondary--bold;
+    font-size: 12px;
+    line-height: 18px;
+    position: relative;
+
+    &:after {
+      border-bottom: 1px solid $scarlet;
+      content: "";
+      display: block;
+      height: 0;
+      transition: width 0.2s ease;
+      width: 0;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  a:not(.blog-article__read-more) {
+    display: inline-block;
+    width: 100%;
+  }
+
+  &.slick-slide {
+    margin: 20px;
+    max-width: 219px;
+    width: 219px !important;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

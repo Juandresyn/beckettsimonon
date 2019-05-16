@@ -1,0 +1,156 @@
+<header class="layout-section__header">
+  <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+  <p class="layout-section__description">{{ section.settings.description }}</p>
+</header>
+<div class="how-it-works__container page-block">
+    <div class="how-it-works__content">
+        <div class="how-it-works__items">
+            {% for i in (1..3) %}
+                {% capture item_title %}item_{{ i }}_title{% endcapture %}
+                {% capture item_description %}item_{{ i }}_description{% endcapture %}
+                {% capture item_image %}item_{{ i }}_image{% endcapture %}
+                <article class="how-it-works__item">
+                    <div class="how-it-works__item-decoration">
+                        <img class="how-it-works__item-image"
+                            src="{{ section.settings[item_image] | img_url: 'master' }}"
+                            alt="" />
+                        <small class="how-it-works__item-count">0{{ forloop.index }}</small>
+                    </div>
+
+                    <div class="how-it-works__item-content">
+                        <h3 class="how-it-works__item-title">{{ section.settings[item_title] }}</h3>
+                        <p class="how-it-works__item-description">{{ section.settings[item_description] }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+
+        <div class="how-it-works__image-wrapper">
+            {% if section.settings.image %}
+                <div class="how-it-works__image"
+                  style="background-image: url({{ section.settings.image | img_url: 'master' }});"></div>
+            {% endif %}
+        </div>
+    </div>
+    {% if section.settings.cta_text != blank %}
+      <a href="{{ section.settings.cta_link }}" class="btn btn--scarlet">{{ section.settings.cta_text }}</a>
+    {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "class": "layout-section how-it-works how-it-works--page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "How It Works"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Loprem ipsun..."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Main Image"
+    },
+    {
+      "type": "header",
+      "content": "Section CTA options"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Section CTA",
+      "default": "My link"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Section CTA Link"
+    },
+    {
+      "type": "header",
+      "content": "How It Works Items"
+    },
+    {
+      "type": "paragraph",
+      "content": "This section is custom made and will take no max than 3 items"
+    },
+    {
+      "type": "header",
+      "content": "How It Works Item #1"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_1_image",
+      "label": "Item Image"
+    },
+    {
+      "type": "text",
+      "id": "item_1_title",
+      "label": "Item Title",
+      "default": "How It Works"
+    },
+    {
+      "type": "textarea",
+      "id": "item_1_description",
+      "label": "Item Description",
+      "default": "Loprem ipsun..."
+    },
+    {
+      "type": "header",
+      "content": "How It Works Item #2"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_2_image",
+      "label": "Item Image"
+    },
+    {
+      "type": "text",
+      "id": "item_2_title",
+      "label": "Item Title",
+      "default": "How It Works"
+    },
+    {
+      "type": "textarea",
+      "id": "item_2_description",
+      "label": "Item Description",
+      "default": "Loprem ipsun..."
+    },
+    {
+      "type": "header",
+      "content": "How It Works Item #3"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_3_image",
+      "label": "Item Image"
+    },
+    {
+      "type": "text",
+      "id": "item_3_title",
+      "label": "Item Title",
+      "default": "How It Works"
+    },
+    {
+      "type": "textarea",
+      "id": "item_3_description",
+      "label": "Item Description",
+      "default": "Loprem ipsun..."
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}

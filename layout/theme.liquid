@@ -7,32 +7,32 @@
   <meta name="theme-color" content="{{ settings.browser_color }}">
   <link rel="canonical" href="{{ canonical_url }}">
 
-  {%- if settings.favicon != blank -%}
+  {% if settings.favicon != blank %}
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
-  {%- endif -%}
+  {% endif %}
 
-  {%- capture seo_title -%}
-    {%- if template == 'search' and search.performed == true -%}
+  {% capture seo_title %}
+    {% if template == 'search' and search.performed == true %}
       {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
-    {%- else -%}
+    {% else %}
       {{ page_title }}
-    {%- endif -%}
-    {%- if current_tags -%}
-      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
-    {%- endif -%}
-    {%- if current_page != 1 -%}
+    {% endif %}
+    {% if current_tags %}
+      {% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {% endif %}
+    {% if current_page != 1 %}
       &ndash; {{ 'general.meta.page' | t: page: current_page }}
-    {%- endif -%}
-    {%- assign escaped_page_title = page_title | escape -%}
-    {%- unless escaped_page_title contains shop.name -%}
+    {% endif %}
+    {% assign escaped_page_title = page_title | escape %}
+    {% unless escaped_page_title contains shop.name %}
       &ndash; {{ shop.name }}
-    {%- endunless -%}
-  {%- endcapture -%}
+    {% endunless %}
+  {% endcapture %}
   <title>{{ seo_title | strip }}</title>
 
-  {%- if page_description -%}
+  {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}">
-  {%- endif -%}
+  {% endif %}
 
   {% include 'social-meta-tags' %}
 
@@ -40,18 +40,16 @@
   {{ 'beckett-simonon.css' | asset_url | stylesheet_tag }}
   <!-- END Site Css -->
 
-  {%- if template.directory == 'customers' -%}
+  {% if template.directory == 'customers' %}
     <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
-  {%- endif -%}
+  {% endif %}
 
-  <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
-  <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'beckett-simonon.min.js' | asset_url }}" defer="defer"></script>
   <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
   <!-- Slick Slider -->
@@ -62,17 +60,35 @@
   {{ content_for_header }}
 </head>
 
-<body class="page--{{ template | split: '.' | first }}">
+{% unless template contains 'product'
+  or template contains 'cart' %}
+  {% assign nav_class = "has-sticky-nav" %}
+{% endunless %}
+
+{% if template contains 'page.information' %}
+  {% assign pageClass = 'page--information' %}
+{% endif %}
+
+<body class="page--{{ template | split: '.' | first }} {{ pageClass }} {{ nav_class }}">
   {% section 'header' %}
 
-  <div class="page-container" id="PageContainer">
+  <main class="main-content" id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
 
-    <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
-      {{ content_for_layout }}
-    </main>
+  {% unless template contains "404"
+    or template contains "cart" %}
+    {% unless template contains "page.information"
+      or template contains "blog"
+      or template contains "article" %}
+      {% include 'press-carousel' %}
+    {% endunless %}
 
     {% section 'footer' %}
-  </div>
+  {% endunless %}
+
+  {% include 'inline-cart' %}
+  {% include 'search-modal' %}
 
   <script type="text/javascript">
     var initTemplate = function() {
@@ -87,27 +103,13 @@
 
     $(window).on('load', initTemplate());
 
-    var theme = {
-      strings: {
-        addToCart: {{ 'products.product.add_to_cart' | t | json }},
-        soldOut: {{ 'products.product.sold_out' | t | json }},
-        unavailable: {{ 'products.product.unavailable' | t | json }},
-        regularPrice: {{ 'products.product.regular_price' | t | json }},
-        sale: {{ 'products.product.on_sale' | t | json }},
-        showMore: {{ 'general.filters.show_more' | t | json }},
-        showLess: {{ 'general.filters.show_less' | t | json }},
-        addressError: {{ 'sections.map.address_error' | t | json }},
-        addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
-        addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
-        authError: {{ 'sections.map.auth_error_html' | t | json }},
-        newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
-        external: {{ 'general.accessibility.link_messages.external' | t | json }},
-        newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }}
-      },
-      moneyFormat: {{ shop.money_format | json }}
-    }
+    window.cart = {{ cart.items | json }};
+    window.cart_count = {{ cart.item_count }};
 
     document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
 </body>
 </html>

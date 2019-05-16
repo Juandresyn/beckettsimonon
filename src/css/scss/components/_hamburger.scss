@@ -7,3 +7,11 @@
     line-height: 6px;
   }
 }
+
+.nav--black {
+  .hamburger-menu {
+    .icon {
+      color: $black;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.signatures {
+  margin: 45px auto 0;
+  max-width: 680px;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.signature__item {
+  text-align: center;
+}
+
+.signature-item {
+  &__image {
+    margin-bottom: 10px;
+    max-height: 62px;
+
+    @media (min-width: $desktop) {
+      max-height: 100px;
+    }
+  }
+
+  &__name {
+    font: 12px/18px $font-secondary;
+    text-transform: uppercase;
+  }
+}

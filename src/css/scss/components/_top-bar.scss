@@ -1,13 +1,15 @@
 .top-bar {
   background-color: $black;
   color: $white;
-  padding: 12px 0;
+  padding: 8px 0;
 }
 
 .top-bar__content {
   display: flex;
   justify-content: center;
   font-family: $font-secondary;
+  font-size: 13px;
+  line-height: 24px;
   margin: 0 auto;
   max-width: calc(#{$site-max-width} + 50px);
   padding: 0 25px;
@@ -21,7 +23,8 @@
   font-size: 12px;
 
   @media screen and (min-width: $desktop) {
-    font-size: 16px;
+    font-size: 13px;
+    line-height: 24px;
   }
 }
 

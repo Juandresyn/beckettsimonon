@@ -1,7 +1,7 @@
-{%- assign social_icons = false -%}
-{%- assign inline_list = false -%}
+{% assign social_icons = false %}
+{% assign inline_list = false %}
 
-{%- if
+{% if
   settings.social_twitter_link != blank
   or settings.social_facebook_link != blank
   or settings.social_instagram_link != blank
@@ -9,20 +9,20 @@
   or settings.social_vimeo_link != blank
   or template.name == 'article'
   or template.name == 'blog'
--%}
-  {%- assign social_icons = true -%}
-{%- endif -%}
+%}
+  {% assign social_icons = true %}
+{% endif %}
 
 {% comment %} Create an appropriate hover color based on text color and brightness {% endcomment %}
-{%- assign footer_text_color = section.settings.color_footer_text -%}
-{%- assign footer_text_color_brightness = section.settings.color_footer_text | color_brightness -%}
-{%- if footer_text_color_brightness <= 26 -%}
-  {%- assign footer_text_color_hover = footer_text_color | color_lighten: 25 -%}
-{%- elsif footer_text_color_brightness <= 65 -%}
-  {%- assign footer_text_color_hover = footer_text_color | color_lighten: 15 -%}
-{%- else -%}
-  {%- assign footer_text_color_hover = footer_text_color | color_darken: 10 -%}
-{%- endif -%}
+{% assign footer_text_color = section.settings.color_footer_text %}
+{% assign footer_text_color_brightness = section.settings.color_footer_text | color_brightness %}
+{% if footer_text_color_brightness <= 26 %}
+  {% assign footer_text_color_hover = footer_text_color | color_lighten: 25 %}
+{% elsif footer_text_color_brightness <= 65 %}
+  {% assign footer_text_color_hover = footer_text_color | color_lighten: 15 %}
+{% else %}
+  {% assign footer_text_color_hover = footer_text_color | color_darken: 10 %}
+{% endif %}
 
 <style>
   .site-footer__hr {
@@ -63,6 +63,8 @@
     name="mc-embedded-subscribe-form"
     target="_blank"
     novalidate="" >
+    <label for="mce-EMAIL"
+      class="visually-hidden">Subscribe Email</label>
     <input id="mce-EMAIL"
       type="email"
       value=""
@@ -72,6 +74,7 @@
 
     <button type="submit"
       class="newsletter-form__submit animation-parent">
+      <span class="visually-hidden">Subscribe</span>
       <span class="icon icon--arrow animation--go-to"></span>
     </button>
   </form>
@@ -85,7 +88,8 @@
 
         <article class="site-footer--prefooter__item">
           <img class="site-footer--prefooter__item-image"
-            src="{{ section.settings[item_icon] | img_url: 'master' }}" />
+            src="{{ section.settings[item_icon] | img_url: 'master' }}"
+            alt="" />
           <p class="site-footer--prefooter__item-description">{{ section.settings[item_description] }}</p>
         </article>
     {% endfor %}
@@ -99,7 +103,8 @@
         <div class="site-footer__logo-wrapper">
           <a href="/">
             <img class="site-footer__logo"
-              src="{{ section.settings.logo | img_url: 'master' }}" />
+              src="{{ section.settings.logo | img_url: 'master' }}"
+              alt="Beckett Simonon logo"/>
           </a>
         </div>
 
@@ -111,6 +116,7 @@
                   <a href="{{ settings.social_facebook_link }}"
                     class="site-footer__social-item__link"
                     target="_blank">
+                    <span class="visually-hidden">facebook</span>
                     <span class="icon icon--facebook"></span>
                   </a>
                 </li>
@@ -120,6 +126,7 @@
                   <a href="{{ settings.social_twitter_link }}"
                     class="site-footer__social-item__link"
                     target="_blank">
+                    <span class="visually-hidden">twitter</span>
                     <span class="icon icon--twitter"></span>
                   </a>
                 </li>
@@ -129,6 +136,7 @@
                   <a href="{{ settings.social_instagram_link }}"
                     class="site-footer__social-item__link"
                     target="_blank">
+                    <span class="visually-hidden">instagram</span>
                     <span class="icon icon--instagram"></span>
                   </a>
                 </li>
@@ -138,6 +146,7 @@
                   <a href="{{ settings.social_youtube_link }}"
                     class="site-footer__social-item__link"
                     target="_blank">
+                    <span class="visually-hidden">youtube</span>
                     <span class="icon icon--youtube"></span>
                   </a>
                 </li>
@@ -149,9 +158,9 @@
     </div>
 
     <div class="site-footer__navs">
-      {%- for block in section.blocks -%}
-          {%- if block.type == 'link_list' -%}
-          {%- assign footer_linklist = block.settings.menu -%}
+      {% for block in section.blocks %}
+        {% if block.type == 'link_list' %}
+          {% assign footer_linklist = block.settings.menu %}
           <nav class="site-footer__nav">
             <h2 class="site-footer__list-title">{{ block.settings.title }}</h2>
             <ul class="site-footer__list">
@@ -164,8 +173,8 @@
               {% endfor %}
             </ul>
           </nav>
-        {%- endif -%}
-      {%- endfor -%}
+        {% endif %}
+      {% endfor %}
 
       {% if social_icons %}
         <div class="site-footer__social mobile--only">
@@ -175,6 +184,7 @@
                 <a href="{{ settings.social_facebook_link }}"
                   class="site-footer__social-item__link"
                   target="_blank">
+                  <span class="visually-hidden">Facebook</span>
                   <span class="icon icon--facebook"></span>
                 </a>
               </li>
@@ -184,6 +194,7 @@
                 <a href="{{ settings.social_twitter_link }}"
                   class="site-footer__social-item__link"
                   target="_blank">
+                  <span class="visually-hidden">Twitter</span>
                   <span class="icon icon--twitter"></span>
                 </a>
               </li>
@@ -193,6 +204,7 @@
                 <a href="{{ settings.social_instagram_link }}"
                   class="site-footer__social-item__link"
                   target="_blank">
+                  <span class="visually-hidden">Instagram</span>
                   <span class="icon icon--instagram"></span>
                 </a>
               </li>
@@ -202,6 +214,7 @@
                 <a href="{{ settings.social_youtube_link }}"
                   class="site-footer__social-item__link"
                   target="_blank">
+                  <span class="visually-hidden">Youtube</span>
                   <span class="icon icon--youtube"></span>
                 </a>
               </li>

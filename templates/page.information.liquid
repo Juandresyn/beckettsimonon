@@ -1,0 +1,9 @@
+{% if page.handle == "how-it-works" %}
+  {% include 'how-it-works-page' %}
+{% elsif page.handle == "craftsmanship" %}
+  {% include 'craftsmanship-page' %}
+{% elsif page.handle == "our-story" %}
+  {% include 'our-story-page' %}
+{% endif %}
+
+{% section 'best-sellers' %}

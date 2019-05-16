@@ -1,0 +1,84 @@
+.page--information {
+  .header-main {
+    height: 100vh;
+  }
+
+  .header-main__title {
+    font-size: 30px;
+    line-height: 44px;
+    max-width: 650px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media (min-width: $desktop) {
+      font-size: 35px;
+      line-height: 48px;
+      max-width: 700px;
+      padding: 30px;
+    }
+  }
+
+  .header-main__scroll {
+    bottom: 105px;
+  }
+}
+
+.information-nav {
+  background: rgba(255, 255, 255, 0.90);
+  bottom: 0;
+  padding: 0 17px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+
+  @media (min-width: $desktop) {
+    padding: 0 25px;
+  }
+}
+
+.information-nav--fixed {
+  height: 56px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.information-nav__item {
+  display: inline-block;
+}
+
+.information-nav__item {
+  &:first-of-type {
+    .information-nav__item-link {
+      margin-left: 0;
+    }
+  }
+
+  &:last-of-type {
+    .information-nav__item-link {
+      margin-right: 0;
+    }
+  }
+}
+
+.information-nav__item-link {
+  border-bottom: 1px solid transparent;
+  display: inline-block;
+  font-family: $font-secondary--bold;
+  font-size: 12px;
+  margin: 0 10px;
+  padding: 18px 2px;
+  text-transform: uppercase;
+  transition: border-color ease 0.2s;
+
+  @media (min-width: $desktop) {
+    font-size: 13px;
+    margin: 0 23px;
+  }
+
+  &:hover,
+  &.is-active {
+    border-color: $scarlet;
+  }
+}

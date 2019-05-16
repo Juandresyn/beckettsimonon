@@ -1,0 +1,24 @@
+<div class="full-width-image__wrapper">
+  <img src="{{ section.settings.image | img_url: 'master' }}"
+    class="full-width-image__image"
+    alt="{{ section.settings.alt }}" />
+</div>
+
+{% schema %}
+{
+  "name": "Full width Image",
+  "class": "full-width-image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Choose Image"
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Alternative text"
+    }
+  ]
+}
+{% endschema %}

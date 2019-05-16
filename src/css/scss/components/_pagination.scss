@@ -1,22 +1,36 @@
 .pagination {
-  font-family: $font-primary;
-  color: $gray;
+  align-items: center;
+  display: flex;
+  color: $king-blue;
+  font-family: $font-secondary;
+  font-size: 15px;
+  justify-content: center;
+  padding: 80px 25px;
   text-align: center;
-  padding-bottom: 30px;
   text-transform: uppercase;
-  font-size: 14px;
 
-  @media screen and (max-width: $mobile-large){
-    padding: 30px 0;
-    font-size: 15px;
-  }
-
-  .page {
-    color: $gray;
+  .pagination__item {
     padding: 0 7px;
   }
 
-  .current {
-    color: $brand-primary;
+  .pagination__item-link {
+    color: $king-blue;
+    line-height: 1;
+    padding: 10px;
+  }
+
+  .is-active {
+    padding: 0;
+  }
+
+  .is-active .pagination__item-link {
+    background-color: $white;
+    border-radius: 100%;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .05);
+    color: $king-blue;
+    display: inline-block;
+    height: 40px;
+    line-height: 1.4;
+    width: 40px;
   }
 }

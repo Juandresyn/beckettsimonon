@@ -1,0 +1,247 @@
+{% assign theCollection = '' %}
+
+{% for coll in product.collections %}
+  {% unless coll.title contains '[NOINDEX]' %}
+    {% assign theCollection = coll.handle %}
+  {% endunless %}
+{% endfor %}
+
+<script type="application/javascript">
+  window.productFaq = {
+    {% for block in section.blocks limit: section.blocks.size %}
+      {% if theCollection == block.settings.collection %}
+        '{{ block.settings.collection }}': [
+          {% if block.settings.question_1 != blank %}
+            {
+              'question': "{{ block.settings.question_1 }}",
+              'answer': "{{ block.settings.answer_1 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_2 != blank %}
+            {
+              'question': "{{ block.settings.question_2 }}",
+              'answer': "{{ block.settings.answer_2 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_3 != blank %}
+            {
+              'question': "{{ block.settings.question_3 }}",
+              'answer': "{{ block.settings.answer_3 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_4 != blank %}
+            {
+              'question': "{{ block.settings.question_4 }}",
+              'answer': "{{ block.settings.answer_4 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_5 != blank %}
+            {
+              'question': "{{ block.settings.question_5 }}",
+              'answer': "{{ block.settings.answer_5 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_6 != blank %}
+            {
+              'question': "{{ block.settings.question_6 }}",
+              'answer': "{{ block.settings.answer_6 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_7 != blank %}
+            {
+              'question': "{{ block.settings.question_7 }}",
+              'answer': "{{ block.settings.answer_7 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_8 != blank %}
+            {
+              'question': "{{ block.settings.question_8 }}",
+              'answer': "{{ block.settings.answer_8 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_9 != blank %}
+            {
+              'question': "{{ block.settings.question_9 }}",
+              'answer': "{{ block.settings.answer_9 }}",
+            },
+          {% endif %}
+          {% if block.settings.question_10 != blank %}
+            {
+              'question': "{{ block.settings.question_10 }}",
+              'answer': "{{ block.settings.answer_10 }}",
+            }
+          {% endif %}
+        ],
+      {% endif %}
+    {% endfor %}
+  };
+</script>
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product FAQ Section"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_faq",
+      "name": "Product faq block",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Product faq block"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Pick a Collection"
+        },
+        {
+          "type": "header",
+          "content": "Product question 1"
+        },
+        {
+          "type": "text",
+          "id": "question_1",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_1",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 2"
+        },
+        {
+          "type": "text",
+          "id": "question_2",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_2",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 3"
+        },
+        {
+          "type": "text",
+          "id": "question_3",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_3",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 4"
+        },
+        {
+          "type": "text",
+          "id": "question_4",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_4",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 5"
+        },
+        {
+          "type": "text",
+          "id": "question_5",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_5",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 6"
+        },
+        {
+          "type": "text",
+          "id": "question_6",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_6",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 7"
+        },
+        {
+          "type": "text",
+          "id": "question_7",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_7",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 8"
+        },
+        {
+          "type": "text",
+          "id": "question_8",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_8",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 9"
+        },
+        {
+          "type": "text",
+          "id": "question_9",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_9",
+          "label": "Answer"
+        },
+        {
+          "type": "header",
+          "content": "Product question 10"
+        },
+        {
+          "type": "text",
+          "id": "question_10",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer_10",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

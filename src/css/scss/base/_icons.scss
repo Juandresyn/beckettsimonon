@@ -1,33 +1,35 @@
 $icomoon-font-family: "bs-icons" !default;
 
-$icon--lock: "\e91b";
-$icon--add: "\e900";
-$icon--chevron-left: "\e901";
-$icon--chevron-right: "\e902";
-$icon--chevron-down: "\e903";
-$icon--arrow: "\e904";
-$icon--minus: "\e905";
-$icon--close: "\e906";
-$icon--bills: "\e907";
-$icon--card: "\e908";
-$icon--circle-info: "\e909";
-$icon--circle-minus: "\e90a";
-$icon--circle-plus: "\e90b";
-$icon--clap: "\e90c";
-$icon--coin: "\e90d";
-$icon--envelope: "\e90e";
-$icon--needle: "\e90f";
-$icon--password: "\e910";
-$icon--phone: "\e911";
-$icon--play: "\e912";
-$icon--search: "\e913";
-$icon--shield: "\e914";
-$icon--shop: "\e915";
-$icon--truck: "\e916";
-$icon--twitter: "\e917";
-$icon--instagram: "\e918";
-$icon--facebook: "\e919";
-$icon--youtube: "\e91a";
+$icon--thin-arrow-right: "\e900";
+$icon--large-thin-arrow-right: "\e901";
+$icon--add: "\e902";
+$icon--chevron-left: "\e903";
+$icon--chevron-right: "\e904";
+$icon--chevron-down: "\e905";
+$icon--arrow: "\e906";
+$icon--minus: "\e907";
+$icon--close: "\e908";
+$icon--bills: "\e909";
+$icon--card: "\e90a";
+$icon--circle-info: "\e90b";
+$icon--circle-minus: "\e90c";
+$icon--circle-plus: "\e90d";
+$icon--clap: "\e90e";
+$icon--coin: "\e90f";
+$icon--envelope: "\e910";
+$icon--needle: "\e911";
+$icon--password: "\e912";
+$icon--phone: "\e913";
+$icon--play: "\e914";
+$icon--search: "\e915";
+$icon--shield: "\e916";
+$icon--shop: "\e917";
+$icon--truck: "\e918";
+$icon--twitter: "\e919";
+$icon--instagram: "\e91a";
+$icon--facebook: "\e91b";
+$icon--youtube: "\e91c";
+$icon--lock: "\e91d";
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
@@ -55,9 +57,14 @@ $icon--youtube: "\e91a";
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon--lock {
+.icon--thin-arrow-right {
   &:before {
-    content: $icon--lock;
+    content: $icon--thin-arrow-right;
+  }
+}
+.icon--large-thin-arrow-right {
+  &:before {
+    content: $icon--large-thin-arrow-right;
   }
 }
 .icon--add {
@@ -195,3 +202,9 @@ $icon--youtube: "\e91a";
     content: $icon--youtube;
   }
 }
+.icon--lock {
+  &:before {
+    content: $icon--lock;
+  }
+}
+

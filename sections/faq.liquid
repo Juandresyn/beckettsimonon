@@ -1,0 +1,66 @@
+<style>
+  .faq {
+    background-color: {{ section.settings.bgcolor }};
+  }
+</style>
+
+<div class="faq__wrapper">
+  <header class="layout-section__header faq__header">
+    <h2 class="layout-section__title faq__title">{{ section.settings.title }}</h2>
+  </header>
+
+  <div class="accordion faq__items js-faq-items">
+    {% for block in section.blocks %}
+      <h2 class="accordion__header faq__item-header">{{ block.settings.question }}</h2>
+      <div class="accordion__content faq__item-content">
+        <p class="accordion__text faq__item-description">{{ block.settings.answer }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script type="application/javascript">
+  $(window).on('load', function() {
+    $('.js-faq-items').accordion();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "class": "layout-section faq",
+  "max_blocks": 15,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Lorem"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "faq Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

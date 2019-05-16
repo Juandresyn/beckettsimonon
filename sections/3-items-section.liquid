@@ -1,0 +1,67 @@
+<header class="layout-section__header three-items-section__header">
+  <h2 class="layout-section__title">{{ section.settings.title }}.</h2>
+  <p class="layout-section__description">{{ section.settings.description }}</p>
+</header>
+<div class="three-items-section__list">
+    {% for block in section.blocks %}
+      <article class="three-items-section__item">
+        <img class="three-items-section__item-icon"
+          src="{{ block.settings.icon | img_url: 'master' }}"
+          alt="{{ block.settings.title }}" />
+        <h3 class="three-items-section__item-title">{{ block.settings.title }}</h3>
+        <p class="three-items-section__item-description">{{ block.settings.description }}</p>
+      </article>
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "3 Items Section",
+  "class": "layout-section three-items-section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Loprem"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Loprem ipsun..."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Make sure you use a transparent background image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -7,9 +7,15 @@ var productToolbarOffset = $('.product-toolbar').height();
 var pageScrollClass = 'images-viewed';
 var productToolbarBodyClass = 'product-toolbar--visible';
 var productPageClass = 'page--product';
+var isMobile = window.innerWidth < 1024;
 
 function manageDetailsPosition() {
   var scrollTop = $(window).scrollTop();
+  function toolbarCalculation() {
+    return isMobile ?
+            scrollTop >= ((imagesOffset + productDetailsHeight) - productToolbarOffset) :
+            scrollTop >= (imagesOffset - productToolbarOffset);
+  }
 
   if (scrollTop >= (imagesOffsetFinal + bottomSize)) {
     $('body').addClass(pageScrollClass);
@@ -17,7 +23,7 @@ function manageDetailsPosition() {
     $('body').removeClass(pageScrollClass);
   }
 
-  if (scrollTop >= (imagesOffset - productToolbarOffset)) {
+  if (toolbarCalculation()) {
     $('body').addClass(productToolbarBodyClass);
   } else {
     $('body').removeClass(productToolbarBodyClass);

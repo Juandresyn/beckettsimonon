@@ -16,7 +16,7 @@
 
   &:hover,
   &:focus {
-    background-color: darken($white, 10%);
+    background-color: darken($white, 15%);
   }
 }
 
@@ -27,6 +27,16 @@
   &:hover,
   &:focus {
     background-color: darken($scarlet, 10%);
+  }
+}
+
+.btn--dark {
+  color: $white;
+  background-color: $king-blue;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($king-blue, 10%);
   }
 }
 
@@ -48,7 +58,7 @@
 
   &:hover,
   &:focus {
-    border-color: darken($black, 10%);
-    color: darken($black, 10%);
+    border-color: darken($black, 15%);
+    color: darken($black, 15%);
   }
 }

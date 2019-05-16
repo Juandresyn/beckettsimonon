@@ -1,0 +1,39 @@
+<aside id="inline-cart" class="modal--right cart-modal">
+  <div class="modal--right__container">
+    <div class="modal--right__header">
+      <span class="js-on-click modal--right__close"
+        data-onclick-target="html"
+        data-onclick-class="modal--open cart-is-open">
+        <span class="icon icon--close"></span>
+      </span>
+
+      <p class="cart-modal__info-text">FREE SHIPPING. FREE RETURNS. FREE EXCHANGES!</p>
+    </div>
+
+    <div class="modal--right__content">
+      <div class="cart__wrapper">
+        <form action="/cart"
+          method="post"
+          novalidate
+          class="cart__form">
+          <inline-cart-item></inline-cart-item>
+          <div class="cart__actions">
+            <div class="cart__prices">
+              <div class="cart__price">
+                <p class="cart-price__label">Subtotal</p>
+                <p class="cart-price__total js-inline-cart-total">{{ cart.total_price | money_without_trailing_zeros }}</p>
+              </div>
+
+              <div class="cart__price">
+                <p class="cart-price__label">Shipping</p>
+                <p class="cart-price__total cart-price__total--red">FREE</p>
+              </div>
+            </div>
+
+            <button type="submit" name="checkout" class="btn btn--scarlet">Checkout</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</aside>

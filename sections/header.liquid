@@ -1,30 +1,71 @@
 {% if template.name contains 'index' %}
+
   {% assign header_image = section.settings.hero_image %}
   {% assign header_title = section.settings.home_page_header_text %}
   {% assign is_home = true %}
+  {% assign has_cta = section.settings.home_page_cta_text %}
+
 {% elsif template contains 'product' %}
+
   {% assign is_product = true %}
+
+{% elsif template contains 'list-collections' %}
+
+  {% assign header_image = section.settings.all_products_hero_image %}
+  {% assign header_title = section.settings.all_products_header_text %}
+  {% assign header_description = section.settings.all_products_header_description %}
+
 {% elsif template contains 'collection' %}
+
   {% assign header_image = collection.image %}
   {% assign header_title = collection.title %}
+
+{% elsif template contains 'page.information' %}
+
+  {% assign pageMetafields = page.metafields.image %}
+  {% assign header_image_str = pageMetafields[page.handle] %}
+  {% assign header_title = page.content | split: '[!--header--!]' | first | strip_html %}
+
+{% elsif template contains 'blog' %}
+
+  {% assign is_blog = true %}
+  {% assign header_image = settings.blog_hero_image %}
+  {% assign header_title = settings.blog_hero_title %}
+  {% assign header_description = settings.blog_hero_description %}
+
+{% elsif template contains 'article' %}
+
+{% elsif template contains '404' %}
+
+  {% assign is_404 = true %}
+
 {% endif %}
 
-{% if is_home %}
+{% if is_home
+  or is_blog
+  or template contains 'list-collections'
+  or template contains 'collection'
+  or template contains 'page.information' %}
+  {% assign themeColor = "nav--white" %}
   {% assign header_logo = section.settings.logo %}
-{% else if %}
+{% else %}
+  {% assign themeColor = "nav--black" %}
   {% assign header_logo = section.settings.logo_black %}
 {% endif %}
 
 <style>
-  {% unless is_product %}
+  {% unless is_product
+    or is_404
+    or template contains 'article'
+    or template contains 'cart' %}
     .header-main {
-      background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({{ header_image | img_url: 'master' }});
+      background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({% if header_image_str %}{{ header_image_str }}{% else %}{{ header_image | img_url: 'master' }}{% endif %});
     }
   {% endunless %}
 </style>
 
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
-  <header class="header-main {% if is_product %}header-main--product{% endif %} {% if section.settings.top_bar_enable %}header-main--has-top-bar{% endif %}">
+  <header class="header-main {% if is_product %}header-main--product{% endif %} {% if section.settings.top_bar_enable %}header-main--has-top-bar{% endif %} {{ themeColor }}">
     {% if section.settings.top_bar_enable %}
       <section class="top-bar" style="background-color: {{ section.settings.top_bar_color_bg }};">
           <div class="top-bar__content" style="color: {{ section.settings.top_bar_color_text }};">
@@ -34,7 +75,7 @@
           </div>
       </section>
     {% endif %}
-    <div class="header-main__nav-wrapper">
+    <div class="header-main__nav-wrapper js-header-main">
       {% include 'site-nav',
         id: 'main-menu-left',
         menu: section.settings.main_linklist_left,
@@ -46,6 +87,10 @@
           <img class="header-main__logo"
             src="{{ header_logo | img_url: 'master' }}"
             alt="Beckett Simonon Logo" />
+
+          <img class="header-main__logo header-main__logo--dark"
+            src="{{ section.settings.logo_black | img_url: 'master' }}"
+            alt="Beckett Simonon Logo Black" />
         </a>
       </div>
 
@@ -57,67 +102,89 @@
         hasSearch: true,
         is: 'right' %}
 
-        <div class="header-main--mobile">
-          <a class="site-menu__link site-menu__link--cart" href="#"><span class="icon icon--shop site-menu__cart"></span> {{ cart.item_count }}</a>
-          <span class="site-menu__link hamburger-menu js-on-click"
-            data-onclick-target="body"
-            data-onclick-class="menu-is-open">
-            <span class="icon icon--minus"></span>
-            <span class="icon icon--minus"></span>
-            <span class="icon icon--minus"></span>
-          </span>
-        </div>
+      <div class="header-main--mobile">
+        <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"
+          data-onclick-target="html"
+          data-onclick-class="modal--open cart-is-open">
+          <span class="icon icon--shop site-menu__cart"></span> <span class="js-cart-count site-menu__cart-count">{{ cart.item_count }}</span>
+        </span>
 
-        <div class="header-main__modal">
-          <div class="header-main__modal--header">
-            <a href="/">
-              <img class="header-main__logo"
-                src="{{ section.settings.logo_black | img_url: 'master' }}"
-                alt="Beckett Simonon Logo" />
-            </a>
-
-            <div>
-              <a class="site-menu__link--cart" href="#">
-                <span class="icon icon--shop site-menu__cart"></span> {{ cart.item_count }}
-              </a>
-
-              <span class="js-on-click header-main--mobile__close"
-                data-onclick-target="body"
-                data-onclick-class="menu-is-open">
-                <span class="icon icon--close"></span>
-              </span>
-            </div>
-          </div>
-
-          {% include 'site-nav',
-            id: 'main-menu-left',
-            menu: section.settings.main_linklist_left,
-            class: 'header-main',
-            is: 'left' %}
-          {% include 'site-nav',
-            id: 'main-menu-right',
-            menu: section.settings.main_linklist_right,
-            class: 'header-main',
-            is: 'right' %}
-        </div>
+        <span class="site-menu__link hamburger-menu js-on-click"
+          data-onclick-target="body"
+          data-onclick-class="menu-is-open">
+          <span class="icon icon--minus"></span>
+          <span class="icon icon--minus"></span>
+          <span class="icon icon--minus"></span>
+        </span>
+      </div>
     </div>
-    {% unless is_home != true %}
+    {% if header_title %}
       <section class="header-main__content">
-        {% if header_title %}
-          <h1 class="header-main__title">{{ header_title }}</h1>
+        <h1 class="header-main__title">{{ header_title }}</h1>
+
+        {% if header_description %}
+          <p class="header-main__description">{{ header_description }}</p>
         {% endif %}
-        <div class="header-main__cta">
-          <a href="{{ section.settings.home_page_cta_link }}" class="btn btn--white">{{ section.settings.home_page_cta_text }}</a>
-        </div>
-        <button class="header-main__scroll animation-parent">
-          <span class="icon icon--arrow rotate-90 animation--go-to"></span>
-        </button>
+
+        {% if has_cta %}
+          <div class="header-main__cta">
+            <a href="{{ section.settings.home_page_cta_link }}" class="btn btn--white">{{ section.settings.home_page_cta_text }}</a>
+          </div>
+        {% endif %}
+
+        {% if is_home or template contains 'page.information' %}
+          <button class="header-main__scroll animation-parent">
+            <span class="visually-hidden">Scroll down</span>
+            <span class="icon icon--arrow rotate-90 animation--go-to"></span>
+          </button>
+        {% endif %}
+        {% if template contains 'page.information' %}
+          {% include 'page-information-nav' with currentHandle: page.handle %}
+        {% endif %}
       </section>
-    {% endunless %}
+    {% endif %}
   </header>
+  <div class="header-main__modal">
+    <div class="header-main__modal--header">
+      <a href="/">
+        <img class="header-main__logo"
+          src="{{ section.settings.logo_black | img_url: 'master' }}"
+          alt="Beckett Simonon Logo" />
+      </a>
+
+      <div>
+        <a class="site-menu__link--cart" href="#">
+          <span class="icon icon--shop site-menu__cart"></span> {{ cart.item_count }}
+        </a>
+
+        <span class="js-on-click header-main--mobile__close"
+          data-onclick-target="body"
+          data-onclick-class="menu-is-open">
+          <span class="icon icon--close"></span>
+        </span>
+      </div>
+    </div>
+
+    {% include 'site-nav',
+      id: 'main-menu-left',
+      menu: section.settings.main_linklist_left,
+      class: 'header-main',
+      is: 'left' %}
+    {% include 'site-nav',
+      id: 'main-menu-right',
+      menu: section.settings.main_linklist_right,
+      class: 'header-main',
+      is: 'right' %}
+
+    <div class="header-main__modal-search">
+      <span class="header-main-modal__search-icon js-on-click"
+        data-onclick-target="html"
+        data-onclick-class="modal--open search-is-open">
+        <span class="icon icon--search"></span>
+      </span>
+    </div>
+  </div>
 </div>
-
-
 
 <script type="application/ld+json">
 {
@@ -249,6 +316,27 @@
       "type": "url",
       "id": "home_page_cta_link",
       "label": "Homepage Hero CTA Link"
+    },
+    {
+      "type": "header",
+      "content": "All Products Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "all_products_hero_image",
+      "label": "All Products Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "all_products_header_text",
+      "label": "All Products Hero Text",
+      "default": "Message Here"
+    },
+    {
+      "type": "text",
+      "id": "all_products_header_description",
+      "label": "All Products Hero Description",
+      "default": "Message Here"
     }
   ]
 }

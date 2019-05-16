@@ -8,8 +8,9 @@
   font-family: $font-secondary--bold;
   font-size: 13px;
   line-height: 18px;
-  padding: 26px 0;
+  padding: 26px 0 30px;
   position: relative;
+  text-align: left;
   text-transform: uppercase;
 
   &:after {
@@ -21,20 +22,31 @@
     font-size: 16px;
     height: 17px;
     line-height: 1;
+    opacity: 1;
     position: absolute;
     right: 0;
     text-align: center;
+    transition: opacity 0.2s ease;
     width: 17px;
   }
 
   &.ui-state-active:after {
     content: "-";
   }
+
+  &:hover::after {
+    opacity: 0.7;
+  }
 }
 
 .accordion__content {
-  padding-bottom: 26px;
-  padding-right: 60px;
+  padding-bottom: 20px;
+  text-align: left;
+
+  @media (min-width: $desktop) {
+    padding-bottom: 26px;
+    padding-right: 60px;
+  }
 }
 
 .accordion__text {

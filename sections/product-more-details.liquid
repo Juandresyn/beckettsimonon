@@ -1,0 +1,143 @@
+{% assign theCollection = '' %}
+
+{% for coll in product.collections %}
+  {% unless coll.title contains '[NOINDEX]' %}
+    {% assign theCollection = coll.handle %}
+  {% endunless %}
+{% endfor %}
+
+<script type="application/javascript">
+  window.productMoreDetails = {
+    {% for block in section.blocks limit: section.blocks.size %}
+      {% if theCollection == block.settings.collection %}
+        '{{ block.settings.collection }}': [
+          {
+            'eyebrow': "{{ block.settings.small_1 }}",
+            'description': "{{ block.settings.description_1 }}",
+          },
+          {
+            'eyebrow': "{{ block.settings.small_2 }}",
+            'description': "{{ block.settings.description_2 }}",
+          },
+          {
+            'eyebrow': "{{ block.settings.small_3 }}",
+            'description': "{{ block.settings.description_3 }}",
+          },
+          {
+            'eyebrow': "{{ block.settings.small_4 }}",
+            'description': "{{ block.settings.description_4 }}",
+          },
+          {
+            'eyebrow': "{{ block.settings.small_5 }}",
+            'description': "{{ block.settings.description_5 }}",
+          },
+        ],
+      {% endif %}
+    {% endfor %}
+  };
+</script>
+
+{% schema %}
+{
+  "name": "A few more details",
+  "settings": [
+    {
+      "type": "header",
+      "content": "A few more details Section"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "more_details",
+      "name": "More details block",
+      "settings": [
+        {
+          "type": "header",
+          "content": "More Details block"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Pick a Collection"
+        },
+        {
+          "type": "header",
+          "content": "More Details block 1"
+        },
+        {
+          "type": "text",
+          "id": "small_1",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "textarea",
+          "id": "description_1",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "More Details block 2"
+        },
+        {
+          "type": "text",
+          "id": "small_2",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "textarea",
+          "id": "description_2",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "More Details block 3"
+        },
+        {
+          "type": "text",
+          "id": "small_3",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "textarea",
+          "id": "description_3",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "More Details block 4"
+        },
+        {
+          "type": "text",
+          "id": "small_4",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "textarea",
+          "id": "description_4",
+          "label": "Description"
+        },
+        {
+          "type": "header",
+          "content": "More Details block 5"
+        },
+        {
+          "type": "text",
+          "id": "small_5",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "textarea",
+          "id": "description_5",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "More Details",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}

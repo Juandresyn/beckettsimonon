@@ -5,6 +5,7 @@ $gray: #666666;
 $blue: #3AB0DD;
 $dark-blue: #34495E;
 $dark-gray: #4D4D4D;
+$dark-gray-2: #d3d3d3;
 $icon-gray: #6E6E6E;
 $border-color: #c9c9c9;
 $medium-gray: #888888;
@@ -29,11 +30,6 @@ $tw-color: #26ABE4;
 $ig-color: #4F7EA8;
 $pt-color: #FE3A35;
 
-// Sizes
-$site-max-width: 1280px;
-$sections-max-width: 1160px;
-$main-header-height: 142px;
-
 // Font Stacks
 $font-primary: "georgia", serif, Georgia, Times;
 $font-primary--bold: "georgia-bold", serif, Georgia, Times;
@@ -41,9 +37,9 @@ $font-primary--bold: "georgia-bold", serif, Georgia, Times;
 $font-heading: "Playfair Display", serif, Georgia, Times;
 $font-heading--bold: "playfair-bold", serif, Georgia, Times;
 
-$font-secondary: "nunito", Arial, sans-serif;
-$font-secondary--light: "nunito-light", Arial, sans-serif;
-$font-secondary--bold: "nunito-bold", Arial, sans-serif;
+$font-secondary: "nunito-sans", Arial, sans-serif;
+$font-secondary--light: "nunito-sans--light", Arial, sans-serif;
+$font-secondary--bold: "nunito-sans--bold", Arial, sans-serif;
 
 $font-monospace: Menlo, Monaco, "Courier New", monospace;
 $font-icon: "bs-icons";
@@ -58,6 +54,12 @@ $mobile-large: 480px;
 $mobile: 375px;
 $form-with: 556px;
 
+$site-max-width: 1280px;
+$sections-max-width: 1160px;
+$main-header-height: 142px;
+$top-bar-height-desktop: 40px;
+$top-bar-height-small: 40px;
+
 // Easing
 
 
@@ -65,6 +67,7 @@ $form-with: 556px;
 $border-color-primary: #EEEEEE;
 $border-color-secondary: #34495E;
 $border-color-dark: #4a4a4a;
+$border-color-blockquote: #707070;
 
 $border-size-primary: 1px;
 $border-type-primary: solid;

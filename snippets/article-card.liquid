@@ -1,0 +1,23 @@
+<article class="blog-article">
+  <a href="{{ article.url }}">
+    <img id="{{ article.handle }}--image"
+      class="blog-article__image lazyload"
+      src="{{ article.image | img_url: '366x366' }}"
+      data-src="{{ img_url }}"
+      data-widths="[180, 360, 540, 720, 905, 1090, 1296, 1512, 1728, 2048]"
+      data-aspectratio="{{ article.image.aspect_ratio }}"
+      data-sizes="auto"
+      alt="Article {{ article.title }} Image" />
+  </a>
+
+  <h2 class="blog-article__title">{{ article.title }}</h2>
+
+  <p class="blog-article__description">
+    {% if article.excerpt.size > 0 %}
+      {{ article.excerpt }}
+    {% else %}
+      {{ article.content | strip_html | truncate: 143 }}
+    {% endif %}
+  </p>
+  <a href="{{ article.url }}" class="blog-article__read-more">READ POST</a>
+</article>

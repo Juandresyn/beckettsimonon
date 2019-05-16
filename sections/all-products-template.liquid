@@ -1,0 +1,63 @@
+<div class="all-products js-all-products">
+  <div class="all-products__container">
+    {% include 'all-products-filters' %}
+    <div class="all-products__overlay js-all-products-overlay"></div>
+    <div class="all-products__content">
+      {% paginate collections['all'].products by section.settings.products_per_page %}
+        <ul class="product-grid">
+          {% for product in collections['all'].products %}
+            {% unless forloop.index > section.settings.max %}
+              <li class="product-grid__item">
+                <a class="product-grid__item-link"
+                  href="{{ product.url }}">
+                  <img class="product-grid__item-image product-grid__item-image--primary"
+                    src="{{ product.featured_image | img_url: '230x230', crop: 'center' }}" />
+                  <img class="product-grid__item-image product-grid__item-image--secondary"
+                    src="{{ product.images[1] | img_url: '230x230', crop: 'center' }}" />
+                  <h3 class="product-grid__item-title">{{ product.title | split: ' -' | first }}</h3>
+                  {% comment %} <span class="product-grid__item-variant">{{ product.variant }}</span> {% endcomment %}
+                  <span class="product-grid__item-price">{{ product.price | money_without_trailing_zeros }}</span>
+                </a>
+              </li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+
+        {% include 'pagination' %}
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "All products page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Page header title"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Page header description"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_image",
+      "label": "Page header image"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "default": 12,
+      "min": 8,
+      "max": 50,
+      "step": 1
+    }
+  ]
+}
+{% endschema %}
+sd

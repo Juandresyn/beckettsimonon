@@ -1,12 +1,12 @@
 .content-block {
   width: calc(100% - 40px);
 
-  @media screen and (max-width: $tablet-small) {
+  @media (max-width: $tablet-small) {
     margin: 0 20px;
     text-align: center;
   }
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     width: 50%;
   }
 }
@@ -21,22 +21,22 @@
   }
 
   &:last-child {
-    padding-bottom: 120px;
+    padding-bottom: 100px;
   }
 
-  @media screen and (min-width: $desktop) {
-    padding: 120px 0 0 0;
+  @media (min-width: $desktop) {
+    padding: 100px 0 0 0;
   }
 }
 
 .section--content-block--left {
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     margin-right: auto;
   }
 }
 
 .section--content-block--right {
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     margin-left: auto;
   }
 }
@@ -57,5 +57,5 @@
 
 .section--content-block__title {
   line-height: 35px;
-  margin-bottom: 21px;
+  margin-bottom: 12px;
 }

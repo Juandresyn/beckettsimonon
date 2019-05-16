@@ -1,0 +1,63 @@
+<style>
+  .quote {
+    background-color: {{ section.settings.bgcolor }};
+  }
+
+  .quote * {
+    color: {{ section.settings.textcolor }};
+  }
+</style>
+<section class="layout-section quote">
+  <div class="quote__wrapper">
+    <span class="quote__icon">“</span>
+    <p class="quote__content">{{ section.settings.content }}</p>
+    <div class="quote__author-wrapper">
+      <span class="quote__author">{{ section.settings.author }}</span>
+      <span class="quote__author-backline">{{ section.settings.authorbackline }}</span>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Quote",
+  "class": "layout-section quote",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Background Color",
+      "default": "#1c1c1c"
+    },
+    {
+      "type": "color",
+      "id": "textcolor",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Loprem ipsun..."
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author",
+      "default": "Jhon doe"
+    },
+    {
+      "type": "text",
+      "id": "authorbackline",
+      "label": "Author Backline",
+      "default": "Loprem ipsun..."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}

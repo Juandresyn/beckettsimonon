@@ -1,0 +1,31 @@
+<div class="cart__item">
+  <a href="{{ item.url }}">
+    <img class="cart-item__image"
+      src="{{ item | img_url: '99x99' }}"
+      alt="{{ item.title | escape }}">
+  </a>
+
+  <div class="cart-item__info">
+    <h2 class="cart-item__title">{{ item.title | split: ' -' | first }}</h2>
+    <small class="cart-item__small">{{ item.product.type }}</small>
+    <small class="cart-item__small">Size. {{ item.variant.title }}</small>
+
+    <div class="cart-item__quantity">
+      <button type="submit" name="update"
+        class="cart-item__quantity-button js-quantity-less">-</button>
+
+      <input id="updates_{{ item.key }}"
+        class="cart-item__quantity-input js-quantity"
+        type="text"
+        name="updates[]"
+        readonly
+        value="{{ item.quantity }}" />
+
+      <button type="submit" name="update"
+        class="cart-item__quantity-button js-quantity-add">+</button>
+    </div>
+  </div>
+
+  <p class="cart-item__price">{{ item.line_price | money_without_trailing_zeros }}</p>
+  <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart-item__remove">Remove</a>
+</div>

@@ -1,0 +1,94 @@
+.zigzag {
+  &.layout-section {
+    @media (max-width: $desktop) {
+      padding: 51px 20px 35px;
+    }
+  }
+
+  .layout-section__header {
+    @media (max-width: $desktop) {
+      margin-bottom: 59px;
+    }
+  }
+
+  .layout-section__title {
+    @media (max-width: $desktop) {
+      font-size: 27px;
+      line-height: 41px;
+    }
+  }
+
+  .layout-section__description {
+    @media (max-width: $desktop) {
+      font-size: 17px;
+      line-height: 32px;
+    }
+  }
+}
+
+.zigzag__wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 68px;
+  max-width: 960px;
+}
+
+.zigzag__item {
+  align-items: center;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  margin-bottom: 75px;
+
+  @media (min-width: $desktop) {
+    flex-direction: row;
+    margin-bottom: 80px;
+  }
+
+  &:nth-child(2n) {
+    @media (min-width: $desktop) {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.zigzag-item__info {
+  text-align: left;
+  max-width: 370px;
+  width: 100%;
+}
+
+.zigzag-item__title {
+  font-size: 22px;
+  line-height: 35px;
+  margin-bottom: 25px;
+
+  @media (min-width: $desktop) {
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 23px;
+  }
+}
+
+.zigzag-item__description {
+  font-family: $font-primary;
+  font-size: 16px;
+  line-height: 28px;
+
+  @media (min-width: $desktop) {
+    font-size: 15px;
+    line-height: 28px;
+  }
+}
+
+.zigzig-item__image {
+  margin-bottom: 30px;
+
+  @media (min-width: $desktop) {
+    margin-bottom: 0;
+  }
+}

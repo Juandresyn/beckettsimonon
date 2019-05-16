@@ -1,14 +1,21 @@
 .header-main {
-  min-height: 400px;
   background-color: $black;
   background-size: cover;
+  height: 340px;
+  position: relative;
+
+  @media (min-width: $desktop) {
+    height: auto;
+    min-height: 400px;
+  }
 }
 
 .header-main--product {
   min-height: initial;
   background-color: initial;
 
-  a {
+  a,
+  span {
     color: $black;
   }
 
@@ -26,8 +33,8 @@
   padding: 17px;
   position: absolute;
   right: 0;
-  top: 37px;
-  z-index: 2;
+  top: 42px;
+  z-index: 4;
 
   @media (min-width: $desktop) {
     top: 42px;
@@ -51,7 +58,7 @@
     font-size: 20px;
     font-weight: bold;
     margin-left: 0;
-    padding: 9px 0;
+    padding: 9px 0 10px;
     transition: color 0.3s ease;
 
     &:hover {
@@ -82,6 +89,35 @@
   }
 }
 
+.header-main__modal-search {
+  bottom: 60px;
+  position: absolute;
+  width: calc(100% - 34px);
+}
+
+.header-main-modal__search-icon {
+  font-size: 22px;
+  padding: 5px 15px 5px 0;
+}
+
+.header-main-modal__search-form {
+  display: flex;
+}
+
+.header-main-modal__search-input {
+  border-bottom: 1px solid $black;
+  font-size: 18px;
+  padding-bottom: 10px;
+  padding-right: 35px;
+  width: 100%;
+}
+
+.header-main-modal__search-button {
+  padding: 2px 0px 5px 10px;
+  position: absolute;
+  right: 0;
+}
+
 .menu-is-open {
   overflow-y: hidden;
 
@@ -105,13 +141,15 @@
   .site-menu__link--cart {
     color: $white;
     line-height: 1;
+    vertical-align: text-top;
   }
 
   .hamburger-menu {
+    justify-content: center;
     margin-left: 25px;
   }
 
-  @media screen and (min-width: $desktop-large) {
+  @media (min-width: $desktop-large) {
     display: none;
   }
 }
@@ -136,8 +174,9 @@
 
 .header-main__nav--right {
   .header-main__list {
-    display: flex;
     align-items: center;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .site-menu__list-search .site-menu__link {
@@ -149,12 +188,13 @@
 
   .site-menu__cart {
     font-size: 20px;
+    padding-bottom: 4px;
     padding-right: 5px;
   }
 }
 
 .header-main__list {
-  margin: 20px 0;
+  margin: 7px 0;
 
   &-item:first-of-type a {
     margin-left: 0;
@@ -167,27 +207,37 @@
   &-link {
     border-bottom: 0;
     color: $white;
+    cursor: pointer;
     font-family: $font-secondary;
-    font-size: 16px;
+    font-size: 13px;
     padding-top: 10px;
-    padding-bottom: 9px;
+    padding-bottom: 10px;
     margin: 0 15px;
     text-transform: uppercase;
     transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: 0;
+    }
 
     &:hover:not(.site-menu__link--icon) {
       border-color: $black;
     }
 
-    @media screen and (min-width: $desktop) {
+    @media (min-width: $desktop) {
       border-bottom: 1px solid transparent;
     }
   }
 }
 
 .header-main__logo {
-  @media screen and (max-width: $tablet-small) {
+  @media (max-width: $tablet-small) {
     height: 15px;
+    vertical-align: middle;
+  }
+
+  @media (min-width: $desktop) {
+    padding-bottom: 3px;
   }
 }
 
@@ -203,7 +253,7 @@
   max-width: calc(#{$site-max-width} + 50px);
   padding: 17px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     padding: 15px 25px;
   }
 }
@@ -225,6 +275,7 @@
   display: inline-block;
   font-family: $font-heading--bold;
   font-size: 35px;
+  letter-spacing: .5px;
   line-height: 48px;
   margin-bottom: 60px;
   max-width: 540px;
@@ -233,16 +284,56 @@
   width: 100%;
 }
 
+.header-main__description {
+  color: $white;
+  font-family: $font-primary;
+  font-size: 18px;
+  line-height: 33px;
+  max-width: 620px;
+  text-align: center;
+}
+
+.header-main__cta .btn {
+  padding: 18px 40px;
+}
+
 .header-main__scroll {
   bottom: 15px;
   position: absolute;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     bottom: 50px;
   }
 
   .icon {
     color: $white;
     font-size: 25px;
+  }
+}
+
+.nav--white .header-main__nav-wrapper:not(.main-nav--sticky) {
+  .header-main__list-link:hover:not(.site-menu__link--icon) {
+    border-color: $white;
+  }
+
+  .site-menu__cart-count {
+    color: $white;
+  }
+}
+
+.nav--black {
+    .header-main__nav-wrapper:not(.main-nav--sticky) {
+      .header-main__list-link {
+        color: $black;
+      }
+
+    .header-main__list-link:hover:not(.site-menu__link--icon) {
+      border-color: $black;
+    }
+  }
+
+  .header-main--mobile .icon,
+  .header-main--mobile .site-menu__link--cart {
+    color: $black;
   }
 }

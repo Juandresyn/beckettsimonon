@@ -1,0 +1,42 @@
+.two-paragraph-with-video {
+  padding: 56px 20px 60px;
+
+  @media (min-width: $desktop) {
+    padding: 87px 30px 41px;
+  }
+
+  .layout-section__header {
+    @media (max-width: $desktop) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.two-paragraph-with-video__description {
+  font-size: 24px;
+  line-height: 42px;
+  margin-bottom: 60px;
+  max-width: 722px;
+}
+
+.two-paragraph-with-video__description--last {
+  font-size: 17px;
+  line-height: 32px;
+  margin-top: 56px;
+  max-width: 664px;
+
+  @media (min-width: $desktop) {
+    margin-top: 60px;
+  }
+}
+
+.two-paragraph-with-video__video {
+  margin: 0 -20px;
+  max-width: 960px;
+  width: calc(100% + 40px);
+
+  @media (min-width: $desktop) {
+    margin: 0 auto;
+    width: 100%;
+  }
+}

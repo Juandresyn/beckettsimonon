@@ -20,6 +20,19 @@
               mozallowfullscreen
               allowfullscreen></iframe>
           {% endif %}
+        {% elsif section.settings.wistia_id != blank %}
+          <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+              <div class="wistia_embed wistia_async_{{ section.settings.wistia_id }} videoFoam=true" style="height:100%;position:relative;width:100%">
+                <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
+                  <img src="https://fast.wistia.com/embed/medias/{{ section.settings.wistia_id }}/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" onload="this.parentNode.style.opacity=1;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script src="https://fast.wistia.com/embed/medias/{{ section.settings.wistia_id }}.jsonp" async=""></script>
+          <script src="https://fast.wistia.com/assets/external/E-v1.js" async=""></script>
         {% else %}
           {{ section.settings.embed_video }}
         {% endif %}
@@ -59,6 +72,11 @@
       "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
     },
     {
+      "type": "text",
+      "id": "wistia_id",
+      "label": "Wistia Video ID"
+    },
+    {
       "type": "html",
       "id": "embed_video",
       "label": "Embed Video"
@@ -79,6 +97,7 @@
       "options": [
         { "value": "btn--white", "label": "White"},
         { "value": "btn--scarlet", "label": "Scarlet (red)"},
+        { "value": "btn--dark", "label": "Dark"},
         { "value": "btn--outline", "label": "Transparent (black)"},
         { "value": "btn--outline--white", "label": "Transparent (white)"}
       ],

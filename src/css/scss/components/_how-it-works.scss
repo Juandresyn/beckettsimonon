@@ -15,12 +15,19 @@
 }
 
 .how-it-works__image {
+  background-size: cover;
+  display: flex;
+  height: 100vw;
   width: 100%;
+
+  @media (min-width: $desktop) {
+    height: 100%;
+  }
 }
 
 .how-it-works__items,
 .how-it-works__image-wrapper {
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     width: calc(50% - 50px);
   }
 }
@@ -28,7 +35,7 @@
 .how-it-works__image-wrapper {
   margin-bottom: 35px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     margin-bottom: 0;
   }
 }
@@ -39,7 +46,7 @@
   justify-content: space-between;
   margin-bottom: 60px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     flex-direction: row;
   }
 }
@@ -56,17 +63,19 @@
 .how-it-works__item-decoration {
   margin-right: 27px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     margin-right: 40px;
   }
 }
 
 .how-it-works__item-content {
+  padding-bottom: 25px;
   text-align: left;
 }
 
 .how-it-works__item-title {
-  margin-bottom: 36px;
+  margin-bottom: 33px;
+  margin-top: 3px;
 }
 
 .how-it-works__item-description {
@@ -74,31 +83,82 @@
   font-size: 16px;
   line-height: 28px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     padding-right: 50px;
   }
 }
 
 .how-it-works__item-image {
-  margin-bottom: 36px;
+  margin-bottom: 30px;
   width: 30px;
   max-width: none;
 
-  @media screen and (min-width: $desktop) {
-    max-width: 100%;
-    max-height: 24px;
+  @media (min-width: $desktop) {
+    max-height: 30px;
   }
 }
 
 .how-it-works__item-count {
   border-bottom: 1px solid $scarlet;
   color: $scarlet;
+  font-family: $font-secondary;
   font-size: 15px;
   padding-bottom: 3px;
   line-height: 34px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     border-color: $black;
     color: $black;
+  }
+}
+
+.how-it-works--page {
+  .how-it-works__content {
+    flex-direction: column-reverse;
+    margin-bottom: 0;
+
+    @media (min-width: $desktop) {
+      flex-direction: row-reverse;
+      margin-bottom: 60px;
+    }
+  }
+
+  .how-it-works__item {
+    margin-bottom: 15px;
+
+    &:last-of-type {
+      @media (max-width: $desktop) {
+        margin-bottom: 0;
+      }
+
+      .how-it-works__item-content {
+        @media (max-width: $desktop) {
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    @media (min-width: $desktop) {
+      margin-bottom: 65px;
+    }
+  }
+
+  .how-it-works__item-title {
+    font-size: 21px;
+    line-height: 28px;
+    margin-bottom: 35px;
+
+    @media (min-width: $desktop) {
+      font-size: 22px;
+      margin-bottom: 36px;
+    }
+  }
+
+  .how-it-works__item-description {
+    font-size: 15px;
+
+    @media (min-width: $desktop) {
+      font-size: 16px;
+    }
   }
 }

@@ -81,7 +81,7 @@
   width: 100%;
 
   @media screen and (min-width: $desktop) {
-    margin-top: 45px;
+    margin-top: 32px;
     text-align: left;
   }
 }
@@ -99,7 +99,7 @@
 .site-footer__copyright-wrapper {
   align-items: center;
   flex-direction: column;
-  margin-top: 75px;
+  margin-top: 70px;
 
   @media screen and (min-width: $desktop) {
     align-items: inherit;
@@ -128,7 +128,7 @@
 
 .site-footer--prefooter {
   background-color: $scarlet;
-  padding: 35px 0;
+  padding: 29px 0;
 }
 
 .site-footer--prefooter__container {
@@ -149,100 +149,14 @@
 }
 
 .site-footer--prefooter__item-description {
-  font-size: 12px;
+  font-size: 11px;
   font-family: $font-secondary;
-  line-height: 18px;
-  padding: 0 25px;
+  line-height: 16px;
+  padding: 0 22px;
 }
 
 .site-footer--prefooter__item-image {
-  height: 30px;
+  height: 25px;
   margin-bottom: 15px;
   width: auto;
-}
-
-.newsletter-form {
-  padding: 60px 0 60px 0;
-
-  &.layout-section {
-    @media screen and (max-width: $tablet-small) {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-  }
-
-  @media screen and (min-width: $desktop) {
-    padding: 85px 0 80px 0;
-  }
-}
-
-.newsletter-form__label {
-  font-size: 12px;
-  font-family: $font-secondary;
-  line-height: 18px;
-
-  @media screen and (min-width: $desktop) {
-    font-size: 16px;
-  }
-}
-
-.newsletter-form__title {
-  margin: 10px 0 25px 0;
-  font-family: $font-primary;
-  font-size: 24px;
-  line-height: 30px;
-
-  @media screen and (min-width: $desktop) {
-    font-family: $font-primary--bold;
-    font-size: 34px;
-    margin: 33px 0 51px 0;
-  }
-}
-
-.newsletter-form__form {
-  margin: 0 auto;
-  max-width: 570px;
-  position: relative;
-  width: 100%;
-
-  ::placeholder {
-    color: $black;
-  }
-
-  .icon {
-    font-size: 18px;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-
-    @media screen and (min-width: $desktop) {
-      right: 20px;
-    }
-  }
-}
-
-.newsletter-form__input {
-  color: $black;
-  border: 1px solid $black;
-  border-radius: 2px;
-  font-size: 14px;
-  font-family: $font-secondary;
-  line-height: 16px;
-  padding: 30px 20px;
-  width: 100%;
-
-  @media screen and (min-width: $desktop) {
-    font-size: 12px;
-    padding: 32px 36px;
-  }
-}
-
-.newsletter-form__submit {
-  position: absolute;
-  right: 0;
-  top: 29px;
-
-  @media screen and (min-width: $desktop) {
-    top: 34px;
-  }
 }

@@ -1,0 +1,9 @@
+<section class="article__tags-social">
+  <div class="article__tags">
+    {% for tag in article.tags %}
+      <span class="article__tags-item">{{ tag }}</span>
+    {% endfor %}
+  </div>
+
+  {% include 'inline-share' with hasPre: true %}
+</section>

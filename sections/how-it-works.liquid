@@ -27,9 +27,8 @@
 
         <div class="how-it-works__image-wrapper">
             {% if section.settings.image %}
-                <img class="how-it-works__image"
-                    src="{{ section.settings.image | img_url: 'master' }}"
-                    alt="How It Works" />
+                <div class="how-it-works__image"
+                  style="background-image: url({{ section.settings.image | img_url: 'master' }});"></div>
             {% endif %}
         </div>
     </div>

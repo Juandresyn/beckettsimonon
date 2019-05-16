@@ -1,0 +1,114 @@
+<style>
+  .press-carousel {
+    background-color: {{ settings.press_color_bg }};
+  }
+</style>
+<section class="layout-section press-carousel">
+  <header class="layout-section__header">
+    <h2 class="layout-section__title">{{ settings.press_title }}</h2>
+  </header>
+
+  <div class="press-carousel__container">
+    <div class="press-carousel__list js-slick-press">
+      {% for i in (1..10) %}
+        {% capture item_text %}press_text_{{ i }}{% endcapture %}
+        {% capture item_logo %}press_logo_{{ i }}{% endcapture %}
+
+        {% if settings[item_logo] %}
+          <div class="press-carousel__item"
+            data-description="{{ settings[item_text] }}"
+            data-index="{{ i }}">
+            <div class="press-carousel__item-logo-wrapper">
+              <img src="{{ settings[item_logo] | img_url: 'master' }}"
+                class="press-carousel__item-logo" />
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <p class="press-carousel__item-text js-slick-press-content mobile--only"></p>
+
+    <div class="press-carousel__arrows">
+      <button class="js-slick-press__prev animation-parent">
+        <span class="icon icon--arrow animation--go-to rotate-180"></span>
+      </button>
+
+      <p class="press-carousel__item-text js-slick-press-content desktop--only"></p>
+
+      <button class="js-slick-press__next animation-parent">
+        <span class="icon icon--arrow animation--go-to"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+  const pressSlider = $('.js-slick-press');
+  const pressSliderArrowPrev = $('.js-slick-press__prev');
+  const pressSliderArrowNext = $('.js-slick-press__next');
+  const pressSliderDescription = $('.js-slick-press-content');
+
+  function handleDescription(newText) {
+    pressSliderDescription.html(newText)
+  };
+
+  pressSlider.on('click', '.slick-slide', function (e) {
+    e.stopPropagation();
+    var index = this.dataset.slickIndex;
+
+    if ($('.slick-slider').slick('slickCurrentSlide') !== index) {
+      $('.slick-slider').slick('slickGoTo', index);
+    }
+  });
+
+  pressSlider.on('init', function(event, slick, currentSlide, nextSlide) {
+    handleDescription(slick.$slides[0].dataset.description);
+  });
+
+  pressSlider.slick({
+    centerMode: true,
+    centerPadding: '60px',
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        centerPadding: '60px',
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerPadding: '40px',
+      }
+    }
+  ]
+  });
+
+  pressSlider.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+    handleDescription(slick.$slides[nextSlide].dataset.description);
+  });
+
+  pressSliderArrowPrev.on('click', function() {
+    pressSlider.slick('slickPrev');
+  });
+
+  pressSliderArrowNext.on('click', function() {
+    pressSlider.slick('slickNext');
+  });
+</script>

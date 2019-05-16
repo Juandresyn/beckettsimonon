@@ -1,0 +1,33 @@
+<aside class="modal--right search-modal">
+  <div class="modal--right__container">
+    <div class="modal--right__header">
+      <h2>Search in our Store</h2>
+
+      <span class="js-on-click modal--right__close"
+        data-onclick-target="html"
+        data-onclick-class="modal--open search-is-open">
+        <span class="icon icon--close"></span>
+      </span>
+    </div>
+
+    <div class="modal--right__content">
+      <form method="get" action="/search" class="search-modal__form">
+        <label for="search-modal-input" class="visually-hidden">Search something</label>
+        <input id="search-modal-input"
+          type="text"
+          name="q"
+          class="search-modal__form-input js-live-search"
+          placeholder="Search something..."
+          data-results="js-live-search-results" />
+
+        <button class="search-modal__form-button">
+          <span class="visually-hidden">Search</span>
+          <span class="search-modal__form-icon icon icon--search"></span>
+        </button>
+
+        <ul class="search-modal__results js-live-search-results">
+        </ul>
+      </form>
+    </div>
+  </div>
+</aside>

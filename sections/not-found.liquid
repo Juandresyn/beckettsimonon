@@ -1,0 +1,68 @@
+<section class="not-found">
+  <div class="not-found__wrapper">
+    <div class="not-found__info">
+      <div class="not-found__info-top">
+        <small class="not-found__info-small">{{ section.settings.small }}</small>
+        <span class="not-found__info-line"></span>
+      </div>
+      <h1 class="not-found__info-title">{{ section.settings.title }}</h1>
+      <a href="{{ section.settings.cta_link }}" class="btn {{ section.settings.button_type }} not-found__info-link">{{ section.settings.cta_text }}</a>
+    </div>
+
+    <div class="not-found__image-wrapper">
+      <img src="{{ section.settings.image | img_url: 'master' }}" class="not-found__image" />
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Not Found (404)",
+  "class": "not-found",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Choose Image"
+    },
+    {
+      "type": "text",
+      "id": "small",
+      "label": "Small Text"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "header",
+      "content": "Section CTA options"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Section CTA",
+      "default": "My link"
+    },
+    {
+      "type": "select",
+      "id": "button_type",
+      "options": [
+        { "value": "btn--white", "label": "White"},
+        { "value": "btn--scarlet", "label": "Scarlet (red)"},
+        { "value": "btn--dark", "label": "Dark"},
+        { "value": "btn--outline", "label": "Transparent (black)"},
+        { "value": "btn--outline--white", "label": "Transparent (white)"}
+      ],
+      "label": "Button Style",
+      "default": "btn--scarlet"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Section CTA Link"
+    }
+  ]
+}
+{% endschema %}

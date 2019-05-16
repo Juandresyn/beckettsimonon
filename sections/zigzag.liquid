@@ -1,0 +1,74 @@
+<style>
+  .zigzag {
+    background-color: {{ section.settings.bgcolor }};
+  }
+</style>
+
+<header class="layout-section__header">
+  <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+  <p class="layout-section__description">{{ section.settings.description }}</p>
+</header>
+
+<div class="zigzag__wrapper">
+  {% for block in section.blocks %}
+    <article class="zigzag__item">
+      <div class="zigzag-item__info">
+        <h3 class="zigzag-item__title">{{ block.settings.title }}</h3>
+        <p class="zigzag-item__description">{{ block.settings.description }}</p>
+      </div>
+      <img src="{{ block.settings.image | img_url: 'master' }}"
+        class="zigzig-item__image" />
+    </article>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "ZigZag Section",
+  "class": "layout-section zigzag",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Lorem"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Loprem ipsun..."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "zigzag",
+      "name": "ZigZag Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
