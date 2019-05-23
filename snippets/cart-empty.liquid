@@ -1,0 +1,19 @@
+<div class="inline-cart-empty">
+  <div class="inline-cart-empty__header">
+    {{ 'cart-emty.svg' | asset_url | img_tag: '', 'inline-cart-empty__image' }}
+
+    <p class="inline-cart-empty__text">{{ settings.inline_cart_empty_text }}</p>
+  </div>
+
+  <div class="inline-cart-empty__content">
+    {% for i in (1..4) %}
+      {% capture btn_text %}inline_cart_empty_btn_{{ i }}{% endcapture %}
+      {% capture btn_link %}inline_cart_empty_btn_{{ i }}_link{% endcapture %}
+      {% capture btn_style %}inline_cart_empty_btn_{{ i }}_style{% endcapture %}
+
+      {% if settings[btn_text] %}
+        <a href="{{ settings[btn_link] }}" class="btn {{ settings[btn_style] }} inline-cart-empty__btn">{{ settings[btn_text] }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

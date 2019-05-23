@@ -1,14 +1,14 @@
 .product__shipping-details {
-  padding: 80px 25px 100px 25px;
+  padding: 80px 25px 50px 25px;
   margin: 0 auto;
   max-width: $sections-max-width;
 
-  @media screen and (max-width: $desktop) {
-    padding-bottom: 50px;
+  @media (min-width: $desktop) {
+    padding-bottom: 120px;
   }
 
   .layout-section__header {
-    @media screen and (max-width: $desktop) {
+    @media (max-width: $desktop) {
       padding-bottom: 0;
     }
   }
@@ -32,7 +32,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     flex-direction: row;
   }
 }
@@ -42,7 +42,7 @@
   max-width: 100%;
   text-align: center;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     margin-bottom: 0;
     max-width: 30%;
   }

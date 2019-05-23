@@ -19,6 +19,7 @@
 
   {% assign header_image = collection.image %}
   {% assign header_title = collection.title %}
+  {% assign header_description = collection.description %}
 
 {% elsif template contains 'page.information' %}
 
@@ -80,7 +81,8 @@
         id: 'main-menu-left',
         menu: section.settings.main_linklist_left,
         class: 'header-main',
-        is: 'left' %}
+        is: 'left',
+        megaMenu: true %}
 
       <div class="header-main__logo-wrapper">
         <a href="/">

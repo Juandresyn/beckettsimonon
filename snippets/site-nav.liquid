@@ -1,27 +1,46 @@
-<nav class="site-menu {{ class }}__nav {{ class }}__nav--{{ is }}">
-	<ul class="inline-list site-menu__list {{ class }}__list" id="{{ id }}">
-		{% if hasSearch %}
-			<li class="site-menu__list-item {{ class }}__list-item">
-        <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"
-          data-onclick-target="html"
-          data-onclick-class="modal--open search-is-open">
-          <span class="icon icon--search"></span>
-        </span>
-			</li>
-		{% endif %}
-		{% for link in linklists[menu].links %}
-			<li class="site-menu__list-item {{ class }}__list-item">
-				<a class="site-menu__link {{ class }}__list-link" href="{{ link.url }}">{{ link.title }}</a>
-			</li>
-		{% endfor %}
-		{% if hasCart %}
-      <li class="site-menu__list-item {{ class }}__list-item site-menu__list-search">
-        <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"
-          data-onclick-target="html"
-          data-onclick-class="modal--open cart-is-open">
-          <span class="icon icon--shop site-menu__cart"></span> <span class="js-cart-count site-menu__cart-count">{{ cart.item_count }}</span>
-        </span>
-      </li>
-		{% endif %}
-	</ul>
-</nav>
+{% include 'current-url' %}
+
+{% if is == 'left' and megaMenu %}
+  <nav class="site-menu {{ class }}__nav {{ class }}__nav--{{ is }}">
+    <ul class="inline-list site-menu__list {{ class }}__list" id="{{ id }}">
+      {% for link in linklists[menu].links %}
+        <li class="site-menu__list-item {{ class }}__list-item">
+          <span class="site-menu__link {{ class }}__list-link js-on-click js-active-on-click"
+            data-onclick-target="html"
+            data-onclick-class="mega-menu--open"
+            href="{{ link.url }}">{{ link.title }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% else %}
+  <nav class="site-menu {{ class }}__nav {{ class }}__nav--{{ is }}">
+    <ul class="inline-list site-menu__list {{ class }}__list" id="{{ id }}">
+      {% if hasSearch %}
+        <li class="site-menu__list-item {{ class }}__list-item">
+          <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"
+            data-onclick-target="html"
+            data-onclick-class="modal--open search-is-open">
+            <span class="icon icon--search"></span>
+          </span>
+        </li>
+      {% endif %}
+
+      {% for link in linklists[menu].links %}
+        <li class="site-menu__list-item {{ class }}__list-item">
+          <a class="site-menu__link {{ class }}__list-link {% if link.url == current_url %}is-active{% endif %}" ref="{{ link.title | downcase }}" href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+
+      {% if hasCart %}
+        <li class="site-menu__list-item {{ class }}__list-item site-menu__list-search">
+          <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"
+            data-onclick-target="html"
+            data-onclick-class="modal--open cart-is-open">
+            <span class="icon icon--shop site-menu__cart"></span> <span class="js-cart-count site-menu__cart-count">{{ cart.item_count }}</span>
+          </span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

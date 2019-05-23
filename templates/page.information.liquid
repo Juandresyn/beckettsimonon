@@ -1,3 +1,13 @@
+{% if page.handle == "how-it-works" or
+  page.handle == "craftsmanship" or
+  page.handle == "our-story" %}
+  <style>
+    a[ref="about"] {
+      border-bottom: 1px solid;
+    }
+  </style>
+{% endif %}
+
 {% if page.handle == "how-it-works" %}
   {% include 'how-it-works-page' %}
 {% elsif page.handle == "craftsmanship" %}

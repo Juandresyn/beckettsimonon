@@ -7,11 +7,16 @@
   animation-name: stickynav-in;
   background-color: $white;
   max-width: none;
-  padding: 15px calc((100vw - (1280px -50px))/2);
+  padding: 15px calc((100vw - (1280px -50px))/2) 8px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 2;
+
+  @media (max-width: 1320px) {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
 
   .header-main__list-link {
     color: $black;

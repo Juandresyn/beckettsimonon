@@ -4,3 +4,7 @@ $('.js-on-click').on('click', function() {
 
   $(target).toggleClass(targetClass);
 });
+
+$('.js-active-on-click').on('click', function() {
+  $(this).toggleClass('is-active');
+});

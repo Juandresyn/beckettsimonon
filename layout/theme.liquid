@@ -37,7 +37,7 @@
   {% include 'social-meta-tags' %}
 
   <!-- Site Css -->
-  {{ 'beckett-simonon.css' | asset_url | stylesheet_tag }}
+  {{ 'shop.min.css' | asset_url | stylesheet_tag }}
   <!-- END Site Css -->
 
   {% if template.directory == 'customers' %}
@@ -89,6 +89,7 @@
 
   {% include 'inline-cart' %}
   {% include 'search-modal' %}
+  {% section 'mega-menu' %}
 
   <script type="text/javascript">
     var initTemplate = function() {

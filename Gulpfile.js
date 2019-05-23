@@ -28,6 +28,7 @@ var gulp = require('gulp'),
 // 			Setup
 // --------------------------------
 var storeName = 'Beckett Simonon',
+  cssName = 'shop',
 	projectName = storeName.toLowerCase().replace(/\s/g, '-'),
 	url = 'https://bec-sin-dev.myshopify.com/', // Note: Url must be the actual shop url for BrowserSync to work properly
 	jsfiles = [
@@ -91,8 +92,9 @@ gulp.task('css:postsass', function(){
 		.pipe(sass().on('error', handleSassError))
 		.pipe(postCss(devProcessors))
 		.pipe(prefix(prefixerOptions))
-		.pipe(sourceMaps.write())
-		.pipe(rename(projectName + '.css'))
+    .pipe(sourceMaps.write())
+    .pipe(cssNano({autoprefixer: { add: true }}))
+		.pipe(rename(cssName + '.min.css'))
 		.pipe(gulp.dest('assets/'))
 		.pipe(browserSync.stream())
 		.pipe(notify({ title: storeName + ' CSS', message: 'CSS Refreshed' }));
@@ -102,8 +104,8 @@ gulp.task('css:post_build', function(){
 	gulp.src('src/css/scss/*.scss')
 		.pipe(sass().on('error', handleSassError))
 		.pipe(postCss(prodProcessors))
-		.pipe(cssNano({autoprefixer: { add: true }}))
-		.pipe(rename(projectName + '.css'))
+    .pipe(cssNano({autoprefixer: { add: true }}))
+		.pipe(rename(shop + '.min.css'))
 		.pipe(gulp.dest('assets/'))
 		.pipe(notify({ title: clientName + ' CSS', message: 'CSS Refreshed' }));
 });

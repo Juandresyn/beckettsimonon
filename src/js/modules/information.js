@@ -1,5 +1,5 @@
 if ($('body').hasClass('page--information')) {
-  var navEl = $('.information-nav');
+  var navEl = $('.js-information-nav');
   var informationNavMaxTop = window.innerHeight - navEl.innerHeight();
 
   $(window).scroll(function() {

@@ -33,7 +33,7 @@
   padding: 17px;
   position: absolute;
   right: 0;
-  top: 42px;
+  top: 40px;
   z-index: 4;
 
   @media (min-width: $desktop) {
@@ -63,6 +63,10 @@
 
     &:hover {
       color: $dark-blue;
+    }
+
+    &.is-active {
+
     }
   }
 
@@ -124,7 +128,7 @@
   .header-main__modal {
     display: block;
 
-    @media (min-width: $desktop-large) {
+    @media (min-width: $desktop-medium) {
       display: none;
     }
   }
@@ -149,7 +153,7 @@
     margin-left: 25px;
   }
 
-  @media (min-width: $desktop-large) {
+  @media (min-width: $desktop-medium) {
     display: none;
   }
 }
@@ -162,7 +166,7 @@
     text-align: right;
   }
 
-  @media (min-width: $desktop-large) {
+  @media (min-width: $desktop-medium) {
     display: block;
   }
 }
@@ -312,7 +316,8 @@
 }
 
 .nav--white .header-main__nav-wrapper:not(.main-nav--sticky) {
-  .header-main__list-link:hover:not(.site-menu__link--icon) {
+  .header-main__list-link:hover:not(.site-menu__link--icon),
+  .header-main__list-link.is-active:not(.site-menu__link--icon) {
     border-color: $white;
   }
 
@@ -327,7 +332,8 @@
         color: $black;
       }
 
-    .header-main__list-link:hover:not(.site-menu__link--icon) {
+    .header-main__list-link:hover:not(.site-menu__link--icon),
+    .header-main__list-link.is-active:not(.site-menu__link--icon) {
       border-color: $black;
     }
   }

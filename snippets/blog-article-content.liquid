@@ -1,0 +1,8 @@
+{% comment %} Always use 'formattedContent' instead of article.content {% endcomment %}
+{% assign formattedContent = article.content %}
+
+{% if formattedContent contains '[!--gallery--!]' %}
+  {% include 'article-gallery' %}
+{% endif %}
+
+{{ formattedContent }}

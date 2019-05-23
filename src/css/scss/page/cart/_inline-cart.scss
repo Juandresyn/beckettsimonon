@@ -7,13 +7,11 @@
 .cart-modal {
   .modal--right__header {
     align-items: center;
-    flex-direction: column;
     padding-bottom: 21px;
   }
 
   .modal--right__close {
-    margin-bottom: 25px;
-    margin-left: 0;
+    margin-left: 25px;
 
     .icon {
       color: $scarlet;
@@ -21,7 +19,7 @@
   }
 
   .modal--right__container {
-    max-width: 375px;
+    max-width: 400px;
     position: relative;
   }
 
@@ -72,5 +70,44 @@
     font: 12px/18px $font-secondary;
     text-align: center;
     text-transform: uppercase;
+  }
+}
+
+.inline-cart-empty {
+  &__header {
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    display: flex;
+    padding: 30px 0;
+  }
+
+  &__image {
+    margin-right: 20px;
+  }
+
+  &__text {
+    color: $dark-gray;
+    font: 13px/24px $font-secondary--light;
+    font-style: italic;
+
+    a,
+    span {
+      color: $scarlet;
+      text-decoration: underline;
+    }
+  }
+
+  &__content {
+    padding: 30px 0;
+  }
+
+  &__btn {
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+
+    &:last-of-type {
+      margin: 0;
+    }
   }
 }

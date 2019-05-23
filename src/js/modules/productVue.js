@@ -12,7 +12,7 @@ if (typeof Vue === 'function') {
 
     computed: {
       infoItem() {
-        return this.information[this.productId][this.productCollection];
+        return this.information[this.productId][this.productCollection] || [];
       },
     },
 
@@ -62,7 +62,7 @@ if (typeof Vue === 'function') {
     },
 
     template: `
-      <span>
+      <span v-if="infoItem.length > 0">
         <article v-for="(item, index) in infoItem"
           :key="index"
           class="product-more-details__item">
@@ -86,7 +86,7 @@ if (typeof Vue === 'function') {
 
     computed: {
       infoItem() {
-        return this.information[this.productCollection].video;
+        return this.information[this.productCollection] ? this.information[this.productCollection].video : [];
       },
 
       getUrls() {
@@ -130,12 +130,12 @@ if (typeof Vue === 'function') {
 
     computed: {
       infoItem() {
-        return this.information[this.productCollection].images;
+        return this.information[this.productCollection] ? this.information[this.productCollection].images : [];
       },
     },
 
     template: `
-      <div class="product-media__carousel js-slick-product-media">
+      <div v-if="infoItem.length > 0" class="product-media__carousel js-slick-product-media">
         <div v-for="(item, index) in infoItem"
           :key="index"
           class="product-media__carousel-item">

@@ -44,7 +44,7 @@
 
 .all-products__filters {
   background-color: $white;
-  padding: 17px 25px;
+  padding: 0 25px;
 
   .all-products__content {
     display: flex;
@@ -52,10 +52,23 @@
   }
 }
 
+.all-products__filters--fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
 .all-products__filter {
+  border-bottom: 1px solid transparent;
   margin: 0 10px;
   min-width: 100px;
+  padding: 13.5px 0 12.5px;
   position: relative;
+
+  &:hover {
+    border-color: $scarlet;
+  }
 
   @media (min-width: $desktop-large) {
     margin: 0 43px;

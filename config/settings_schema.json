@@ -23,6 +23,131 @@
     ]
   },
   {
+    "name": "Inline Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Inline Cart Top"
+      },
+      {
+        "type": "text",
+        "id": "inline_cart_top_text",
+        "label": "Top Text"
+      },
+      {
+        "type": "color",
+        "id": "inline_cart_top_text_color",
+        "label": "Top Text color",
+        "default": "#930303"
+      },
+      {
+        "type": "header",
+        "content": "Inline Cart Empty"
+      },
+      {
+        "type": "html",
+        "id": "inline_cart_empty_text",
+        "label": "Inline cart empty text"
+      },
+      {
+        "type": "header",
+        "content": "Inline Cart buttons"
+      },
+      {
+        "type": "text",
+        "id": "inline_cart_empty_btn_1",
+        "label": "Inline cart empty button 1"
+      },
+      {
+        "type": "url",
+        "id": "inline_cart_empty_btn_1_link",
+        "label": "Inline cart empty button 1"
+      },
+      {
+        "type": "select",
+        "id": "inline_cart_empty_btn_1_style",
+        "options": [
+          { "value": "btn--white", "label": "White"},
+          { "value": "btn--scarlet", "label": "Scarlet (red)"},
+          { "value": "btn--dark", "label": "Dark"},
+          { "value": "btn--outline", "label": "Transparent (black)"},
+          { "value": "btn--outline--white", "label": "Transparent (white)"}
+        ],
+        "label": "Btn Style",
+        "default": "btn--outline"
+      },
+      {
+        "type": "text",
+        "id": "inline_cart_empty_btn_2",
+        "label": "Inline cart empty button 2"
+      },
+      {
+        "type": "url",
+        "id": "inline_cart_empty_btn_2_link",
+        "label": "Inline cart empty button 2"
+      },
+      {
+        "type": "select",
+        "id": "inline_cart_empty_btn_2_style",
+        "options": [
+          { "value": "btn--white", "label": "White"},
+          { "value": "btn--scarlet", "label": "Scarlet (red)"},
+          { "value": "btn--dark", "label": "Dark"},
+          { "value": "btn--outline", "label": "Transparent (black)"},
+          { "value": "btn--outline--white", "label": "Transparent (white)"}
+        ],
+        "label": "Btn Style",
+        "default": "btn--outline"
+      },
+      {
+        "type": "text",
+        "id": "inline_cart_empty_btn_3",
+        "label": "Inline cart empty button 3"
+      },
+      {
+        "type": "url",
+        "id": "inline_cart_empty_btn_3_link",
+        "label": "Inline cart empty button 3"
+      },
+      {
+        "type": "select",
+        "id": "inline_cart_empty_btn_3_style",
+        "options": [
+          { "value": "btn--white", "label": "White"},
+          { "value": "btn--scarlet", "label": "Scarlet (red)"},
+          { "value": "btn--dark", "label": "Dark"},
+          { "value": "btn--outline", "label": "Transparent (black)"},
+          { "value": "btn--outline--white", "label": "Transparent (white)"}
+        ],
+        "label": "Btn Style",
+        "default": "btn--outline"
+      },
+      {
+        "type": "text",
+        "id": "inline_cart_empty_btn_4",
+        "label": "Inline cart empty button 4"
+      },
+      {
+        "type": "url",
+        "id": "inline_cart_empty_btn_4_link",
+        "label": "Inline cart empty button 4"
+      },
+      {
+        "type": "select",
+        "id": "inline_cart_empty_btn_4_style",
+        "options": [
+          { "value": "btn--white", "label": "White"},
+          { "value": "btn--scarlet", "label": "Scarlet (red)"},
+          { "value": "btn--dark", "label": "Dark"},
+          { "value": "btn--outline", "label": "Transparent (black)"},
+          { "value": "btn--outline--white", "label": "Transparent (white)"}
+        ],
+        "label": "Btn Style",
+        "default": "btn--outline"
+      }
+    ]
+  },
+  {
     "name": "Social media",
     "settings": [
       {

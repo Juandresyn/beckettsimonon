@@ -1,0 +1,16 @@
+{% capture galleryInitHtml %}
+    </div>
+  </div>
+  <div class="cf article__gallery-wrapper">
+    <div class="cf article__gallery js-article-gallery">
+{% endcapture %}
+{% capture galleryEndHtml %}
+    </div>
+    <span class="article__gallery-arrow article__gallery-arrow--left js-article-carousel__prev">{{ 'carousel-arrow.svg' | asset_url | img_tag }}</span>
+    <span class="article__gallery-arrow article__gallery-arrow--right js-article-carousel__next">{{ 'carousel-arrow.svg' | asset_url | img_tag }}</span>
+  </div>
+  <div class="article__content">
+    <div class="rte article__description">
+{% endcapture %}
+{% assign formattedContent = formattedContent | replace: '[!--gallery--!]', galleryInitHtml %}
+{% assign formattedContent = formattedContent | replace: '[!--endgallery--!]', galleryEndHtml %}
