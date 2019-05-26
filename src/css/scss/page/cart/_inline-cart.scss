@@ -59,10 +59,6 @@
     padding-top: 25px;
     right: auto;
     width: 100%;
-
-    @media (min-width: $desktop) {
-      max-width: 315px;
-    }
   }
 
   &__info-text {

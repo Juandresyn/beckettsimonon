@@ -5,14 +5,152 @@ $mega-menu-width: calc(((100vw - 1280px) / 2) + 410px);
   bottom: 0;
   left: calc(#{$mega-menu-width} * -1);
   opacity: 0;
+  padding-top: 100px;
   position: absolute;
-  top: 40px;
+  top: $top-bar-height-desktop;
   transition: opacity 0.3s ease,
               left 0.5s ease;
   width: $mega-menu-width;
 
   &__wrapper {
-    padding: 0 60px 80px;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 40px 15vh calc((100vw - 1280px) / 2);
+  }
+
+  &__close {
+    cursor: pointer;
+    position: absolute;
+    right: 70px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &__fade {
+    background: rgba(246,41,12,0);
+    background: -moz-linear-gradient(top, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(246,41,12,0)), color-stop(20%, rgba(255,255,255,0.35)), color-stop(57%, rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: -o-linear-gradient(top, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: -ms-linear-gradient(top, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: linear-gradient(to bottom, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    bottom: 0;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6290c', endColorstr='#ffffff', GradientType=0 );
+    height: 15vh;
+    position: fixed;
+    width: $mega-menu-width;
+  }
+
+  &__item-title {
+    display: inline-block;
+    font: 15px/25px $font-secondary--bold;
+    margin-bottom: 38px;
+
+    .icon {
+      margin-left: 16px;
+    }
+  }
+
+  &__item-link {
+    border-bottom: 1px solid transparent;
+    display: inline-block;
+    font: 15px/25px $font-secondary;
+    margin-bottom: 13px;
+
+    &:hover {
+      border-color: $black;
+    }
+  }
+
+  &__product {
+    background: $light-gray-3;
+    bottom: 0;
+    display: none;
+    left: $mega-menu-width;
+    position: absolute;
+    right: 0;
+    top: $top-bar-height-desktop;
+  }
+
+  &__product-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(((100vh - 40px) - 600px) / 2);
+  }
+
+  &__product-info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    min-width: 565px;
+    max-width: 720px;
+  }
+
+  &__product-variables {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 50px;
+  }
+
+  &__product-title {
+    font-size: 35px;
+    line-height: 28px;
+    margin-bottom: 8px;
+  }
+
+  &__product-type {
+    color: $dark-gray;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 33px;
+  }
+
+  &__product-price {
+    display: block;
+    font-family: $font-secondary--light;
+    font-size: 20px;
+    line-height: 28px;
+    margin-top: 10px;
+  }
+
+  &__product-variants {
+    padding: 10px;
+    width: 170px;
+  }
+
+  &__product-actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 720px;
+    width: 100%;
+
+    & > * {
+      width: 48%;
+    }
+  }
+
+  &__product-size {
+    font-family: $font-secondary;
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+
+  &__product-instructions {
+    color: $icon-gray;
+    font-family: $font-secondary;
+    font-size: 12px;
+    text-decoration: underline;
+  }
+
+  &__loader {
+    display: none;
+    left: calc(50% - 50px);
   }
 }
 

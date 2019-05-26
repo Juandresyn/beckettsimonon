@@ -3,12 +3,14 @@
 {% if is == 'left' and megaMenu %}
   <nav class="site-menu {{ class }}__nav {{ class }}__nav--{{ is }}">
     <ul class="inline-list site-menu__list {{ class }}__list" id="{{ id }}">
-      {% for link in linklists[menu].links %}
+      {% include 'mega-menu-links' %}
+      {% for item in megaMenuLinks %}
         <li class="site-menu__list-item {{ class }}__list-item">
-          <span class="site-menu__link {{ class }}__list-link js-on-click js-active-on-click"
+          <span class="site-menu__link {{ class }}__list-link js-on-click js-mega-menu-on-click"
             data-onclick-target="html"
             data-onclick-class="mega-menu--open"
-            href="{{ link.url }}">{{ link.title }}</span>
+            data-target="{{ item }}"
+            data-do="add">{{ collections[item].title }}</span>
         </li>
       {% endfor %}
     </ul>

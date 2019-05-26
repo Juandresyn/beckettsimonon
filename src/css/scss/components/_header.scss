@@ -208,6 +208,10 @@
     margin-right: 0;
   }
 
+  &-item:first-of-type .header-main__list-link {
+    margin-left: 0;
+  }
+
   &-link {
     border-bottom: 0;
     color: $white;

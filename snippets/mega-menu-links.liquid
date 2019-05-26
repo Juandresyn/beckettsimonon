@@ -1,0 +1,10 @@
+{% assign collectionsArray = '' %}
+{% for i in (1..5) %}
+  {% capture collectionHandle %}collection_{{i}}{% endcapture %}
+  {% assign collectionItem = settings[collectionHandle] %}
+  {% if collectionItem != '' %}
+    {% capture collectionItemText %}{% unless forloop.first %},{% endunless %}{{ collectionItem }}{% endcapture %}
+    {% assign collectionsArray = collectionsArray | append: collectionItemText %}
+    {% assign megaMenuLinks = collectionsArray | split: ',' %}
+  {% endif %}
+{% endfor %}

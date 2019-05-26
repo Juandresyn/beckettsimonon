@@ -1,0 +1,33 @@
+{% include 'mega-menu-links' %}
+
+<aside class="mega-menu">
+  <div class="mega-menu__wrapper">
+    <span class="icon icon--close mega-menu__close js-on-click js-mega-menu-close"
+      data-onclick-target="html"
+      data-onclick-class="mega-menu--open"></span>
+
+    {% for item in megaMenuLinks %}
+      {% assign coll = collections[item] %}
+      {% assign collProducts = coll.products %}
+
+      <div class="mega-menu__item js-mega-menu-item" data-item="{{ item }}">
+        <a href="{{coll.url}}"><h3 class="mega-menu__item-title animation-parent">View All {{ coll.title }} <span class="icon icon--arrow animation--go-to"></span></h3></a>
+
+        <ul class="mega-menu__item-products">
+          {% for p in collProducts %}
+            {% if p.available %}
+              <li class="mega-menu__item-product">
+                <a href="{{ p.url }}"
+                  class="mega-menu__item-link js-mega-menu-product"
+                  data-handle="{{ p.handle }}">{{ p.title | split: ' -' | first }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="mega-menu__fade"></div>
+</aside>
+
+{% include 'mega-menu-product' %}
