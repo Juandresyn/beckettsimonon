@@ -1,0 +1,356 @@
+.my-size {
+  &__arrow {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 30px;
+    position: absolute;
+    top: calc(88% - 30px);
+    z-index: 9;
+
+    @media (min-width: $desktop) {
+      top: calc(50% - 15px);
+    }
+  }
+
+  &__arrow--left {
+    transform: rotate(180deg);
+    left: 30px;
+  }
+
+  &__arrow--right {
+    right: 30px;
+  }
+
+  &__sizes-wrapper {
+    margin-top: 70px;
+    width: 75%;
+
+    @media (min-width: $desktop) {
+      width: 360px;
+    }
+  }
+
+  &__size {
+    border: 1px solid $scarlet;
+    border-radius: 100%;
+    cursor: pointer;
+    display: inline-block;
+    font: 15px/46px $font-secondary;
+    height: 40px;
+    line-height: 38px;
+    margin: 10px;
+    text-align: center;
+    transition: background-color .3s ease;
+    width: 40px;
+
+    &:hover,
+    &.is-active {
+      background-color: $scarlet;
+      color: $white;
+    }
+  }
+
+  &__footer {
+    bottom: 77px;
+    color: $scarlet;
+    cursor: pointer;
+    font: 16px/36px $font-secondary;
+    position: absolute;
+    text-align: center;
+    width: calc(100% - 30px);
+
+    @media (min-width: $desktop) {
+      width: calc(100% - 60px);
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__progress {
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    @media (min-width: $desktop) {
+      bottom: 0;
+      top: inherit;
+    }
+  }
+
+  &__progress-count {
+    bottom: 18px;
+    display: flex;
+    left: 0;
+    position: absolute;
+    right: 0;
+
+    span {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  &__progress-bar {
+    background-color: $scarlet;
+    border-radius: 5px 0 0;
+    top: 0;
+    height: 10px;
+    left: 0;
+    position: absolute;
+    transition: width 0.4s ease,
+                background-color 0.4s ease;
+
+    @media (min-width: $desktop) {
+      border-radius: 0 0 0 5px;
+      border: 0;
+      bottom: 0;
+      top: inherit;
+    }
+  }
+}
+
+.my-size--done {
+
+  .my-size__progress-bar {
+    @media (min-width: $desktop) {
+      border-radius: 0 0 5px 5px;
+    }
+  }
+
+}
+
+.my-size__step {
+  &-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 0;
+    max-width: 650px;
+    text-align: center;
+
+    @media (min-width: $desktop) {
+      margin-top: 52px;
+    }
+
+    .my-size__step-heading:not(.my-size__step-heading-initial) {
+      text-align: left;
+
+      @media (min-width: $desktop) {
+        text-align: center;
+      }
+    }
+  }
+
+  &-heading {
+    line-height: 44px;
+    margin-bottom: 21px;
+  }
+
+  &-heading--small {
+    font: 22px/35px $font-primary--bold;
+    margin-bottom: 5px;
+  }
+
+  &-paragraph {
+    margin-bottom: 35px;
+  }
+
+  &-subtitle {
+    color: $dark-gray;
+    font: 16px/28px $font-primary;
+    text-align: left;
+    width: 100%;
+
+    @media (min-width: $desktop) {
+      text-align: center;
+      width: auto;
+    }
+  }
+
+  &-btn {
+    margin-top: 35px;
+  }
+
+  &-final-size {
+    color: $scarlet;
+    font: 70px/1 $font-primary--bold;
+    margin-bottom: 50px;
+  }
+
+  &-description {
+    color: $king-blue;
+    font: 12px/18px $font-secondary--bold;
+  }
+}
+
+.my-size__shape {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin: 30px 25px;
+
+  &.is-active,
+  &:hover {
+    .my-size__shape-icon path {
+      fill: $scarlet;
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    margin-top: 50px;
+  }
+
+  &-icon {
+    height: 90px;
+    margin-bottom: 30px;
+    width: auto;
+
+    path {
+      fill: $icon-gray;
+    }
+  }
+
+  &-name {
+    color: $king-blue;
+    font: 12px/18px $font-secondary;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &-small {
+    color: $scarlet;
+    font: 12px/18px $font-secondary;
+    text-transform: capitalize;
+  }
+}
+
+.my-size__step--5 {
+  .my-size__step-wrapper {
+    max-width: none;
+    width: 855px;
+  }
+}
+
+.my-size--has-errors {
+  .modal__content {
+    @media (min-width: $desktop) {
+      margin-top: -77px;
+    }
+  }
+
+  .my-size__step-wrapper {
+    align-items: center;
+    height: 570px;
+    justify-content: center;
+    margin-top: 0;
+    max-width: none;
+    width: 855px;
+  }
+
+  .my-size__step-wrapper {
+    margin-top: -25px;
+
+    @media (min-width: $desktop) {
+      margin-top: 0;
+    }
+  }
+
+  .my-size__step-heading {
+    text-align: center !important;
+  }
+}
+
+.my-size__error-icon,
+.my-size__step-heading {
+  margin-bottom: 20px;
+}
+
+.my-size__error-description {
+  color: $scarlet;
+  font: 12px/18px $font-secondary;
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+.my-size-modal {
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+
+  .modal__header {
+    align-items: center;
+    margin-top: 10px;
+
+    @media (min-width: $desktop) {
+      margin-top: 0;
+    }
+  }
+
+  .modal__title {
+    margin-right: -40px;
+    width: 100%;
+
+    @media (min-width: $desktop) {
+      text-align: center;
+    }
+  }
+
+  &.my-size__step--0 {
+    .modal__content {
+      align-items: center;
+    }
+  }
+
+  .modal__content {
+    height: 100%;
+    display: flex;
+
+    @media (min-width: $desktop) {
+      align-items: center;
+      display: block;
+    }
+  }
+
+  .modal__container {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-top: 20px;
+    max-height: calc(100vh - 90px);
+    max-width: calc(100vw - 40px);
+    position: relative;
+
+    @media (min-width: $desktop) {
+      display: block;
+      height: calc(100% - 92px);
+      max-height: 600px;
+      margin-top: inherit;
+      max-width: 1200px;
+      width: 100%;
+    }
+  }
+}
+
+.my-size-modal--open {
+  &,
+  body {
+    overflow: hidden;
+  }
+
+  .my-size-modal {
+    display: flex;
+
+    @media (max-width: $tablet) {
+      top: 0;
+      max-height: 100vh;
+    }
+  }
+}

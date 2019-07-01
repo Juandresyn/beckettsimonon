@@ -1,36 +1,42 @@
-<div class="page-width">
-  <div class="grid">
-    <div class="grid__item medium-up--one-half medium-up--push-one-quarter">
+<div class="account-form__wrapper">
+  {% form 'create_customer' %}
 
-      <div class="form-vertical">
-        {% form 'create_customer' %}
+    <h1 class="account-form__title">Register</h1>
 
-          <h1 class="text-center">{{ 'customer.register.title' | t }}</h1>
-
-          {%- if form.errors -%}
-            <div class="form-message form-message--error">
-              {{ form.errors | default_errors }}
-            </div>
-          {%- endif -%}
-
-          <label for="FirstName">{{ 'customer.register.first_name' | t }}</label>
-          <input type="text" name="customer[first_name]" id="FirstName" {% if form.first_name %}value="{{ form.first_name }}"{% endif %} autofocus>
-
-          <label for="LastName">{{ 'customer.register.last_name' | t }}</label>
-          <input type="text" name="customer[last_name]" id="LastName" {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
-
-          <label for="Email">{{ 'customer.register.email' | t }}</label>
-          <input type="email" name="customer[email]" id="Email" class="{% if form.errors contains 'email' %} input--error{% endif %}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
-
-          <label for="CreatePassword">{{ 'customer.register.password' | t }}</label>
-          <input type="password" name="customer[password]" id="CreatePassword" class="{% if form.errors contains 'password' %} input--error{% endif %}">
-
-          <p class="text-center">
-            <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn">
-          </p>
-
-        {% endform %}
+    {%- if form.errors -%}
+      <div class="form-message form-message--error">
+        {{ form.errors | default_errors }}
       </div>
+    {%- endif -%}
+
+    <input type="hidden" name="form_type" value="create_customer">
+    <input type="hidden" name="utf8" value="✓">
+
+    <div class="input-control">
+      <label for="first_name" class="form-label required">First Name</label>
+      <input id="first_name" type="text" class="input form-input" value="" name="customer[first_name]">
     </div>
-  </div>
+
+    <div class="input-control">
+      <label for="last_name" class="form-label required">Last Name</label>
+      <input id="last_name" type="text" class="input form-input" value="" name="customer[last_name]">
+    </div>
+
+    <div class="input-control">
+      <label for="email" class="form-label required">Email Address</label>
+      <input id="email" type="email" class="input form-input" value="" name="customer[email]">
+    </div>
+
+    <div class="input-control">
+      <label for="password" class="form-label required">Password</label>
+      <input type="password" class="input form-input" value="" name="customer[password]">
+    </div>
+
+    <div class="input-control input-control--action">
+      <button class="btn btn--scarlet login-form-modal__btn">Create Account</button>
+    </div>
+
+  {% endform %}
+
+  <a href="/account/login" class="account-form__toggle">RETURNING CUSTOMER? <span>LOG IN HERE</span></a>
 </div>

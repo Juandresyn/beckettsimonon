@@ -41,7 +41,7 @@
 
     {% assign formId = 'CommentForm' %}
 
-    <h2>Leave a Comment</h2>
+    <h2>Leave a comment</h2>
     {% if blog.moderated? %}
       <p class="">Please note, comments must be approved before they are published.</p>
     {% endif %}
@@ -61,6 +61,7 @@
         <div class="comment__form-wrapper">
           <label for="{{ formId }}-email"
             class="comment__form-label">Email</label>
+          <small>Will not be published</small>
           <input id="{{ formId }}-email"
             class="comment__form-input"
             type="email"

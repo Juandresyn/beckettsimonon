@@ -53,11 +53,17 @@ if (typeof Vue === 'function') {
 
       handleRemoveItem(index) {
         const currentQty = this.cart[index].quantity;
+        const newCartCount = this.cart_count - currentQty;
+
+        if (newCartCount === 0) {
+          $('.js-empty-template').toggle();
+        }
+
         return this.ajaxUpdateItem(this.cart[index].key, 0, () => {
           this.cart[index].quantity = 0;
           this.cart[index].line_price = 0;
 
-          this.updateGlobalCartCount(this.cart_count - currentQty);
+          this.updateGlobalCartCount(newCartCount);
           this.updateInlineCartTotalPrice();
         });
       },

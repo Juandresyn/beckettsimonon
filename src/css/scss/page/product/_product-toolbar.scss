@@ -10,6 +10,14 @@
   transition: opacity 0.2s ease,
               top 0.2s ease;
   z-index: 3;
+
+  .product-header__variant-instructions {
+    color: $king-blue;
+
+    @media (max-width: $desktop) {
+      display: none;
+    }
+  }
 }
 
 .product-toolbar--visible {
@@ -48,16 +56,9 @@
   }
 }
 
-.product-header__variant-instructions {
-  @media (max-width: $desktop) {
-    display: none;
-  }
-}
-
 .product-toolbar__actions {
   display: flex;
   max-width: 100%;
-  padding-top: 10px 0;
   width: 100%;
 
   @media (min-width: $desktop) {
@@ -91,7 +92,9 @@
   }
 
   .product-header__shipping-info {
+    color: $king-blue;
     margin-top: 0;
+    font-style: normal;
 
     @media (max-width: $desktop) {
       display: none;

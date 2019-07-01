@@ -17,7 +17,7 @@ if (typeof Vue === 'function') {
     },
 
     template: `
-      <span>
+      <span v-if="Object.keys(infoItem).length > 0">
         <article v-for="(item, index) in Object.keys(infoItem)"
           :key="index"
           v-if="infoItem[item].image"
@@ -55,6 +55,14 @@ if (typeof Vue === 'function') {
       },
     },
 
+    mounted() {
+      const el = document.querySelector('.product-more-details');
+
+      if (!this.infoItem) {
+        el.style.display = 'none';
+      }
+    },
+
     methods: {
       unscapify(string) {
         return decodeURI(string);
@@ -62,7 +70,7 @@ if (typeof Vue === 'function') {
     },
 
     template: `
-      <span v-if="infoItem.length > 0">
+      <span v-if="infoItem && Object.keys(infoItem).length > 0">
         <article v-for="(item, index) in infoItem"
           :key="index"
           class="product-more-details__item">
@@ -99,8 +107,16 @@ if (typeof Vue === 'function') {
       },
     },
 
+    mounted() {
+      const el = document.querySelector('.product-media__video-wrapper');
+
+      if (this.infoItem.length === 0) {
+        el.style.display = 'none';
+      }
+    },
+
     template: `
-      <div class="media-video__iframe-wrapper">
+      <div v-if="infoItem && infoItem.length > 0" class="media-video__iframe-wrapper">
         <script :src="getUrls.js" async></script>
         <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
           <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
@@ -135,7 +151,7 @@ if (typeof Vue === 'function') {
     },
 
     template: `
-      <div v-if="infoItem.length > 0" class="product-media__carousel js-slick-product-media">
+      <div v-if="infoItem && infoItem.length > 0" class="product-media__carousel js-slick-product-media">
         <div v-for="(item, index) in infoItem"
           :key="index"
           class="product-media__carousel-item">
@@ -162,8 +178,16 @@ if (typeof Vue === 'function') {
       },
     },
 
+    mounted() {
+      const el = document.querySelector('.product-faq');
+
+      if (!this.infoItem) {
+        el.style.display = 'none';
+      }
+    },
+
     template: `
-      <div class="accordion product-faq__items js-product-faq-items">
+      <div v-if="infoItem && infoItem.length > 0" class="accordion product-faq__items js-product-faq-items">
         <template v-for="(item, index) in infoItem">
           <h2 class="accordion__header product-faq__item-header">{{ item.question }}</h2>
           <div class="accordion__content product-faq__item-contnet">

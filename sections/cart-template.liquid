@@ -4,19 +4,33 @@
     novalidate
     class="cart__form js-cart">
     <div class="cart__list">
-      {% if cart.item_count > 0 %}
-        <div class="section-header text-center">
-          <h1 class="cart__title">{{ section.settings.title }}</h1>
-        </div>
+      <div class="section-header text-center">
+        <h1 class="cart__title">{{ section.settings.title }}</h1>
+      </div>
 
+      {% if cart.item_count > 0 %}
         <div class="cart__items">
           {% for item in cart.items %}
             {% include "cart-item" %}
           {% endfor %}
         </div>
       {% else %}
-        <div class="section-header text-center">
-          <h1 class="cart__title">No products</h1>
+        <div class="cart-empty__header">
+          {{ 'cart-emty.svg' | asset_url | img_tag: '', 'cart-empty__image' }}
+
+          <p class="cart-empty__text">{{ settings.inline_cart_empty_text }}</p>
+        </div>
+
+        <div class="cart-empty__content">
+          {% for i in (1..4) %}
+            {% capture btn_text %}inline_cart_empty_btn_{{ i }}{% endcapture %}
+            {% capture btn_link %}inline_cart_empty_btn_{{ i }}_link{% endcapture %}
+            {% capture btn_style %}inline_cart_empty_btn_{{ i }}_style{% endcapture %}
+
+            {% if settings[btn_text] %}
+              <a href="{{ settings[btn_link] }}" class="btn {{ settings[btn_style] }} cart-empty__btn">{{ settings[btn_text] }}</a>
+            {% endif %}
+          {% endfor %}
         </div>
       {% endif %}
     </div>

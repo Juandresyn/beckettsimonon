@@ -27,9 +27,9 @@
     max-width: calc(100vw - 40px);
 
     @media (min-width: $desktop) {
-      margin: auto -70px;
+      margin: auto -15%;
       max-width: none;
-      width: 800px;
+      width: 130%;
     }
   }
 

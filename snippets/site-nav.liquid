@@ -34,6 +34,14 @@
         </li>
       {% endfor %}
 
+      {% if hasLogin %}
+        <li id="header-main{% if isMobile %}-mobile{% endif %}" class="site-menu__list-item {{ class }}__list-item">
+            <span class="site-menu__link {{ class }}__list-link">
+                <login-register :mobile="true" {% if customer %}customer="{{ customer.first_name }}"{% endif %}></login-register>
+            </span>
+        </li>
+      {% endif %}
+
       {% if hasCart %}
         <li class="site-menu__list-item {{ class }}__list-item site-menu__list-search">
           <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"

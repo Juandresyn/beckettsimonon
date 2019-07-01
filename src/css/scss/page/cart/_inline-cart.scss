@@ -10,6 +10,11 @@
     padding-bottom: 21px;
   }
 
+  .cart__form {
+    flex-direction: column;
+    max-height: calc(100vh - 117px);
+  }
+
   .modal--right__close {
     margin-left: 25px;
 
@@ -28,6 +33,9 @@
   }
 
   .cart__list {
+    overflow-y: scroll;
+    height: 100vh;
+    margin-bottom: 0;
     max-width: 100%;
   }
 
@@ -55,8 +63,9 @@
 
   .cart__actions {
     bottom: 15px;
-    max-width: 345px;
+    max-width: none;
     padding-top: 25px;
+    position: relative;
     right: auto;
     width: 100%;
   }
@@ -106,4 +115,8 @@
       margin: 0;
     }
   }
+}
+
+.empty-template {
+  display: none;
 }

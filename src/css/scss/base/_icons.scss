@@ -1,5 +1,10 @@
 $icomoon-font-family: "bs-icons" !default;
 
+$icon--shape1: "\e91e";
+$icon--shape2: "\e91f";
+$icon--shape3: "\e920";
+$icon--shape4: "\e921";
+$icon--shape5: "\e922";
 $icon--thin-arrow-right: "\e900";
 $icon--large-thin-arrow-right: "\e901";
 $icon--add: "\e902";
@@ -57,6 +62,31 @@ $icon--lock: "\e91d";
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon--shape1 {
+  &:before {
+    content: $icon--shape1;
+  }
+}
+.icon--shape2 {
+  &:before {
+    content: $icon--shape2;
+  }
+}
+.icon--shape3 {
+  &:before {
+    content: $icon--shape3;
+  }
+}
+.icon--shape4 {
+  &:before {
+    content: $icon--shape4;
+  }
+}
+.icon--shape5 {
+  &:before {
+    content: $icon--shape5;
+  }
+}
 .icon--thin-arrow-right {
   &:before {
     content: $icon--thin-arrow-right;
@@ -207,4 +237,3 @@ $icon--lock: "\e91d";
     content: $icon--lock;
   }
 }
-

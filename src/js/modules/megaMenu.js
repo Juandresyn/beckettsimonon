@@ -41,7 +41,7 @@ var fillTemplate = function(product, cb) {
     price.html('$'+product.price / 100);
     url.attr('href', product.url);
     size.attr('href', product.url + '?whats-my-size=true');
-    type.html(product.type)
+    type.html(product.type);
     variantsWrapper.html(fillVariants(product.variants));
     img.attr('src', imageService(product.featured_image, 365));
     img.fadeIn();

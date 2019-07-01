@@ -12,10 +12,20 @@ $mega-menu-width: calc(((100vw - 1280px) / 2) + 410px);
               left 0.5s ease;
   width: $mega-menu-width;
 
+  @media (max-width: $desktop) {
+    display: none;
+  }
+
   &__wrapper {
     height: 100%;
     overflow-y: scroll;
-    padding: 0 40px 15vh calc((100vw - 1280px) / 2);
+    padding: 0 40px 15vh 25px;
+
+    // Basically, when the screen is at least 1320px
+    // because 25px of padding os the sides are 50px.
+    @media (min-width: $desktop-large + 50px) {
+      padding-left: calc((100vw - 1280px) / 2);
+    }
   }
 
   &__close {

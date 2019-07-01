@@ -1,16 +1,17 @@
 .product-grid {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
 }
 
 .product-grid__item {
   margin-bottom: 60px;
+  margin-right: 1.25%;
   position: relative;
   text-align: center;
   width: 24%;
 
-  &:last-of-type {
+  &:last-of-type,
+  &:nth-child(4n) {
     margin-right: 0;
   }
 
@@ -69,6 +70,14 @@
   @media screen and (min-width: $desktop) {
     font-size: 22px;
   }
+}
+
+.product-grid__item-variant {
+  color: $king-blue;
+  display: block;
+  font: 13px/26px $font-secondary;
+  margin: 10px 0 6px;
+  width: 100%;
 }
 
 .product-grid__item-price {

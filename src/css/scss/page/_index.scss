@@ -1,8 +1,11 @@
 @import '404';
 @import 'account/index';
+@import 'affiliates';
 @import 'blog/index';
 @import 'cart/index';
+@import 'challenge';
 @import 'collection';
+@import 'contact';
 @import 'customers';
 @import 'home';
 @import 'information';
@@ -11,3 +14,4 @@
 @import 'not-found';
 @import 'page';
 @import 'product/index';
+@import 'search';

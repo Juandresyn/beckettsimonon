@@ -1,22 +1,22 @@
-<aside id="inline-cart" class="modal--right cart-modal">
-  <div class="modal--right__container">
-    <div class="modal--right__header">
+<aside id="inline-cart" class="modal modal--right cart-modal">
+  <div class="modal__container modal--right__container">
+    <div class="modal__header modal--right__header">
       <p class="cart-modal__info-text" style="color: {{ settings.inline_cart_top_text_color }}">{{ settings.inline_cart_top_text }}</p>
 
-      <span class="js-on-click modal--right__close"
+      <span class="js-on-click modal__close modal--right__close"
         data-onclick-target="html"
         data-onclick-class="modal--open cart-is-open">
         <span class="icon icon--close"></span>
       </span>
     </div>
 
-    <div class="modal--right__content">
+    <div class="modal__content modal--right__content">
       <div class="cart__wrapper">
         {% if cart.item_count > 0 %}
           <form action="/cart"
             method="post"
             novalidate
-            class="cart__form">
+            class="cart__form js-empty-template">
             <inline-cart-item></inline-cart-item>
             <div class="cart__actions">
               <div class="cart__prices">
@@ -37,6 +37,10 @@
         {% else %}
           {% include 'cart-empty' %}
         {% endif %}
+
+        <div class="empty-template js-empty-template">
+          {% include 'cart-empty' %}
+        </div>
       </div>
     </div>
   </div>

@@ -404,5 +404,53 @@
         "label": "Blog Pages Description"
       }
     ]
+  },
+  {
+    "name": "Search Page",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "search_hero_image",
+        "label": "Search Pages Hero"
+      }
+    ]
+  },
+  {
+    "name": "Customer Page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "page_label",
+        "label": "Page Title"
+      },
+      {
+        "type": "text",
+        "id": "orders_title",
+        "label": "Orders Title"
+      },
+      {
+        "type": "text",
+        "id": "account_title",
+        "label": "Account Title"
+      },
+      {
+        "type": "text",
+        "id": "logout_text",
+        "label": "Logout Text"
+      },
+      {
+        "type": "select",
+        "id": "button_type",
+        "options": [
+          { "value": "btn--white", "label": "White"},
+          { "value": "btn--scarlet", "label": "Scarlet (red)"},
+          { "value": "btn--dark", "label": "Dark"},
+          { "value": "btn--outline", "label": "Transparent (black)"},
+          { "value": "btn--outline--white", "label": "Transparent (white)"}
+        ],
+        "label": "Button Style",
+        "default": "btn--scarlet"
+      }
+    ]
   }
 ]

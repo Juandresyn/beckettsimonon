@@ -55,9 +55,18 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
+    position: relative;
 
     &:only-child {
       width: 100%;
+    }
+
+    small {
+      color: $dark-gray;
+      font: 13px/18px $font-secondary;
+      position: absolute;
+      right: 0;
+      text-transform: initial;
     }
   }
 

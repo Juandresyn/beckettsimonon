@@ -1,0 +1,17 @@
+<section class="affiliates">
+  <div class="affiliates__wrapper">
+    <div class="affiliates__description rte">
+        {% if page.content contains '[!--header--!]' %}
+          {{ page.content | split: '[!--header--!]' | last }}
+        {% else %}
+          {{ page.content }}
+        {% endif %}
+    </div>
+
+    <div class="affiliates__content">
+      {% section 'perks' %}
+    </div>
+  </div>
+</section>
+
+{% section 'faq--affiliates' %}

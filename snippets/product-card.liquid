@@ -1,0 +1,12 @@
+<li class="product-grid__item">
+  <a class="product-grid__item-link"
+    href="{{ product.url }}">
+    <img class="product-grid__item-image product-grid__item-image--primary"
+      src="{{ product.featured_image | img_url: '230x230', crop: 'center' }}" />
+    <img class="product-grid__item-image product-grid__item-image--secondary"
+      src="{{ product.images[1] | img_url: '230x230', crop: 'center' }}" />
+    <h3 class="product-grid__item-title">{{ product.title | split: ' -' | first }}</h3>
+    <span class="product-grid__item-variant">{{ product.type }}</span>
+    <span class="product-grid__item-price">{{ product.price | money_without_trailing_zeros }}</span>
+  </a>
+</li>

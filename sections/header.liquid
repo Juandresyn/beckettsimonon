@@ -21,7 +21,7 @@
   {% assign header_title = collection.title %}
   {% assign header_description = collection.description %}
 
-{% elsif template contains 'page.information' %}
+{% elsif template contains 'page.information' or template contains 'page.affiliates' %}
 
   {% assign pageMetafields = page.metafields.image %}
   {% assign header_image_str = pageMetafields[page.handle] %}
@@ -34,7 +34,29 @@
   {% assign header_title = settings.blog_hero_title %}
   {% assign header_description = settings.blog_hero_description %}
 
-{% elsif template contains 'article' %}
+{% elsif template contains 'search' %}
+
+  {% assign is_search = true %}
+  {% assign header_image = settings.search_hero_image %}
+
+{% elsif template contains "page.contact" %}
+
+  {% assign pageHeroImage = page.metafields.image[page.handle] %}
+  {% assign is_contact = true %}
+
+  {% if pageHeroImage %}
+    {% assign header_image_str = pageHeroImage %}
+    {% assign is_bulk_orders = true %}
+  {% else %}
+    {% assign header_classes = "header-main--small" %}
+  {% endif %}
+
+{% elsif template contains 'account' or
+  template contains 'order' or
+  template contains 'customer' %}
+
+  {% assign is_customer = true %}
+  {% assign header_classes = "header-main--small" %}
 
 {% elsif template contains '404' %}
 
@@ -42,10 +64,19 @@
 
 {% endif %}
 
+
+{% if template == blank %}
+  {% assign header_classes = "header-main--small" %}
+  {% assign isEmpty = true %}
+{% endif %}
+
 {% if is_home
   or is_blog
+  or is_search
+  or is_bulk_orders
   or template contains 'list-collections'
   or template contains 'collection'
+  or template contains 'page.affiliates'
   or template contains 'page.information' %}
   {% assign themeColor = "nav--white" %}
   {% assign header_logo = section.settings.logo %}
@@ -54,19 +85,19 @@
   {% assign header_logo = section.settings.logo_black %}
 {% endif %}
 
-<style>
-  {% unless is_product
-    or is_404
-    or template contains 'article'
-    or template contains 'cart' %}
+{% unless is_product
+  or is_404
+  or template contains 'article'
+  or template contains 'cart' %}
+  <style>
     .header-main {
       background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({% if header_image_str %}{{ header_image_str }}{% else %}{{ header_image | img_url: 'master' }}{% endif %});
     }
-  {% endunless %}
-</style>
+  </style>
+{% endunless %}
 
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
-  <header class="header-main {% if is_product %}header-main--product{% endif %} {% if section.settings.top_bar_enable %}header-main--has-top-bar{% endif %} {{ themeColor }}">
+  <header class="header-main {{ header_classes }} {% if is_product %}header-main--product{% endif %} {% if section.settings.top_bar_enable %}header-main--has-top-bar{% endif %} {{ themeColor }}">
     {% if section.settings.top_bar_enable %}
       <section class="top-bar" style="background-color: {{ section.settings.top_bar_color_bg }};">
           <div class="top-bar__content" style="color: {{ section.settings.top_bar_color_text }};">
@@ -102,6 +133,7 @@
         class: 'header-main',
         hasCart: true,
         hasSearch: true,
+        hasLogin: true,
         is: 'right' %}
 
       <div class="header-main--mobile">
@@ -145,6 +177,25 @@
         {% endif %}
       </section>
     {% endif %}
+
+    {% if is_search %}
+      <div class="header-main__search">
+        <form action="/search" method="get" role="search" class="header-main__search-form">
+          <input type="search"
+            id="SearchInput"
+            class="input-group__field search__input"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="Search Something..."
+            aria-label="Search Something..."
+            >
+            <button type="submit"><span class="icon icon--search"></span></button>
+        </form>
+        {% if search.performed %}
+          <span class="header-main__search-count">About {{ search.results_count }} results</span>
+        {% endif %}
+      </div>
+    {% endif %}
   </header>
   <div class="header-main__modal">
     <div class="header-main__modal--header">
@@ -176,7 +227,9 @@
       id: 'main-menu-right',
       menu: section.settings.main_linklist_right,
       class: 'header-main',
-      is: 'right' %}
+      is: 'right',
+      isMobile: 'true',
+      hasLogin: true %}
 
     <div class="header-main__modal-search">
       <span class="header-main-modal__search-icon js-on-click"

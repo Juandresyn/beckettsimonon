@@ -1,7 +1,11 @@
 .top-bar {
   background-color: $black;
   color: $white;
-  padding: 8px 0;
+  padding: 3px 0;
+
+  @media (min-width: $desktop) {
+    padding: 8px 0;
+  }
 }
 
 .top-bar__content {
@@ -14,7 +18,7 @@
   max-width: calc(#{$site-max-width} + 50px);
   padding: 0 25px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     justify-content: space-between;
   }
 }
@@ -22,7 +26,7 @@
 .top-bar__message {
   font-size: 12px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     font-size: 13px;
     line-height: 24px;
   }

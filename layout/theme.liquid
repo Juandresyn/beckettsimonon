@@ -69,17 +69,40 @@
   {% assign pageClass = 'page--information' %}
 {% endif %}
 
-<body class="page--{{ template | split: '.' | first }} {{ pageClass }} {{ nav_class }}">
+{% if template contains 'page.contact' %}
+  {% assign pageClass = 'page--contact' %}
+{% endif %}
+
+{% if template contains 'page.affiliates' %}
+  {% assign pageClass = 'page--affiliates' %}
+{% endif %}
+
+{% if template == blank %}
+  {% assign pageClass = 'page--empty' %}
+  {% assign isEmpty = true %}
+{% endif %}
+
+<body id="theme-content" class="page--{{ template | replace: '/', '-' | split: '.' | first }} {{ pageClass }} {{ nav_class }}">
   {% section 'header' %}
 
   <main class="main-content" id="MainContent" role="main" tabindex="-1">
     {{ content_for_layout }}
   </main>
 
+  {% assign is_customer = true %}
+  {% assign header_classes = "header-main--small" %}
   {% unless template contains "404"
+    or template contains "account"
+    or template contains "order"
     or template contains "cart" %}
     {% unless template contains "page.information"
+      or isEmpty
+      or template contains "page.contact"
+      or template contains "collection"
+      or template contains "page.affiliates"
       or template contains "blog"
+      or template contains "customer"
+      or template contains "search"
       or template contains "article" %}
       {% include 'press-carousel' %}
     {% endunless %}
@@ -106,6 +129,7 @@
 
     window.cart = {{ cart.items | json }};
     window.cart_count = {{ cart.item_count }};
+    window.template_name = "{{ template }}";
 
     document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
   </script>

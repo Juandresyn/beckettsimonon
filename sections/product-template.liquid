@@ -25,7 +25,7 @@
 </style>
 
 <div class="product__container page-block"
-  id="ProductSection-{{ section.id }}"
+  id="product"
   data-section-id="{{ section.id }}"
   data-section-type="product"
   data-enable-history-state="true"
@@ -53,6 +53,7 @@
         </div>
       </div>
     </div>
+
     <div class="product-header__details">
       <div class="product-header__title">
         <h1 class="product-header__title">{{ product.title | split: ' -' | first }}</h1>
@@ -64,6 +65,7 @@
           <span class="product-header__price">{{ price | money_without_trailing_zeros }}</span>
           <span class="product-header__price-label">Pre-Order</span>
         </div>
+
         {% if compare_at_price %}
           <div class="product-header__price-item">
             <span class="product-header__price product-header__price--retail">{{ compare_at_price | money_without_trailing_zeros }}</span>
@@ -74,15 +76,17 @@
 
       {% form 'product', product, class:form_classes, novalidate: 'novalidate' %}
         <div class="product-header-details__section product-header__variants">
-          {% for option in product.options %}
-            <h2 class="product-header__variants-title">{{ option }} {% if section.settings.size_page %}<a href="{{ section.settings.size_page }}" target="_blank" class="product-header__variant-instructions">What's my size?</a>{% endif %}</h2>
-          {% endfor %}
+          <h2 class="product-header__variants-title">{{ section.settings.size_label }}
+            <my-size label="{{ section.settings.size_link_label }}"
+              label-class="product-header__variant-instructions modal__trigger"
+              image-url="{{ 'shape1.svg' | asset_url }}"></my-size>
+          </h2>
           <div class="select-wrapper">
-            <select name="id" class="select product-header__variant-select">
+            <select id="product-variants" name="id" class="select product-header__variant-select">
               {% for variant in product.variants %}
                 <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}
                   value="{{ variant.id }}"
-                  data-object="{{ variant | json }}">
+                  data-object="{{ variant }}">
                   {{ variant.title }}
                 </option>
               {% endfor %}
@@ -91,7 +95,7 @@
         </div>
 
         <div class="product-header__buttons">
-          <button id="AddToCart-{{ section.id }}"
+          <button id="add-to-cart"
             type="submit"
             name="add"
             {% unless current_variant.available %}disabled="disabled"{% endunless %}
@@ -131,45 +135,6 @@
   {% include 'product-faq' %}
 </span>
 
-<script type="text/javascript">
-  var productImagesSlider = $('.js-slick-product-images');
-
-  function initializeImagesSlider() {
-    if (window.innerWidth < 1024) {
-      var productImagesSliderArrowPrev = $('.js-slick-product-images__prev');
-      var productImagesSliderArrowNext = $('.js-slick-product-images__next');
-      var $status = $('.js-slick-product-images-counter');
-
-      productImagesSlider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide){
-        var counter = (currentSlide ? currentSlide : 0) + 1;
-        $status.text('0' + counter + ' / 0' + slick.slideCount);
-      });
-
-      productImagesSlider.slick({
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false
-      });
-
-      productImagesSliderArrowPrev.on('click', function() {
-        productImagesSlider.slick('slickPrev');
-      });
-
-      productImagesSliderArrowNext.on('click', function() {
-        productImagesSlider.slick('slickNext');
-      });
-    }
-  }
-
-  initializeImagesSlider();
-  $(window).on('resize', function() {
-    if (!productImagesSlider.hasClass('slick-initialized')) {
-      initializeImagesSlider();
-    }
-  });
-</script>
-
 {% unless product == empty %}
   {% assign productData = product | json %}
   <script type="application/json" id="ProductJson">
@@ -192,9 +157,14 @@
   "name": "Product pages",
   "settings": [
     {
-      "type": "url",
-      "id": "size_page",
-      "label": "What's my size link"
+      "type": "text",
+      "id": "size_label",
+      "label": "What's my size label"
+    },
+    {
+      "type": "text",
+      "id": "size_link_label",
+      "label": "What's my size text"
     },
     {
       "type": "select",

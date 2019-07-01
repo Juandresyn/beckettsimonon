@@ -1,4 +1,10 @@
 .page--product {
+  .page-block {
+    @media (max-width: $desktop) {
+      padding: 0;
+    }
+  }
+
   .header-main {
     height: auto;
   }
@@ -163,7 +169,7 @@
 .product-header__shipping-info {
   color: $icon-gray;
   font-family: $font-secondary;
-  font-size: 13px;
+  font-size: 12px;
   font-style: italic;
   line-height: 24px;
   margin-top: 10px;
@@ -179,12 +185,15 @@
   margin-top: 60px;
 
   @media (max-width: $desktop) {
-    padding-top: 0;
-    padding-bottom: 50px;
+    padding: 0 17px 50px;
   }
 
   &.rte {
-    margin-top: 0;
+    margin-top: 100px;
+
+    h2:first-of-type {
+      margin-top: 0;
+    }
 
     h2 {
       margin-bottom: 50px;

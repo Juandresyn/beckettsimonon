@@ -31,6 +31,14 @@
     }
   }
 
+  &__author {
+    color: $black;
+    font: 13px/18px $font-secondary--bold;
+    margin: 40px 0 80px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
   &__image {
     margin-bottom: 30px;
     width: 100%;

@@ -1,0 +1,92 @@
+.account-page {
+  &__wrapper {
+    max-width: $site-max-width + 40px;
+    margin: 23px auto 60px;
+    padding: 0 20px;
+  }
+
+  &__label {
+    color: $scarlet;
+    font: 12px/18px $font-secondary;
+
+    .icon {
+      padding-left: 10px;
+    }
+  }
+
+  &__title {
+    font: 22px/35px $font-primary--bold;
+    margin: 17px 0 35px;
+  }
+
+  &__orders {
+    max-width: 790px;
+  }
+
+  &__details-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media (min-width: $tablet-large) {
+      flex-direction: row;
+    }
+  }
+
+  &__details {
+    min-width: 195px;
+    width: 100%;
+
+    @media (min-width: $tablet-large) {
+      margin-left: 30px;
+      width: auto;
+    }
+  }
+
+  &__address p {
+    font: 17px/32px $font-primary;
+    text-transform: capitalize;
+  }
+
+  &__addresses {
+    color: $scarlet;
+    display: block;
+    font: 12px/18px $font-secondary--bold;
+    margin: 15px 0 20px;
+    text-transform: uppercase;
+  }
+}
+
+.account-form {
+  &__wrapper {
+    margin: 80px auto 100px;
+    max-width: 460px;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  &__title {
+    margin-bottom: 60px;
+    text-align: center;
+  }
+
+  &__subtitle {
+    margin-bottom: 35px;
+    text-align: center;
+  }
+
+  &__toggle {
+    color: $king-blue;
+    cursor: pointer;
+    display: inline-block;
+    font: 13px/18px $font-secondary--bold;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+
+    span {
+      color: $scarlet;
+      cursor: pointer;
+    }
+  }
+}

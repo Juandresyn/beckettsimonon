@@ -1,8 +1,7 @@
-.modal--right {
+.modal {
   background: rgba(0, 0, 0, 0.4);
   bottom: 0;
   display: none;
-  justify-content: flex-end;
   left: 0;
   max-height: calc(100vh - #{$top-bar-height-small});
   position: absolute;
@@ -39,8 +38,16 @@
 
   &__close {
     color: $black;
-    margin-left: 21px;
+    margin-left: auto;
   }
+
+  &__trigger {
+    cursor: pointer;
+  }
+}
+
+.modal--right {
+  justify-content: flex-end;
 }
 
 .modal--open {

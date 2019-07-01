@@ -1,0 +1,102 @@
+<div class="affiliates__perks">
+  <h2 class="affiliates-perks__title">{{ section.settings.title }}</h2>
+
+  <div class="affiliates-perks__wrapper">
+    {% for block in section.blocks %}
+      <article class="affiliates__perk">
+        <div class="affiliates-perk__icon-wrapper">
+          <img class="affiliates-perk__icon"
+            src="{{ block.settings.icon | img_url: 'master' }}"
+            alt="{{ block.settings.title }}" />
+        </div>
+
+        <div class="affiliates-perk__info">
+          <h3 class="affiliates-perk__title">{{ block.settings.title }}</h3>
+          <p class="affiliates-perk__description">{{ block.settings.description }}</p>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="affiliates-perks__footer">
+    <h2 class="affiliates-perks__title affiliates-perks-footer__title">{{ section.settings.footer_title }}</h2>
+    <p class="affiliates-perks-footer__description">{{ section.settings.footer_description }}</p>
+    <a href="{{ section.settings.footer_cta_link }}" class="btn {{ section.settings.footer_cta_color }}">{{ section.settings.footer_cta }}</a>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Affiliates Perks",
+    "class": "affiliates__perks",
+    "max_blocks": 15,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "Peerks Footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_title",
+        "label": "Footer Title"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_description",
+        "label": "Footer Description"
+      },
+      {
+        "type": "text",
+        "id": "footer_cta",
+        "label": "Footer CTA"
+      },
+      {
+        "type": "url",
+        "id": "footer_cta_link",
+        "label": "Footer CTA Link"
+      },
+      {
+        "type": "select",
+        "id": "footer_cta_color",
+        "options": [
+          { "value": "btn--white", "label": "White"},
+          { "value": "btn--scarlet", "label": "Scarlet (red)"},
+          { "value": "btn--dark", "label": "Dark"},
+          { "value": "btn--outline", "label": "Transparent (black)"},
+          { "value": "btn--outline--white", "label": "Transparent (white)"}
+        ],
+        "label": "Footer CTA Style",
+        "default": "btn--scarlet"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "perk",
+        "name": "Perk",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon",
+            "info": "Make sure you use a transparent background image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

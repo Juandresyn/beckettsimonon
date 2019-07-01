@@ -1,0 +1,100 @@
+<div class="contact__info">
+  <h1 class="contact-info__title">{% if section.settings.title != blank %}{{ section.settings.title }}{% else %}{{ page.title }}{% endif %}</h1>
+  <p class="contact-info__content">{{ section.settings.content }}</p>
+  <span class="contact-info__note">{{ section.settings.note }}</span>
+</div>
+
+<div class="contact__form-wrapper">
+  {% assign formId = 'ContactForm' %}
+  {% form 'contact', id: formId %}
+    {% include 'form-status', form_id: formId %}
+
+    <input type="hidden" value="{{ section.settings.form_type }}" name="contact[Form Type]">
+
+    <div class="input-control">
+      <label for="{{ formId }}-name"
+        class="form-label required">Name</label>
+      <input type="text"
+        id="{{ formId }}-name"
+        class="input form-input"
+        name="contact[name]"
+        value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+        required>
+    </div>
+
+    <div class="input-control">
+      <label for="{{ formId }}-email"
+        class="form-label required">Email</label>
+      <input type="email"
+        id="{{ formId }}-email"
+        class="input form-input"
+        name="contact[email]"
+        autocorrect="off"
+        autocapitalize="off"
+        value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+        aria-required="true"
+        required>
+    </div>
+
+    <div class="input-control">
+      <label for="{{ formId }}-order"
+        class="form-label">Order</label>
+      <input type="text"
+        id="{{ formId }}-order"
+        class="input form-input"
+        name="contact[Order]">
+    </div>
+
+    <div class="input-control">
+      <label for="{{ formId }}-message"
+        class="form-label required">Comment</label>
+
+      <textarea id="{{ formId }}-message"
+        rows="3"
+        class="input form-input"
+        name="contact[body]"
+        placeholder="{{ section.settings.placeholder }}"
+        required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+    </div>
+
+    <div class="input-control input-control--action-right">
+      <button class="btn btn--scarlet">Submit</button>
+    </div>
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Contact form information",
+  "class": "contact__wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "form_type",
+      "label": "Form Name",
+      "default": "Form Returns and Exchanges",
+      "info": "This value will be send in the email to distinguish the forms"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Note"
+    },
+    {
+      "type": "textarea",
+      "id": "placeholder",
+      "label": "Textarea Placeholder"
+    }
+  ]
+}
+{% endschema %}

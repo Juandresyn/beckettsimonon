@@ -1,0 +1,9 @@
+.page--empty {
+  .shopify-challenge__container {
+    margin: 80px auto 100px;
+  }
+
+  .shopify-challenge__button {
+    @extend .btn--scarlet;
+  }
+}

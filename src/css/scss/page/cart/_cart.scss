@@ -16,6 +16,10 @@
     margin: 0 20px;
 
     @media (min-width: $desktop) {
+      margin: 0 25px;
+    }
+
+    @media (min-width: $desktop-large + 50px) {
       margin: 0;
     }
   }
@@ -62,8 +66,12 @@
       bottom: inherit;
       max-width: 270px;
       padding-top: 15px;
-      right: calc(((100vw - 1280px) / 2));
+      right: 25px;
       width: 100%;
+    }
+
+    @media (min-width: $desktop-large + 50px) {
+      right: calc(((100vw - 1280px) / 2));
     }
 
     > .btn {
@@ -85,6 +93,56 @@
 
   &__shipping-info {
     text-align: center;
+  }
+
+  &-empty__header {
+    display: flex;
+    margin: 10px 0 0;
+    padding: 30px 0 20px;
+
+    @media (min-width: $desktop) {
+      margin: 30px 0 10px;
+      padding: 30px 0;
+    }
+  }
+
+  &-empty__image {
+    margin-right: 20px;
+  }
+
+  &-empty__text {
+    color: $dark-gray;
+    font: 13px/24px $font-secondary--light;
+    font-style: italic;
+
+    a,
+    span {
+      color: $scarlet;
+      text-decoration: underline;
+    }
+  }
+
+  &-empty__content {
+    padding: 30px 0;
+  }
+
+  &-empty__btn {
+    display: block;
+    margin-bottom: 30px;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    width: 100%;
+
+    @media (min-width: $desktop) {
+      display: inline-block;
+      margin-right: 30px;
+      width: 168px;
+    }
+
+    &:last-of-type {
+      margin: 0;
+    }
   }
 }
 

@@ -10,7 +10,7 @@
       alt="Article {{ article.title }} Image" />
   </a>
 
-  <h2 class="blog-article__title">{{ article.title }}</h2>
+  <a href="{{ article.url }}"><h2 class="blog-article__title">{{ article.title }}</h2></a>
 
   <p class="blog-article__description">
     {% if article.excerpt.size > 0 %}

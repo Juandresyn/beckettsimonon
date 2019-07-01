@@ -1,0 +1,7 @@
+{% if form.posted_successfully? %}
+  <p class="form-success">
+    Thanks for contacting us. We'll get back to you as soon as possible.
+  </p>
+{% endif %}
+
+{{ form.errors | default_errors }}

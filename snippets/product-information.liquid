@@ -1,7 +1,10 @@
 {% assign productMetafields = product.metafields.product %}
+{% assign metaFieldsSize = productMetafields | size %}
 
-<section class="product__information">
-  <div class="product-information__wrapper page-block">
-    <product-information></product-information>
-  </div>
-</section>
+{% if metaFieldsSize > 0 %}
+  <section class="product__information">
+    <div class="product-information__wrapper page-block">
+      <product-information></product-information>
+    </div>
+  </section>
+{% endif %}
