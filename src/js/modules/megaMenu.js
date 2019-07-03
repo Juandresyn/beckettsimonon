@@ -49,7 +49,7 @@ var fillTemplate = function(product, cb) {
   });
 };
 
-$('.js-mega-menu-product').on('click', function(e) {
+$('.js-mega-menu-product').on('mouseover click', function(e) {
   e.preventDefault();
   e.stopPropagation();
 

@@ -132,13 +132,14 @@
 }
 
 .site-footer--prefooter__container {
+  display: flex;
+  justify-content: space-between;
   max-width: $sections-max-width;
   margin: 0 auto;
 }
 
 .site-footer--prefooter__item {
   display: inline-block;
-  padding-right: 20px;
   max-width: 270px;
   text-align: center;
   width: 25%;

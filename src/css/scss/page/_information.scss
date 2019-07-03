@@ -29,6 +29,7 @@
   padding: 0 17px;
   position: absolute;
   text-align: center;
+  transition: background .2s ease;
   width: 100%;
 
   @media (min-width: $desktop) {
@@ -37,6 +38,8 @@
 }
 
 .information-nav--fixed {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 20px -1px rgba(0, 0, 0, 0.1);
   height: 56px;
   position: fixed;
   top: 0;
