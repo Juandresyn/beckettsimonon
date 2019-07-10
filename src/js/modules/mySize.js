@@ -213,7 +213,6 @@ if (typeof Vue === 'function') {
       },
 
       setSize(size) {
-        console.log(this.sizeOptionsArray, size, this.sizeOptionsArray.findIndex((i) => i === size));
         const variantSelector = document.querySelector('#product-variants');
 
         variantSelector.selectedIndex = this.sizeOptionsArray.findIndex((i) => i === size);
@@ -261,11 +260,14 @@ if (typeof Vue === 'function') {
         }
 
         this.activeItems[size] = this.activeItems[size] === name ? '' : name;
-        console.log(this.currentIsSleceted);
+
+        setTimeout(() => this.nextStep(), 480);
       },
 
       handleShapeClick(value) {
         this.valuePicked.shape = value;
+
+        setTimeout(() => this.nextStep(), 480);
       },
 
       generateImgUrl(imgName) {

@@ -160,7 +160,7 @@ $mega-menu-width: calc(((100vw - 1280px) / 2) + 410px);
 
   &__loader {
     display: none;
-    left: calc(50% - 50px);
+    left: calc(((100vw - 1280px) / 2) + 410px);
   }
 }
 

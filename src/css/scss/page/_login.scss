@@ -47,7 +47,12 @@
   }
 
   &__btn {
+    color: $white !important;
     cursor: pointer;
+  }
+
+  &__btn:last-child {
+    padding: 21px 40px;
   }
 
   &__forgot {

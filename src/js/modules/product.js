@@ -1,33 +1,40 @@
-var siteHeaderHeight = $('[data-section-id="header"]').height() + 20;
-var productDetailsHeight = $('.product-header__details').height();
-var imagesOffset = $('.product-header__images').height();
+var siteHeaderHeight = $('[data-section-id="header"]').innerHeight() + 20;
+var productDetailsHeight = $('.product-header__details').innerHeight();
+var imagesOffset = ($('.product-header__images img').length * 660);
 var imagesOffsetFinal = (imagesOffset - window.innerHeight) + siteHeaderHeight;
 var bottomSize = window.innerHeight - (siteHeaderHeight + productDetailsHeight);
-var productToolbarOffset = $('.product-toolbar').height();
+var productToolbarOffset = $('.product-toolbar').innerHeight();
 var pageScrollClass = 'images-viewed';
 var productToolbarBodyClass = 'product-toolbar--visible';
 var productPageClass = 'page--product';
-var isMobile = window.innerWidth < 1024;
 
 function manageDetailsPosition() {
   var scrollTop = $(window).scrollTop();
-  function toolbarCalculation() {
-    return isMobile ?
-            scrollTop >= ((imagesOffset + productDetailsHeight) - productToolbarOffset) :
-            scrollTop >= (imagesOffset - productToolbarOffset);
-  }
 
-  if (scrollTop >= (imagesOffsetFinal + bottomSize)) {
-    $('body').addClass(pageScrollClass);
-  } else if (scrollTop < (imagesOffsetFinal + bottomSize)) {
-    $('body').removeClass(pageScrollClass);
-  }
+  if (window.innerWidth > 1024) {
+    function toolbarCalculation() {
+      return scrollTop >= (imagesOffset - productToolbarOffset);
+    }
 
-  if (toolbarCalculation()) {
-    $('body').addClass(productToolbarBodyClass);
+    if (scrollTop >= (imagesOffsetFinal + bottomSize)) {
+      $('body').addClass(pageScrollClass);
+    } else if (scrollTop < (imagesOffsetFinal + bottomSize)) {
+      $('body').removeClass(pageScrollClass);
+    }
+
+    if (toolbarCalculation()) {
+      $('body').addClass(productToolbarBodyClass);
+    } else {
+      $('body').removeClass(productToolbarBodyClass);
+    }
   } else {
-    $('body').removeClass(productToolbarBodyClass);
+    if ($(window).scrollTop() >= $('#add-to-cart').offset().top) {
+      $('body').addClass(productToolbarBodyClass);
+    } else {
+      $('body').removeClass(productToolbarBodyClass);
+    }
   }
+  console.log(toolbarCalculation(), imagesOffset, productToolbarOffset);
 }
 
 function initializeEffect() {
@@ -43,8 +50,11 @@ function initializeEffect() {
 }
 
 if ($('body').hasClass(productPageClass)) {
-  initializeEffect();
+  const lazyLoadInstance = new LazyLoad({
+    elements_selector: ".lazyload"
+  });
 
+  initializeEffect();
 
   $(window).scroll(function() {
     manageDetailsPosition();

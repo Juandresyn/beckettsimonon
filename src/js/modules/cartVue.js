@@ -1,12 +1,26 @@
+const state = {
+  reRender: '0',
+  cart: window.cart,
+  cart_count: window.window.cart_count
+};
+
 if (typeof Vue === 'function') {
   Vue.component('inline-cart-item', {
     name: 'InlineCartItem',
 
-    data: function () {
-      return {
-        cart: window.cart,
-        cart_count: window.window.cart_count,
-      };
+    data: function() { return state; },
+
+    watch: {
+      reRender(newVal) {
+        console.log('>>>>>>>>>>>', this.cart_count, newVal);
+        this.handleRerender();
+      }
+    },
+
+    mounted() {
+      if (this.cart_count === 0) {
+        $('.js-empty-template').toggle();
+      }
     },
 
     methods: {
@@ -22,18 +36,17 @@ if (typeof Vue === 'function') {
         return `/cart/change?line=${index }&amp;quantity=0`;
       },
 
-      updateGlobalCartCount(newQty) {
-        document.querySelectorAll('.js-cart-count')
-          .forEach((item) => item.innerHTML = newQty);
+      updateGlobalCartCount() {
+        this.ajaxGetCart(({ item_count }) => {
+          this.cart_count = item_count;
+
+          document.querySelectorAll('.js-cart-count')
+            .forEach((item) => item.innerHTML = item_count);
+        });
       },
 
       updateInlineCartTotalPrice() {
-        let totalPrice = 0;
-        for (let i = 0; i < this.cart.length; i++) {
-          totalPrice += this.cart[i].line_price;
-        }
-
-        document.querySelector('.js-inline-cart-total').innerHTML = `$${this.cleanPrice(totalPrice)}`;
+        this.ajaxGetCart(({ total_price }) => document.querySelector('.js-inline-cart-total').innerHTML = `$${this.cleanPrice(total_price)}`);
       },
 
       handleQuantity(type, qty, index, price) {
@@ -78,15 +91,41 @@ if (typeof Vue === 'function') {
             quantity,
           }
         })
-        .done(function() {
+        .done(() => {
           cb();
         });
       },
+
+      ajaxGetCart(cb) {
+        $.ajax({
+          method: "POST",
+          url: "/cart.js",
+          dataType: 'json',
+        })
+        .done((data) => {
+          console.log(data);
+          cb(data);
+        });
+      },
+
+      handleRerender() {
+        this.ajaxGetCart(({ items }) => {
+          this.cart = items;
+          if (this.cart_count === 0) {
+            $('.js-empty-template').toggle();
+          }
+
+          this.cart_count = items.length;
+          this.updateGlobalCartCount(items.length);
+          this.updateInlineCartTotalPrice();
+
+        });
+      }
     },
 
     template: `
       <div class="cart__list">
-        <div  v-for="(item, index) in cart"
+        <div v-for="(item, index) in cart"
           :key="index"
           v-if="item.quantity > 0"
           class="cart__item">

@@ -12,31 +12,27 @@
 
     <div class="modal__content modal--right__content">
       <div class="cart__wrapper">
-        {% if cart.item_count > 0 %}
-          <form action="/cart"
-            method="post"
-            novalidate
-            class="cart__form js-empty-template">
-            <inline-cart-item></inline-cart-item>
-            <div class="cart__actions">
-              <div class="cart__prices">
-                <div class="cart__price">
-                  <p class="cart-price__label">Subtotal</p>
-                  <p class="cart-price__total js-inline-cart-total">{{ cart.total_price | money_without_trailing_zeros }}</p>
-                </div>
-
-                <div class="cart__price">
-                  <p class="cart-price__label">Shipping</p>
-                  <p class="cart-price__total cart-price__total--red">FREE</p>
-                </div>
+        <form action="/cart"
+          method="post"
+          novalidate
+          class="cart__form js-empty-template">
+          <inline-cart-item></inline-cart-item>
+          <div class="cart__actions">
+            <div class="cart__prices">
+              <div class="cart__price">
+                <p class="cart-price__label">Subtotal</p>
+                <p class="cart-price__total js-inline-cart-total">{{ cart.total_price | money_without_trailing_zeros }}</p>
               </div>
 
-              <button type="submit" name="checkout" class="btn btn--scarlet">Checkout</button>
+              <div class="cart__price">
+                <p class="cart-price__label">Shipping</p>
+                <p class="cart-price__total cart-price__total--red">FREE</p>
+              </div>
             </div>
-          </form>
-        {% else %}
-          {% include 'cart-empty' %}
-        {% endif %}
+
+            <button type="submit" name="checkout" class="btn btn--scarlet">Checkout</button>
+          </div>
+        </form>
 
         <div class="empty-template js-empty-template">
           {% include 'cart-empty' %}

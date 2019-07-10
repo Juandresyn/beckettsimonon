@@ -6,10 +6,16 @@
   padding: 10px 0;
   position: fixed;
   right: 0;
-  top: -85px;
+  bottom: -85px;
   transition: opacity 0.2s ease,
-              top 0.2s ease;
+              top 0.2s ease,
+              bottom 0.2s ease;
   z-index: 3;
+
+  @media (min-width: $desktop) {
+    bottom: initial;
+    top: -85px;
+  }
 
   .product-header__variant-instructions {
     color: $king-blue;
@@ -23,7 +29,12 @@
 .product-toolbar--visible {
   .product-toolbar {
     opacity: 1;
-    top: 0;
+    bottom: 0;
+
+    @media (min-width: $desktop) {
+      bottom: initial;
+      top: 0;
+    }
   }
 }
 

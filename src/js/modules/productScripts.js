@@ -69,4 +69,33 @@ $(window).on('load', function() {
       initializeImagesSlider();
     }
   });
+
+  const ajaxAddToCart = (id, quantity) => {
+    $.ajax({
+      method: "POST",
+      url: "/cart/add.js",
+      dataType: 'json',
+      data: {
+        id,
+        quantity,
+      }
+    })
+    .done(() => {
+      state.reRender = new Date().getTime();
+
+      console.log('kjhdfgjkgsdjkgsjhdgj', id, quantity, $('.js-update-cart').val());
+    });
+  };
+
+  $('.js-add-to-cart').on('submit', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const id = $('#product-variants').val();
+
+    ajaxAddToCart(id, 1);
+
+    $('html').toggleClass('modal--open');
+    $('html').toggleClass('cart-is-open');
+  });
 });

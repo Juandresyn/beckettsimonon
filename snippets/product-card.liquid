@@ -6,7 +6,11 @@
     <img class="product-grid__item-image product-grid__item-image--secondary"
       src="{{ product.images[1] | img_url: '230x230', crop: 'center' }}" />
     <h3 class="product-grid__item-title">{{ product.title | split: ' -' | first }}</h3>
-    <span class="product-grid__item-variant">{{ product.type }}</span>
+    {% for tag in product.tags %}
+      {% if tag contains 'material_' %}
+        <span class="product-grid__item-variant">{{ tag | remove: 'material_' }}</span>
+      {% endif %}
+    {% endfor %}
     <span class="product-grid__item-price">{{ product.price | money_without_trailing_zeros }}</span>
   </a>
 </li>

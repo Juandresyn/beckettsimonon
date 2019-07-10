@@ -34,8 +34,9 @@
     <div class="product-header__images">
       <div class="product-header__images-wrapper js-slick-product-images">
         {% for image in product.images %}
-          <img class="product-header__image"
-            src="{{ image | img_url: '650x650' }}"
+          <img class="product-header__image lazyload"
+            src="{{ image | img_url: '50x50' }}"
+            data-src="{{ image | img_url: '650x650' }}, {{ image | img_url: '450x450' }}, {{ image | img_url: '150x150' }}"
             alt="{{ product.title }}" />
         {% endfor %}
       </div>
@@ -57,7 +58,11 @@
     <div class="product-header__details">
       <div class="product-header__title">
         <h1 class="product-header__title">{{ product.title | split: ' -' | first }}</h1>
-        <span class="product-header__type">{{ product.type }}</span>
+        {% for tag in product.tags %}
+          {% if tag contains 'material_' %}
+            <span class="product-header__type">{{ tag | remove: 'material_' }}</span>
+          {% endif %}
+        {% endfor %}
       </div>
 
       <div class="product-header-details__section product-header__prices">
@@ -74,7 +79,7 @@
         {% endif %}
       </div>
 
-      {% form 'product', product, class:form_classes, novalidate: 'novalidate' %}
+      {% form 'product', product, class: 'js-add-to-cart', novalidate: 'novalidate' %}
         <div class="product-header-details__section product-header__variants">
           <h2 class="product-header__variants-title">{{ section.settings.size_label }}
             <my-size label="{{ section.settings.size_link_label }}"
