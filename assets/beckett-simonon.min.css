@@ -2767,7 +2767,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           -webkit-box-orient: horizontal;
           -webkit-box-direction: normal;
               flex-direction: row;
-      padding: 115px 0 55px; } }
+      padding: 125px 0 55px; } }
 
 .section--why-us__container {
   display: -ms-flexbox;

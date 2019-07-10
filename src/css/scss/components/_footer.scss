@@ -3,7 +3,7 @@
   padding: 60px 45px 35px 45px;
 
   @media screen and (min-width: $desktop) {
-    padding: 60px 60px 75px 60px;
+    padding: 45px 60px 47px 60px;
   }
 }
 
@@ -99,7 +99,7 @@
 .site-footer__copyright-wrapper {
   align-items: center;
   flex-direction: column;
-  margin-top: 70px;
+  margin-top: 66px;
 
   @media screen and (min-width: $desktop) {
     align-items: inherit;
@@ -128,7 +128,7 @@
 
 .site-footer--prefooter {
   background-color: $scarlet;
-  padding: 29px 0;
+  padding: 34px 0;
 }
 
 .site-footer--prefooter__container {

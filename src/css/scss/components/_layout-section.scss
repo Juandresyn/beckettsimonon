@@ -1,5 +1,5 @@
 .layout-section {
-  padding: 60px 25px;
+  padding: 71px 36px;
   text-align: center;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .layout-section__header {
-  margin-bottom: 66px;
+  margin-bottom: 99px;
 }
 
 .layout-section__eyebrow {
@@ -29,14 +29,14 @@
   @media (min-width: $desktop) {
     font-size: 30px;
     line-height: 44px;
-    margin: 0 0 21px 0;
+    margin: 0 0 16px 0;
   }
 }
 
 .layout-section__description {
   font-family: $font-primary;
-  font-size: 17px;
-  line-height: 32px;
+  font-size: 16px;
+  line-height: 28px;
   margin: 0 auto;
   max-width: 620px;
 }
