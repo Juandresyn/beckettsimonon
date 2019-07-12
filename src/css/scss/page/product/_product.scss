@@ -135,10 +135,33 @@
   }
 }
 
+.product-header__variant {
+  padding: 25px 0;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $light-gray;
+  }
+}
+
 .product-header__variants-title {
   font-family: $font-secondary;
   font-size: 15px;
   margin-bottom: 15px;
+}
+
+.product-header__variants-small {
+  color: $icon-gray;
+  font: 15px/28px $font-secondary;
+  padding-left: 8px;
+  text-transform: capitalize;
 }
 
 .product-header__variant-select {
@@ -154,6 +177,10 @@
   &:hover {
     font-family: $font-secondary--bold;
   }
+}
+
+.product-variants-selector {
+  display: none;
 }
 
 .product-header__buttons {

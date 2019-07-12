@@ -1,0 +1,65 @@
+.color-picker {
+  display: flex;
+}
+
+.color-item {
+  align-items: center;
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  margin-right: 14px;
+  width: 32px;
+}
+
+.color-item__input {
+  display: none;
+}
+
+.color-item__label {
+  background: gray;
+  border-radius: 100%;
+  cursor: pointer;
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 24px;
+
+  &:hover::before {
+    border-color: $light-gray;
+  }
+
+  &::before {
+    content: " ";
+    border: 1px solid transparent;
+    border-radius: 100%;
+    left: -4px;
+    position: absolute;
+    height: 32px;
+    top: -4px;
+    transition: border .3s ease;
+    width: 32px;
+  }
+}
+
+.color-item__input:checked + .color-item__label {
+  &::before {
+    content: " ";
+    border-color: $black;
+  }
+}
+
+.color-red {
+  background: $scarlet;
+}
+
+.color-blue {
+  background: $dark-blue;
+}
+
+.color-tan {
+  background: tan;
+}
+
+.color-black {
+  background: $black;
+}

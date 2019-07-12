@@ -82,8 +82,6 @@ $(window).on('load', function() {
     })
     .done(() => {
       state.reRender = new Date().getTime();
-
-      console.log('kjhdfgjkgsdjkgsjhdgj', id, quantity, $('.js-update-cart').val());
     });
   };
 

@@ -198,11 +198,9 @@ if (typeof Vue === 'function') {
       },
 
       setSizeOptions(){
-        const variantSelectorOptions = document.querySelectorAll('#product-variants > option');
-
-        Array.from(variantSelectorOptions).forEach((option, index) =>
+        window.productSizes.forEach((option, index) =>
           this.sizeOptions.push({
-            name: option.text,
+            name: option,
             index,
            })
         );
@@ -213,16 +211,25 @@ if (typeof Vue === 'function') {
       },
 
       setSize(size) {
-        const variantSelector = document.querySelector('#product-variants');
+        const variantSelector = document.querySelector('#product-option-size');
 
         variantSelector.selectedIndex = this.sizeOptionsArray.findIndex((i) => i === size);
+
+        if ("createEvent" in document) {
+          var evt = document.createEvent("HTMLEvents");
+          evt.initEvent("change", false, true);
+          variantSelector.dispatchEvent(evt);
+        } else {
+          variantSelector.fireEvent("onchange");
+        }
+
         this.toggleModal();
       },
 
       shopNow(size) {
         this.setSize(size);
+        handleProductChanges();
 
-        console.log(this.sizeOptions);
         const addTocart = document.querySelector('#add-to-cart');
         addTocart.click();
       },

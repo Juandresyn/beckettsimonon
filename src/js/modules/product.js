@@ -34,7 +34,6 @@ function manageDetailsPosition() {
       $('body').removeClass(productToolbarBodyClass);
     }
   }
-  console.log(toolbarCalculation(), imagesOffset, productToolbarOffset);
 }
 
 function initializeEffect() {
@@ -49,6 +48,28 @@ function initializeEffect() {
   }
 }
 
+const handleProductChanges = function() {
+  $('.js-product-options-size, .js-product-options-color').on('change', function() {
+    const variantsSelector = $('.js-product-variants');
+    const size = $('.js-product-options-size').val();
+    let color = null;
+
+    if ($('.js-product-options-color').val()) {
+      color =  $('.js-product-options-color').filter(':checked').val();
+      $('.js-product-color-label').html(color);
+    }
+
+    variantsSelector.find('option').each(function() {
+      $(this).attr("selected", false);
+
+      const singleOption = $(this).data('options');
+      if (singleOption.includes(!!color ? `${size}-${color}` : `${size}-`)) {
+        $(this).attr("selected","selected");
+      }
+    });
+  });
+}
+
 if ($('body').hasClass(productPageClass)) {
   const lazyLoadInstance = new LazyLoad({
     elements_selector: ".lazyload"
@@ -60,3 +81,5 @@ if ($('body').hasClass(productPageClass)) {
     manageDetailsPosition();
   });
 }
+
+handleProductChanges();
