@@ -1,10 +1,37 @@
 <li class="product-grid__item">
   <a class="product-grid__item-link"
     href="{{ product.url }}">
-    <img class="product-grid__item-image product-grid__item-image--primary"
-      src="{{ product.featured_image | img_url: '230x230', crop: 'center' }}" />
-    <img class="product-grid__item-image product-grid__item-image--secondary"
-      src="{{ product.images[1] | img_url: '230x230', crop: 'center' }}" />
+    <img id="product-grid-image-{{ product.id }}"
+      class="product-grid__item-image product-grid__item-image--primary"
+      src="{{ product.featured_image | img_url: '230x230', crop: 'center' }}"
+      data-images='{% for img in product.images %}{{ img | img_url: '230x230' }}{% unless forloop.last %},{% endunless %}{% endfor %}'/>
+  </a>
+
+  {% for product_option in product.options_with_values %}
+    {% assign optionName = product_option.name | downcase %}
+
+    {% if optionName == 'color' %}
+      <div class="product-grid__item-color">
+        <div class="color-picker">
+          {% for value in product_option.values %}
+            <div class="color-item">
+              <input id="pg-color-{{ value | downcase | remove: ' ' }}-{{ product.id }}"
+                type="radio"
+                name="color-{{ product.id }}"
+                value="{{ value | downcase | remove: ' ' }}"
+                class="color-item__input js-product-grid-color"
+                data-target="product-grid-image-{{ product.id }}"
+                {% if product_option.selected_value == value %} checked="checked" {% endif %}>
+                <label for="pg-color-{{ value | downcase | remove: ' ' }}-{{ product.id }}" class="color-item__label color-{{ value | downcase | remove: ' ' }}"></label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  <a class="product-grid__item-link"
+    href="{{ product.url }}">
     <h3 class="product-grid__item-title">{{ product.title | split: ' -' | first }}</h3>
     {% for tag in product.tags %}
       {% if tag contains 'material_' %}

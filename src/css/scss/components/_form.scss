@@ -64,6 +64,11 @@
   &__radio-wrapper {
     font: 16px/28px $font-primary;
   }
+
+  &__error {
+    border-color: $error;
+    border-width: 2px;
+  }
 }
 
 .form-radio {

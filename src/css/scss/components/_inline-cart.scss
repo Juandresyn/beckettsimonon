@@ -1,0 +1,11 @@
+.cart__item {
+  transition: opacity .3s ease;
+
+  &.action-in-progress *:not(.loader) {
+    opacity: 0.4;
+  }
+
+  .loader {
+    position: absolute;
+  }
+}

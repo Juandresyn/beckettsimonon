@@ -13,7 +13,7 @@ $(window).on('load', function() {
       arrows: false,
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1025,
           settings: {
             centerPadding: '200px',
           }

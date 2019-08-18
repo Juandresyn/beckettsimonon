@@ -62,6 +62,12 @@
   <!-- END Lazyload -->
 
   {{ content_for_header }}
+
+  <!-- Product Colors -->
+  <style>
+    {{ settings.product_colors_css }}
+  </style>
+  <!-- End Product Colors -->
 </head>
 
 {% unless template contains 'product'
@@ -114,6 +120,10 @@
     {% section 'footer' %}
   {% endunless %}
 
+  {% unless template contains "cart" %}
+    {% section 'end-of-page' %}
+  {% endunless %}
+
   {% include 'inline-cart' %}
   {% include 'search-modal' %}
   {% include 'mega-menu' %}
@@ -131,7 +141,10 @@
 
     $(window).on('load', initTemplate());
 
-    window.cart = {{ cart.items | json }};
+    const cartItems = {{ cart.items | json }};
+    cartItems.forEach(i =>
+        i.material = '');
+    window.cart = cartItems;
     window.cart_count = {{ cart.item_count }};
     window.template_name = "{{ template }}";
 

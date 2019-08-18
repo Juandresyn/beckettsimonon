@@ -1,60 +1,59 @@
 {% assign handle = collection.handle %}
+{% capture filtersName %}{% endcapture %}
+{% capture filtersItems %}{% endcapture %}
+
+{% for block in section.blocks %}
+  {% if handle == block.settings.filter_collection %}
+    {% assign fn1 = block.settings.filter_name_1 %}
+    {% assign fo1 = block.settings.filter_options_1 %}
+    {% assign fn2 = block.settings.filter_name_2 %}
+    {% assign fo2 = block.settings.filter_options_2 %}
+    {% assign fn3 = block.settings.filter_name_3 %}
+    {% assign fo3 = block.settings.filter_options_3 %}
+
+    {% capture filtersName %}{% if fn1 != '' %}{{ fn1 }}{% endif %}{% if fn2 != '' %}|{{ fn2 }}{% endif %}{% if fn3 != '' %}|{{ fn3 }}{% endif %}{% endcapture %}
+    {% capture filtersItems %}{% if fo1 != '' %}{{ fo1 }}{% endif %}{% if fo2 != '' %}|{{ fo2 }}{% endif %}{% if fo3 != '' %}|{{ fo3 }}{% endif %}{% endcapture %}
+
+  {% endif %}
+{% endfor %}
+
+{% assign filtersName = filtersName | split: '|' %}
+{% assign filtersItems = filtersItems | split: '|' %}
+{% assign current_tags_string = current_tags | join: ' ' %}
+{% assign current_tags_size = current_tags | size %}
 
 <div class="all-products__filters js-all-products__filters">
   <div class="all-products__content">
-    <div class="all-products__filter">
-      <span class="all-products__filter-title js-product-filter">Category <span class="all-products__filter-icon icon icon--chevron-down"></span></span>
-      <ul class="all-products__filter-list js-product-filter-list">
-        <li class="all-products__filter-item {% if handle == blank %}is-active{% endif %}">
-          <a href="/products"
-            class="all-products__filter-link">
-            All
-          </a>
-        </li>
-        {% for collection in collections %}
-          {% unless collection.title contains '[NOINDEX]' %}
-            <li class="all-products__filter-item {% if handle == collection.handle %}is-active{% endif %}"
-              data-handle="{{ handle }}">
-              <a href="{{ collection.url }}"
-                class="all-products__filter-link">
-                {{ collection.title }}
+    {% for name in filtersName %}
+      {% assign filterOptions = filtersItems[forloop.index0] | split: ',' %}
+      {% assign downcase_name = name | downcase %}
+
+      <div class="all-products__filter">
+        <span class="all-products__filter-title js-product-filter">{{ name }} <span class="all-products__filter-icon icon icon--chevron-down"></span></span>
+        <ul class="all-products__filter-list js-product-filter-list">
+          <li class="all-products__filter-item {% unless current_tags_string contains downcase_name %}is-active{% endunless %}">
+              <a href="{{ collection.url }}/"
+              data-action="remove"
+              data-type="{{ downcase_name }}_"
+              class="all-products__filter-link js-filter-item">
+              View All
+            </a>
+          </li>
+          {% for option in filterOptions %}
+            {% assign itemTag = option | split: ':' | last | downcase %}
+            <li class="all-products__filter-item {% if current_tags contains itemTag %}is-active{% endif %}"
+              data-handle="{{ option }}">
+              <a href="{{ collection.url }}/{{ itemTag | replace: ' ', '-'}}"
+                target="_self"
+                data-type="{{ downcase_name }}_"
+                data-tag="{{ itemTag | replace: ' ', '-'}}"
+                class="all-products__filter-link js-filter-item">
+                {{ option | split: ':' | first }}
               </a>
             </li>
-          {% endunless %}
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="all-products__filter">
-      <span class="all-products__filter-title js-product-filter">Style <span class="all-products__filter-icon icon icon--chevron-down"></span></span>
-      <ul class="all-products__filter-list js-product-filter-list">
-        {% for collection in collections %}
-          {% unless collection.title contains '[NOINDEX]' %}
-            <li class="all-products__filter-item {% if handle == collection.handle %}is-active{% endif %}"
-              data-handle="{{ handle }}">
-              <a href="{{ collection.url }}"
-                class="all-products__filter-link">
-                {{ collection.title }}
-              </a>
-            </li>
-          {% endunless %}
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="all-products__filter">
-      <span class="all-products__filter-title js-product-filter">Color <span class="all-products__filter-icon icon icon--chevron-down"></span></span>
-      <ul class="all-products__filter-list js-product-filter-list">
-        {% for collection in collections %}
-          {% unless collection.title contains '[NOINDEX]' %}
-            <li class="all-products__filter-item {% if handle == collection.handle %}is-active{% endif %}"
-              data-handle="{{ handle }}">
-              <a href="{{ collection.url }}"
-                class="all-products__filter-link">
-                {{ collection.title }}
-              </a>
-            </li>
-          {% endunless %}
-        {% endfor %}
-      </ul>
-    </div>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
   </div>
 </div>

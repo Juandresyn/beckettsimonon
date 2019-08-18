@@ -1,0 +1,58 @@
+.product-gallery {
+  background: $light-gray-3;
+  bottom: 0;
+  display: none;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9;
+
+  @media (min-width: $desktop) {
+    display: block;
+  }
+
+  &__wrapper {
+    display: flex;
+    height: 100vh;
+    margin: 0 auto;
+    max-width: $sections-max-width + 30px;
+    padding: 0 30px;
+    position: relative;
+  }
+
+  &__thumbnails {
+    align-self: center;
+  }
+
+  &__thumbnail {
+    border: 1px solid #C6C6C6;
+    cursor: zoom-in;
+    margin: 7px 0;
+    transition: border .3s ease;
+
+    &:hover,
+    &:focus,
+    &.is-active {
+      border-color: $scarlet;
+    }
+  }
+
+  &__big-wrapper {
+    align-self: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .product-gallery__close {
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 40px;
+    transition: transform .3s ease;
+
+    &:hover {
+      transform: rotate(-90deg);
+    }
+  }
+}

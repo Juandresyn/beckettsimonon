@@ -7,8 +7,14 @@
 
   <div class="cart-item__info">
     <h2 class="cart-item__title">{{ item.title | split: ' -' | first }}</h2>
-    <small class="cart-item__small">{{ item.product.type }}</small>
-    <small class="cart-item__small">Size. {{ item.variant.title }}</small>
+    {% for tag in item.product.tags %}
+      {% if tag contains 'material_' %}
+        <small class="cart-item__small">{{ tag | remove: 'material_' }}</small>
+      {% endif %}
+    {% endfor %}
+    {% for opt in item.options_with_values %}
+      <small class="cart-item__small">{{ opt.name }}: {{ opt.value }}</small>
+    {% endfor %}
 
     <div class="cart-item__quantity">
       <button type="submit" name="update"

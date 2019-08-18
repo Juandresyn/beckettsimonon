@@ -1,15 +1,14 @@
-{% assign theCollection = '' %}
+{% assign theCollection = blank %}
 
 {% for coll in product.collections %}
-  {% unless coll.title contains '[NOINDEX]' %}
-    {% assign theCollection = coll.handle %}
-  {% endunless %}
+  {% capture theCollection %}***{{ coll.handle }}***,{{ theCollection }}{% endcapture %}
 {% endfor %}
 
 <script type="application/javascript">
   window.productFaq = {
     {% for block in section.blocks limit: section.blocks.size %}
-      {% if theCollection == block.settings.collection %}
+      {% capture formatedCollection %}***{{ block.settings.collection  }}***,{% endcapture %}
+      {% if theCollection contains formatedCollection %}
         '{{ block.settings.collection }}': [
           {% if block.settings.question_1 != blank %}
             {

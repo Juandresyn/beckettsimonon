@@ -5,34 +5,16 @@
       <p class="product-header__price product-toolbar__price">{{ price | money_without_trailing_zeros }}</p>
     </div>
 
-    <form method="post"
-      id="product_form_{{ product.id }}-toolbar"
-      class="product-toolbar__actions"
-      action="/cart/add"
-      accept-charset="UTF-8"
-      enctype="multipart/form-data"
-      novalidate="novalidate">
-      <div class="product-toolbar__variants">
-        <div class="select-wrapper">
-          <select name="id" class="select product-header__variant-select">
-            <option>Select Size</option>
-            {% for variant in product.variants %}
-              <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}
-                value="{{ variant.id }}">
-                {{ variant.title }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
-        {% if section.settings.size_label %}
-          <a href="{{ product.url }}?whats-my-size=true" class="product-header__variant-instructions">What's my size?</a>
-        {% endif %}
+    <div class="product-toolbar__actions">
+      <div class="product-toolbar__variants-wrapper">
+        {% include 'product-options' with: { helperBar: true }%}
       </div>
       <div class="product-toolbar__button">
         <button type="submit"
+          id="product-toolbar__cta"
           name="add"
           {% unless current_variant.available %}disabled="disabled"{% endunless %}
-          class="btn {{ section.settings.button_type }} product-header__button">
+          class="btn {{ section.settings.button_type }} product-header__button js-product-toolbar__cta">
           <span id="AddToCartText-{{ section.id }}-toolbar">
             {% unless current_variant.available %}
               {{ 'products.product.sold_out' | t }}
@@ -43,6 +25,6 @@
         </button>
         <p class="product-header__shipping-info">Free shipping. Free returns. Free exchanges!</p>
       </div>
-    </form>
+    </div>
   </div>
 </section>

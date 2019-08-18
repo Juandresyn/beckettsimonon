@@ -35,7 +35,7 @@
   .cart__list {
     overflow-y: scroll;
     height: 100vh;
-    margin-bottom: 0;
+    margin-bottom: 160px;
     max-width: 100%;
   }
 
@@ -62,12 +62,20 @@
   }
 
   .cart__actions {
-    bottom: 15px;
+    bottom: 0;
     max-width: none;
     padding-top: 25px;
-    position: relative;
+    position: fixed;
     right: auto;
-    width: 100%;
+    width: calc(100% - 30px);
+
+    @media (min-width: 405px) {
+      width: 370px;
+    }
+
+    @media (min-width: $desktop) {
+      width: 340px;
+    }
   }
 
   &__info-text {

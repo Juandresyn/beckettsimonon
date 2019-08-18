@@ -78,7 +78,7 @@ if (typeof Vue === 'function') {
         activeItems: JSON.parse(JSON.stringify(_activeItems)),
         hasError: false,
         errorCode: null,
-        isMobile: window.innerWidth < 1024,
+        isMobile: window.innerWidth < 1025,
       };
     },
 
@@ -130,7 +130,6 @@ if (typeof Vue === 'function') {
       },
 
       currentIsSleceted() {
-        console.log(this.activeItems, !!this.activeItems[Object.keys(this.activeItems)[this.step]]);
         return !!this.activeItems[Object.keys(this.activeItems)[this.step - 1]];
       },
 
@@ -298,13 +297,13 @@ if (typeof Vue === 'function') {
 
             <div class="modal__content">
               <div class="my-size__step-wrapper">
-                <template v-if="step === 0">
+                <template v-if="step == 0">
                   <h2 class="my-size__step-heading my-size__step-heading-initial">Find out your Beckett Simonon size <br />in 30 seconds or less.</h2>
                   <p @click="prevStep" class="my-size__step-paragraph">We ask you a few simple questions, crunch the numbers and calculate the best size for you. It’s simple and extremely accurate! {{ step }}</p>
                   <span @click="nextStep" class="btn btn--scarlet my-size__step-btn">Start</span>
                 </template>
 
-                <template v-if="step === 1">
+                <template v-if="step == 1">
                   <h2 class="my-size__step-heading my-size__step-heading--small">Do you know your Brannock device size?</h2>
 
                   <div class="my-size__sizes-wrapper">
@@ -315,7 +314,7 @@ if (typeof Vue === 'function') {
                   </div>
                 </template>
 
-                <template v-if="step === 2">
+                <template v-if="step == 2">
                   <h2 class="my-size__step-heading my-size__step-heading--small">What size do you wear the most in dress shoe brands?</h2>
                   <p class="my-size__step-subtitle">i.e. Allen Edmonds, Johnston & Murphy or Cole Haan</p>
 
@@ -327,7 +326,7 @@ if (typeof Vue === 'function') {
                   </div>
                 </template>
 
-                <template v-if="step === 3">
+                <template v-if="step == 3">
                   <h2 class="my-size__step-heading my-size__step-heading--small">What size do you wear the most in sneaker brands?</h2>
                   <p class="my-size__step-subtitle">i.e. Adidas and Nike</p>
 
@@ -339,7 +338,7 @@ if (typeof Vue === 'function') {
                   </div>
                 </template>
 
-                <template v-if="step === 4 && !hasError">
+                <template v-if="step == 4 && !hasError">
                   <h2 class="my-size__step-heading my-size__step-heading--small">What is the most common shoe size in your closet today?</h2>
 
                   <div class="my-size__sizes-wrapper">
@@ -350,7 +349,7 @@ if (typeof Vue === 'function') {
                   </div>
                 </template>
 
-                <template v-if="step === 5 && !hasError">
+                <template v-if="step == 5 && !hasError">
                   <h2 class="my-size__step-heading my-size__step-heading--small">How would you describe your foot shape?</h2>
 
                   <div class="my-size__shape-wrapper">
@@ -411,7 +410,11 @@ if (typeof Vue === 'function') {
     `,
   });
 
-  new Vue({
+  window.mySize = new Vue({
     el: '#product',
   });
 }
+
+$('.js-click-my-size').on('click', function() {
+  $('.js-my-size-trigger').trigger('click');
+});

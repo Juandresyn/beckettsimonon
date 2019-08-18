@@ -7,8 +7,12 @@
   display: flex;
   height: 32px;
   justify-content: center;
-  margin-right: 14px;
+  margin-right: 10px;
   width: 32px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
 
 .color-item__input {
@@ -16,50 +20,112 @@
 }
 
 .color-item__label {
-  background: gray;
+  border: 1px solid transparent;
   border-radius: 100%;
   cursor: pointer;
   display: inline-block;
-  height: 24px;
+  height: 32px;
+  padding: 4px;
   position: relative;
-  width: 24px;
+  width: 32px;
 
-  &:hover::before {
+  &:hover {
     border-color: $light-gray;
   }
 
-  &::before {
-    content: " ";
-    border: 1px solid transparent;
+  div {
+    background: $black;
+    border: 1px solid gray;
     border-radius: 100%;
-    left: -4px;
-    position: absolute;
-    height: 32px;
-    top: -4px;
-    transition: border .3s ease;
-    width: 32px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
   }
+
+  span {
+    display: inline-block;
+    height: 9.5px;
+    position: absolute;
+    width: 100%;
+  }
+
+  span:only-child {
+    height: 100%;
+  }
+
+  span:nth-child(2) {
+    top: 10px;
+    transform: rotate(180deg);
+  }
+
+  &:not(.color--triple) span {
+    left: 0;
+  }
+
+  &.color--triple {
+    span {
+      border: 0.5px solid black;
+      height: 70%;
+      right: -20%;
+      top: -20%;
+      transform-origin: 0% 100%;
+      width: 70%;
+    }
+
+    span:nth-child(1) {
+      transform: rotate(0deg) skewY(30deg);
+    }
+
+    span:nth-child(2) {
+      transform: rotate(120deg) skewY(30deg);
+    }
+
+    span:nth-child(3) {
+      transform: rotate(240deg) skewY(30deg);
+    }
+  }
+
+  // &::before {
+  //   content: " ";
+  //   border: 1px solid transparent;
+  //   border-radius: 100%;
+  //   left: -4px;
+  //   position: absolute;
+  //   height: 29px;
+  //   top: -4px;
+  //   transition: border .3s ease;
+  //   width: 29px;
+  // }
+
+  // &::after {
+  //   background: red;
+  //   content: '';
+  //   position: absolute;
+  //   z-index: 2;
+  //   width: 11px;
+  //   height: 100%;
+  //   border-radius: 0 10px 10px 0;
+  //   right: 0;
+  // }
 }
 
 .color-item__input:checked + .color-item__label {
-  &::before {
-    content: " ";
-    border-color: $black;
-  }
+  border-color: $black;
 }
 
-.color-red {
-  background: $scarlet;
-}
+// .color-red {
+//   background: $scarlet;
+// }
 
-.color-blue {
-  background: $dark-blue;
-}
+// .color-blue {
+//   background: $dark-blue;
+// }
 
-.color-tan {
-  background: tan;
-}
+// .color-tan {
+//   background: tan;
+// }
 
-.color-black {
-  background: $black;
-}
+// .color-black {
+//   background: $black;
+// }

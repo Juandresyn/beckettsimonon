@@ -259,6 +259,16 @@
     ]
   },
   {
+    "name": "Collections",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "colletion_default_image",
+        "label": "Default collection image"
+      }
+    ]
+  },
+  {
     "name": "Favicon",
     "settings": [
       {
@@ -412,6 +422,16 @@
         "type": "image_picker",
         "id": "search_hero_image",
         "label": "Search Pages Hero"
+      }
+    ]
+  },
+  {
+    "name": "Product Colors Css",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "product_colors_css",
+        "label": "Product colors Css"
       }
     ]
   },

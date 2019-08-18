@@ -1,7 +1,8 @@
 const state = {
   reRender: '0',
   cart: window.cart,
-  cart_count: window.window.cart_count
+  cart_count: window.window.cart_count,
+  currentActionOn: null,
 };
 
 if (typeof Vue === 'function') {
@@ -12,7 +13,6 @@ if (typeof Vue === 'function') {
 
     watch: {
       reRender(newVal) {
-        console.log('>>>>>>>>>>>', this.cart_count, newVal);
         this.handleRerender();
       }
     },
@@ -33,7 +33,7 @@ if (typeof Vue === 'function') {
       },
 
       handleRemoveLink(index) {
-        return `/cart/change?line=${index }&amp;quantity=0`;
+        return `/cart/change?line=${index}&amp;quantity=0`;
       },
 
       updateGlobalCartCount() {
@@ -65,26 +65,30 @@ if (typeof Vue === 'function') {
       },
 
       handleRemoveItem(index) {
-        const currentQty = this.cart[index].quantity;
-        const newCartCount = this.cart_count - currentQty;
+        if (!this.currentActionOn) {
+          this.currentActionOn = index;
+          const currentQty = this.cart[index].quantity;
+          const newCartCount = this.cart_count - currentQty;
 
-        if (newCartCount === 0) {
-          $('.js-empty-template').toggle();
+          if (newCartCount === 0) {
+            $('.js-empty-template').toggle();
+          }
+
+          return this.ajaxUpdateItem(this.cart[index].key, 0, () => {
+            this.cart[index].quantity = 0;
+            this.cart[index].line_price = 0;
+
+            this.updateGlobalCartCount(newCartCount);
+            this.updateInlineCartTotalPrice();
+            this.currentActionOn = null;
+          });
         }
-
-        return this.ajaxUpdateItem(this.cart[index].key, 0, () => {
-          this.cart[index].quantity = 0;
-          this.cart[index].line_price = 0;
-
-          this.updateGlobalCartCount(newCartCount);
-          this.updateInlineCartTotalPrice();
-        });
       },
 
       ajaxUpdateItem(id, quantity, cb) {
         $.ajax({
-          method: "POST",
-          url: "/cart/change.js",
+          method: 'POST',
+          url: '/cart/change.js',
           dataType: 'json',
           data: {
             id,
@@ -98,12 +102,11 @@ if (typeof Vue === 'function') {
 
       ajaxGetCart(cb) {
         $.ajax({
-          method: "POST",
-          url: "/cart.js",
+          method: 'POST',
+          url: '/cart.js',
           dataType: 'json',
         })
         .done((data) => {
-          console.log(data);
           cb(data);
         });
       },
@@ -120,7 +123,20 @@ if (typeof Vue === 'function') {
           this.updateInlineCartTotalPrice();
 
         });
-      }
+      },
+
+      getMaterial(handle, index) {
+        $.ajax({
+          method: 'GET',
+          url: `/products/${handle}.js`,
+          dataType: 'json',
+        })
+        .done((data) => {
+          const material = data.tags.filter(m => m.includes('material_'));
+
+          this.cart[index].material = material.length > 0 ? material[0].replace('material_', '') : '';
+        });
+      },
     },
 
     template: `
@@ -128,7 +144,8 @@ if (typeof Vue === 'function') {
         <div v-for="(item, index) in cart"
           :key="index"
           v-if="item.quantity > 0"
-          class="cart__item">
+          :class="['cart__item', {'action-in-progress': index === currentActionOn}]">
+          <div v-if="index === currentActionOn" class="loader"></div>
           <a :href="item.url">
             <img class="cart-item__image"
               :src="item.image"
@@ -138,8 +155,10 @@ if (typeof Vue === 'function') {
           <div class="cart-item__info">
             <h2 class="cart-item__title">{{ cleanTitle(item.title) }}</h2>
 
-            <small class="cart-item__small">{{ item.product_type }}</small>
-            <small class="cart-item__small">Size. {{ item.variant_title }}</small>
+            <small class="cart-item__small">{{ getMaterial(item.handle, index) }} {{ item.material }}</small>
+            <small v-for="(opt, ind) in item.options_with_values" :key="ind" class="cart-item__small">
+              {{ opt.name }} {{ opt.value }}
+            </small>
 
             <div class="cart-item__quantity">
               <span @click="handleQuantity('less', item.quantity, index, item.price)"

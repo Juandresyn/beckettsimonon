@@ -1,0 +1,104 @@
+<aside class="modal product-modal">
+  <div class="modal__container">
+    <div class="modal__header">
+      <h3 class="savings__title">{{ section.settings.title }}</h3>
+
+      <span class="js-on-click modal__close"
+        data-onclick-target="html"
+        data-onclick-class="modal--open product-is-open">
+        <span class="icon icon--close"></span>
+      </span>
+    </div>
+
+    <div class="modal__content">
+      <section class="savings__wrapper">
+        <p class="savings__description">{{ section.settings.description }}</p>
+
+        <div class="savings__prices">
+          <div class="savings__price">
+            <span class="savings-price__name">{{ section.settings.price_1_name }}</span>
+            <span class="savings-price__box">
+              <span class="savings-price__box-steps">Factory
+                <span class="icon icon--thin-arrow-right"></span> You
+              </span>
+
+              <span class="savings-price__price">{{ section.settings.price_1_price }}</span>
+            </span>
+            <span class="savings-price__price"><span class="icon icon--large-thin-arrow-right large-icon"></span> {{ section.settings.price_1_price }}</span>
+          </div>
+
+          <div class="savings__price">
+            <span class="savings-price__name">{{ section.settings.price_2_name }}</span>
+            <span class="savings-price__box">
+              <span class="savings-price__box-steps">Factory
+                <span class="icon icon--thin-arrow-right"></span> Sourcing Agent
+                <span class="icon icon--thin-arrow-right"></span> Brand
+                <span class="icon icon--thin-arrow-right"></span> Distributor
+                <span class="icon icon--thin-arrow-right"></span> Retailer
+                <span class="icon icon--thin-arrow-right"></span> You
+              </span>
+
+              <span class="savings-price__price">{{ section.settings.price_2_price }}</span>
+            </span>
+            <span class="savings-price__price"><span class="icon icon--large-thin-arrow-right large-icon"></span> {{ section.settings.price_2_price }}</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</aside>
+
+<script>
+  $(window).on('keyup', function(e) {
+    if (e.keyCode === 27 &&  $('hml').hasClass('modal')) {
+      $('hml').removeClass('modal--open product-is-open');
+    }
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Product popup",
+    "class": "product-popup",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bgcolor",
+        "label": "Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Lorem"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Loprem ipsun..."
+      },
+      {
+        "type": "text",
+        "id": "price_1_name",
+        "label": "Price name"
+      },
+      {
+        "type": "text",
+        "id": "price_1_price",
+        "label": "Price"
+      },
+      {
+        "type": "text",
+        "id": "price_2_name",
+        "label": "Price name"
+      },
+      {
+        "type": "text",
+        "id": "price_2_price",
+        "label": "Price"
+      }
+    ]
+  }
+{% endschema %}

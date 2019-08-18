@@ -30,9 +30,18 @@ $(window).on('load', function() {
   });
 
   var productImagesSlider = $('.js-slick-product-images');
+  var productImagesSliderConfig = {
+    draggable: false,
+    prevArrow: $('.js-slick-product-images__prev'),
+    nextArrow: $('.js-slick-product-images__next'),
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false
+  };
 
   function initializeImagesSlider() {
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth < 1025) {
       var productImagesSliderArrowPrev = $('.js-slick-product-images__prev');
       var productImagesSliderArrowNext = $('.js-slick-product-images__next');
       var $status = $('.js-slick-product-images-counter');
@@ -42,15 +51,7 @@ $(window).on('load', function() {
         $status.text('0' + counter + ' / 0' + slick.slideCount);
       });
 
-      productImagesSlider.slick({
-        draggable: false,
-        prevArrow: productImagesSliderArrowPrev,
-        nextArrow: productImagesSliderArrowNext,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false
-      });
+      productImagesSlider.slick(productImagesSliderConfig);
 
       productImagesSliderArrowPrev.on('click', function() {
         productImagesSlider.slick('slickPrev');
@@ -70,21 +71,6 @@ $(window).on('load', function() {
     }
   });
 
-  const ajaxAddToCart = (id, quantity) => {
-    $.ajax({
-      method: "POST",
-      url: "/cart/add.js",
-      dataType: 'json',
-      data: {
-        id,
-        quantity,
-      }
-    })
-    .done(() => {
-      state.reRender = new Date().getTime();
-    });
-  };
-
   $('.js-add-to-cart').on('submit', function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -97,3 +83,20 @@ $(window).on('load', function() {
     $('html').toggleClass('cart-is-open');
   });
 });
+
+
+const ajaxAddToCart = (id, quantity, cb = () => null) => {
+  $.ajax({
+    method: "POST",
+    url: "/cart/add.js",
+    dataType: 'json',
+    data: {
+      id,
+      quantity,
+    }
+  })
+  .done(() => {
+    state.reRender = new Date().getTime();
+    cb();
+  });
+};

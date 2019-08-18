@@ -1,0 +1,50 @@
+<section class="end-of-page" style="background-color: {{ section.settings.color_bg }};">
+  <div class="end-of-page__wrapper">
+    <p class="end-of-page__description">{{ section.settings.description }}</p>
+    <form class="end-of-page__form">
+      <textarea name="message"
+        placeholder="{{ section.settings.message_placeholder }}"></textarea>
+      <div class="end-of-page__group">
+        <input type="email"
+          name="email"
+          placeholder="{{ section.settings.email_placeholder }}"
+          required>
+        <button class="btn btn--dark">{{ section.settings.button_placeholder }}</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "End of Page",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "message_placeholder",
+      "label": "Message placeholder"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email"
+    },
+    {
+      "type": "text",
+      "id": "button_placeholder",
+      "label": "Button"
+    }
+  ]
+}
+{% endschema %}

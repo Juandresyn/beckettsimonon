@@ -111,6 +111,10 @@
       top: inherit;
     }
   }
+
+  &__trigger {
+    cursor: pointer;
+  }
 }
 
 .my-size--done {

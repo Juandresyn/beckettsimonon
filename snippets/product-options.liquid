@@ -1,0 +1,150 @@
+{% if helperBar %}
+  <div class="product-toolbar__variants">
+    {% for product_option in product.options_with_values %}
+      {% assign optionName = product_option.name | downcase %}
+
+      {% if optionName == 'color' %}
+        <div class="product-toolbar__variant product-toolbar__variant--color">
+          <div class="color-picker">
+            {% for value in product_option.values %}
+
+              {% assign colorsStrings = value | split: '/' %}
+              {% assign colorsCount = colorsStrings | size %}
+
+              {% if colorsCount == 2 %}
+                {% assign limit = 2 %}
+                {% assign colorClass = 'color--double' %}
+              {% elsif colorsCount == 3 %}
+                {% assign limit = 3 %}
+                {% assign colorClass = 'color--triple' %}
+              {% else %}
+                {% assign limit = 1 %}
+                {% assign colorClass = ' ' %}
+              {% endif %}
+
+              <div class="color-item">
+
+
+                <input id="pt-color-{{ value | downcase | remove: ' ' | remove: '/' }}"
+                  type="radio"
+                  name="color"
+                  value="{{ value | downcase | remove: ' ' | remove: '/' }}"
+                  data-name="{{ value | downcase | replace: '/', ' / ' }}"
+                  class="color-item__input js-product-options-color"
+                  {% if product_option.selected_value == value %} checked="checked" {% endif %}>
+
+                  <label for="pt-color-{{ value | downcase | remove: ' ' | remove: '/' }}"
+                    class="color-item__label {{ colorClass }}"
+                    title="{{ value }}">
+                    <div>
+                      {% for i in (1..limit) %}
+                        <span class="color-{{ colorsStrings[forloop.index0] | remove: ' ' }}"></span>
+                      {% endfor %}
+                    </div>
+                  </label>
+              </div>
+            {% endfor %}
+          </div>
+          <span class="product-header__variant-instructions product-toolbar__variants-small js-product-color-label">{{ product_option.selected_value }}</span>
+        </div>
+      {% endif %}
+
+      {% if optionName == 'size' %}
+        <div class="product-toolbar__variant">
+          <div class="select-wrapper">
+            <select id="pt-roduct-option-{{ optionName }}" name="{{ optionName }}" class="select product-toolbar__variant-select js-product-options-size">
+              {% for value in product_option.values %}
+                {% assign scapedValue = value | replace: '"', "'" | replace: ' ', '' %}
+                <option {% if product_option.selected_value == value %}selected{% endif %}
+                  value="{{ scapedValue }}">
+                  {{ value }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          {% if section.settings.size_label %}
+            <span class="product-header__variant-instructions js-click-my-size my-size__trigger">{{ section.settings.size_link_label }}</span>
+          {% endif %}
+        </div>
+
+        <script> window.productSizes = {{ product_option.values | json }}</script>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="product-header-details__section product-header__variants">
+    {% for product_option in product.options_with_values %}
+      {% assign optionName = product_option.name | downcase %}
+
+      {% if optionName == 'color' %}
+        <div class="product-header__variant">
+          <h2 class="product-header__variants-title">{{ product_option.name }} <span class="product-header__variants-small js-product-color-label">{{ product_option.selected_value | replace: '/', ' / ' }}</span></h2>
+
+          <div class="color-picker">
+            {% for value in product_option.values %}
+
+              {% assign colorsStrings = value | split: '/' %}
+              {% assign colorsCount = colorsStrings | size %}
+
+              {% if colorsCount == 2 %}
+                {% assign limit = 2 %}
+                {% assign colorClass = 'color--double' %}
+              {% elsif colorsCount == 3 %}
+                {% assign limit = 3 %}
+                {% assign colorClass = 'color--triple' %}
+              {% else %}
+                {% assign limit = 1 %}
+                {% assign colorClass = ' ' %}
+              {% endif %}
+
+              <div class="color-item">
+                <input id="color-{{ value | downcase | remove: ' ' | remove: '/' }}"
+                  type="radio"
+                  name="color"
+                  value="{{ value | downcase | remove: ' ' | remove: '/' }}"
+                  data-name="{{ value | downcase | replace: '/', ' / ' }}"
+                  class="color-item__input js-product-options-color"
+                  {% if product_option.selected_value == value %} checked="checked" {% endif %}>
+
+                  <label for="color-{{ value | downcase | remove: ' ' | remove: '/' }}"
+                    class="color-item__label {{ colorClass }}"
+                    title="{{ value }}">
+                    <div>
+                      {% for i in (1..limit) %}
+                        <span class="color-{{ colorsStrings[forloop.index0] | remove: ' ' }}"></span>
+                      {% endfor %}
+                    </div>
+                  </label>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if optionName == 'size' %}
+        <div class="product-header__variant">
+          <h2 class="product-header__variants-title">{{ section.settings.size_label }}
+            <my-size label="{{ section.settings.size_link_label }}"
+              label-class="product-header__variant-instructions modal__trigger js-my-size-trigger"
+              image-url="{{ 'shape1.svg' | asset_url }}"></my-size>
+          </h2>
+
+          <div class="select-wrapper">
+            <select id="product-option-{{ optionName }}" name="{{ optionName }}" class="select product-header__variant-select js-product-options-size">
+              {% for value in product_option.values %}
+                {% assign scapedValue = value | replace: '"', "'" | replace: ' ', '' %}
+                <option {% if product_option.selected_value == value %}selected{% endif %}
+                  value="{{ scapedValue }}">
+                  {{ value }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <script> window.productSizes = {{ product_option.values | json }}</script>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

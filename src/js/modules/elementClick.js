@@ -1,4 +1,4 @@
-$('.js-on-click').on('click', function() {
+$('body').on('click', '.js-on-click', function() {
   var target = $(this).data('onclick-target');
   var targetClass = $(this).data('onclick-class');
   var targetClassBehavior = $(this).data('do');

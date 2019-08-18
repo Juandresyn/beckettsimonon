@@ -1,10 +1,9 @@
 <section class="product-media">
   <div class="product-media__wrapper">
-    <div class="product-media__carousel-wrapper">
-      <header class="layout-section__header product-media__carousel-header">
-        <h2 class="layout-section__title product-media__carousel-title">Handcrafted with integrity</h2>
-        <p class="layout-section__description product-media__carousel-description">Great value shouldn’t come at the expense of human dignity. Manufacturing directly allows us to ensure responsible and ethical working conditions. We are privileged to be working with this team of skilled artisans, and it’s our duty to honor their craft and humanity.</p>
-      </header>
+    <div class="product-media__carousel-wrapper"
+      data-onshow-target=".animation--on-show"
+      data-onshow-class="animation--fade-up animated">
+      <product-media-info></product-media-info>
 
       <div class="product-media__carousel-container">
         <product-media-images></product-media-images>

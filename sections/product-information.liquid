@@ -1,35 +1,34 @@
 {% assign productMetafields = product.metafields.product %}
-{% assign theCollection = '' %}
+{% assign theCollection = blank %}
 
 {% for coll in product.collections %}
-  {% unless coll.title contains '[NOINDEX]' %}
-    {% assign theCollection = coll.handle %}
-  {% endunless %}
+  {% capture theCollection %}***{{ coll.handle }}***,{{ theCollection }}{% endcapture %}
 {% endfor %}
 
 <script type="application/javascript">
   window.productMoreInfo = {
     '{{ product.id }}' : {
       {% for block in section.blocks limit: section.blocks.size %}
-        {% if theCollection == block.settings.collection %}
+        {% capture formatedCollection %}***{{ block.settings.collection  }}***,{% endcapture %}
+        {% if theCollection contains formatedCollection %}
           '{{ block.settings.collection }}': {
             'pii_1': {
-              'eyebrow': '{{ block.settings.pii_small_1 }}',
-              'title': '{{ block.settings.pii_title_1 }}',
-              'description': '{{ block.settings.pii_description_1 }}',
-              'image': '{{ productMetafields.PII1 }}',
+              'eyebrow': "{{ block.settings.pii_small_1 }}",
+              'title': "{{ block.settings.pii_title_1 }}",
+              'description': "{{ block.settings.pii_description_1 }}",
+              'image': "{{ productMetafields.PII1 }}",
             },
             'pii_2': {
-              'eyebrow': '{{ block.settings.pii_small_2 }}',
-              'title': '{{ block.settings.pii_title_2 }}',
-              'description': '{{ block.settings.pii_description_2 }}',
-              'image': '{{ productMetafields.PII2 }}',
+              'eyebrow': "{{ block.settings.pii_small_2 }}",
+              'title': "{{ block.settings.pii_title_2 }}",
+              'description': "{{ block.settings.pii_description_2 }}",
+              'image': "{{ productMetafields.PII2 }}",
             },
             'pii_3': {
-              'eyebrow': '{{ block.settings.pii_small_3 }}',
-              'title': '{{ block.settings.pii_title_3 }}',
-              'description': '{{ block.settings.pii_description_3 }}',
-              'image': '{{ productMetafields.PII3 }}',
+              'eyebrow': "{{ block.settings.pii_small_3 }}",
+              'title': "{{ block.settings.pii_title_3 }}",
+              'description': "{{ block.settings.pii_description_3 }}",
+              'image': "{{ productMetafields.PII3 }}",
             }
           },
         {% endif %}

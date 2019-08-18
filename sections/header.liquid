@@ -1,3 +1,6 @@
+{% assign header_image = '' %}
+{% assign header_image_str = '' %}
+
 {% if template.name contains 'index' %}
 
   {% assign header_image = section.settings.hero_image %}
@@ -16,8 +19,11 @@
   {% assign header_description = section.settings.all_products_header_description %}
 
 {% elsif template contains 'collection' %}
-
-  {% assign header_image = collection.image %}
+  {% if collection.image %}
+    {% assign header_image = collection.image %}
+  {% else %}
+    {% assign header_image = settings.colletion_default_image %}
+  {% endif %}
   {% assign header_title = collection.title %}
   {% assign header_description = collection.description %}
 
@@ -64,12 +70,6 @@
 
 {% endif %}
 
-
-{% if template == blank %}
-  {% assign header_classes = "header-main--small" %}
-  {% assign isEmpty = true %}
-{% endif %}
-
 {% if is_home
   or is_blog
   or is_search
@@ -89,12 +89,18 @@
   or is_404
   or template contains 'article'
   or template contains 'cart' %}
+
   <style>
     .header-main {
-      background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({% if header_image_str %}{{ header_image_str }}{% else %}{{ header_image | img_url: 'master' }}{% endif %});
+      background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({% if header_image_str != '' %}{{ header_image_str }}{% else %}{{ header_image | img_url: 'master' }}{% endif %});
     }
   </style>
 {% endunless %}
+
+{% if template == blank and header_image == '' and header_image_str == '' %}
+  {% assign header_classes = "header-main--small" %}
+  {% assign isEmpty = true %}
+{% endif %}
 
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
   <header class="header-main {{ header_classes }} {% if is_product %}header-main--product{% endif %} {% if section.settings.top_bar_enable %}header-main--has-top-bar{% endif %} {{ themeColor }}">

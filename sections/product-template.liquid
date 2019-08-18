@@ -32,7 +32,7 @@
 >
   <div class="product__header">
     <div class="product-header__images">
-      <div class="product-header__images-wrapper js-slick-product-images">
+      <div class="product-header__images-wrapper js-product-images js-slick-product-images">
         {% for image in product.images %}
           <img class="product-header__image lazyload"
             src="{{ image | img_url: '50x50' }}"
@@ -40,6 +40,13 @@
             alt="{{ product.title }}" />
         {% endfor %}
       </div>
+
+      <!-- <div class="product-header__video-wrapper">
+        {% if metadata.video %}
+          <video class="product-header__video" src="{{ metadata.video }}" autoplay muted loop></video>
+        {% endif %}
+      </div> -->
+
       <div class="product-media__carousel-actions product-header__images-actions">
         <p class="product-media__carousel-counter js-slick-product-images-counter"></p>
 
@@ -56,8 +63,8 @@
     </div>
 
     <div class="product-header__details">
-      <div class="product-header__title">
-        <h1 class="product-header__title">{{ product.title | split: ' -' | first }}</h1>
+      <div class="product-header__title-wrapper">
+        <h1 class="product-header__title">{{ product.title }}</h1>
         {% for tag in product.tags %}
           {% if tag contains 'material_' %}
             <span class="product-header__type">{{ tag | remove: 'material_' }}</span>
@@ -74,56 +81,17 @@
         {% if compare_at_price %}
           <div class="product-header__price-item">
             <span class="product-header__price product-header__price--retail">{{ compare_at_price | money_without_trailing_zeros }}</span>
-            <span class="product-header__price-label">Traditional Retail</span>
+            <span class="js-on-click product-header__price-label"
+              data-onclick-target="html"
+              data-onclick-class="modal--open product-is-open">
+              Traditional Retail <span class="icon icon--circle-info product-header__price-label-icon"></span>
+            </span>
           </div>
         {% endif %}
       </div>
 
       {% form 'product', product, class: 'js-add-to-cart', novalidate: 'novalidate' %}
-        <div class="product-header-details__section product-header__variants">
-          {% for product_option in product.options_with_values %}
-            {% assign optionName = product_option.name | downcase %}
-
-            {% if optionName == 'color' %}
-              <div class="product-header__variant">
-                <h2 class="product-header__variants-title">{{ product_option.name }} <span class="product-header__variants-small js-product-color-label">{{ product_option.selected_value }}</span></h2>
-
-                <div class="color-picker">
-                  {% for value in product_option.values %}
-                    <div class="color-item">
-                      <input id="color-{{ value }}" type="radio" name="color" value="{{ value }}" class="color-item__input js-product-options-color"
-                        {% if product_option.selected_value == value %} checked="checked" {% endif %}>
-                        <label for="color-{{ value }}" class="color-item__label color-{{ value }}"></label>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endif %}
-
-            {% if optionName == 'size' %}
-              <div class="product-header__variant">
-                <h2 class="product-header__variants-title">{{ section.settings.size_label }}
-                  <my-size label="{{ section.settings.size_link_label }}"
-                    label-class="product-header__variant-instructions modal__trigger"
-                    image-url="{{ 'shape1.svg' | asset_url }}"></my-size>
-                </h2>
-
-                <div class="select-wrapper">
-                  <select id="product-option-{{ optionName }}" name="{{ optionName }}" class="select product-header__variant-select js-product-options-size">
-                    {% for value in product_option.values %}
-                      <option {% if product_option.selected_value == value %}selected{% endif %}
-                        value="{{ value }}">
-                        {{ value }}
-                      </option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-
-              <script> window.productSizes = {{ product_option.values | json }}</script>
-            {% endif %}
-          {% endfor %}
-        </div>
+        {% include 'product-options' %}
 
         <div class="product-header__buttons">
           <button id="add-to-cart"
@@ -145,9 +113,13 @@
 
         <select id="product-variants" name="id" class="js-product-variants product-variants-selector">
           {% for variant in product.variants %}
+            {% assign scapedValue = "" %}
+            {% for opt in variant.options %}
+              {% capture scapedValue %}{{ scapedValue }}{{ opt | downcase | replace: '"', "'" | replace: ' ', '' | remove: "/" }}-{% endcapture %}
+            {% endfor %}
             <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}
               value="{{ variant.id }}"
-              data-options='{% for opt in variant.options %}{{ opt }}-{% endfor %}'
+              data-options='{{ scapedValue }}'
               data-object="{{ variant }}">
               {{ variant.title }}
             </option>
@@ -157,8 +129,12 @@
     </div>
   </div>
 
-  <div class="product__description rte">
-    {{ product.description }}
+  <div class="product__description rte"
+    data-onshow-target=".product-description__wrapper"
+    data-onshow-class="animation--fade-up animated">
+    <div class="product-description__wrapper">
+      {{ product.description }}
+    </div>
   </div>
 
   {% include 'product-toolbar' with product, price %}
@@ -186,6 +162,10 @@
 
   <script type="application/javascript">
     window.currentProduct = {{ productData }};
+
+    if (!$('.js-product-options-color').val()) {
+      window.currentProductImages = window.currentProduct.images;
+    }
 
     {% for coll in product.collections %}
       {% unless coll.title contains '[NOINDEX]' %}

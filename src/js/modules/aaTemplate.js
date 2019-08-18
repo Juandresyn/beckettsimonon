@@ -16,6 +16,13 @@ window.template = (function() {
   };
 })();
 
+var updateQueryParam = function(param, value) {
+  if (history.pushState) {
+    var newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${param}=${value}`;
+    window.history.pushState({path:newurl},'',newurl);
+  }
+};
+
 var imageService = function(img, w, h = w) {
   var imgSplit = img.split('.');
   var imgFormat = imgSplit[imgSplit.length - 1];

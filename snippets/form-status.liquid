@@ -1,7 +1,53 @@
 {% if form.posted_successfully? %}
-  <p class="form-success">
-    Thanks for contacting us. We'll get back to you as soon as possible.
-  </p>
-{% endif %}
+  {% assign formProduct = all_products[section.settings.success_product] %}
+  {% assign formProductImage = formProduct %}
+  {% if section.settings.success_product_image %}
+  {% assign formProductImage = section.settings.success_product_image %}
+  {% endif %}
+  <section class="form-info__success form-info__modal">
+    <div class="form-info-modal__wrapper">
+      <div class="form-info-modal__content">
+        <span class="icon icon--close form-info-modal__close js-form-info-modal-close"></span>
 
-{{ form.errors | default_errors }}
+        <h1>{{ section.settings.success_title }}</h1>
+        {{ section.settings.success_text }}
+      </div>
+
+      <div class="form-info-modal__product">
+        <a href="{{ formProduct.url }}">
+          <img class="form-info-modal__image"
+            src="{{ formProductImage | img_url: '460x' }}"
+            alt="{{ formProduct.title }} image">
+        </a>
+      </div>
+    </div>
+
+    <div class='form-info-modal__cta'>
+      <a href="{{ formProduct.url }}"
+      class="form-info-modal__product-link animation-parent">View this Product <span class="icon icon--arrow animation--go-to"></span></a>
+    </div>
+  </section>
+
+  <script>
+    $('html').addClass('modal--open');
+
+    function closeFormModal() {
+      $('.form-info__success').fadeOut('fast', function(e) {
+        $(this).remove();
+        $('html').removeClass('modal--open');
+      });
+    };
+
+    $('.js-form-info-modal-close').on('click', function() {
+      closeFormModal();
+    });
+
+    $(window).on('keyup', function(e) {
+      if (e.keyCode === 27) {
+        closeFormModal();
+      }
+    });
+  </script>
+{% else %}
+  {%- comment -%}<p class="form-info__error">{{ form.errors | default_errors }}</p>{%- endcomment -%}
+{% endif %}

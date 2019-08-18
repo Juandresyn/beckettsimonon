@@ -2,6 +2,7 @@ $(window).scroll(function(){
   $('.js-on-show').each(function() {
     var target = $(this).data('onshow-target');
     var targetClass = $(this).data('onshow-class');
+
     if (isScrolledIntoView($(this))) {
       $(this).find(target).addClass(targetClass || 'animate');
     }

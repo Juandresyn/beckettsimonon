@@ -6,22 +6,26 @@ if (typeof Vue === 'function') {
       return {
         information: window.productMoreInfo,
         productId: window.currentProduct.id,
-        productCollection: window.currentProduct.collection,
       };
     },
 
     computed: {
       infoItem() {
-        return this.information[this.productId][this.productCollection] || [];
+        const collections = this.information[this.productId];
+
+        return collections[Object.keys(collections)[0]] || [];
       },
     },
 
     template: `
-      <span v-if="Object.keys(infoItem).length > 0">
+      <span v-if="Object.keys(infoItem).length > 0"
+        class="js-on-show"
+        data-onshow-target=".animation--on-show"
+        data-onshow-class="animation--fade-up animated">
         <article v-for="(item, index) in Object.keys(infoItem)"
           :key="index"
           v-if="infoItem[item].image"
-          class="product-information__item">
+          class="product-information__item animation--on-show">
           <div class="product-information__item-image-wrapper">
             <img class="product-information__item-image"
               :src="infoItem[item].image" />
@@ -51,7 +55,7 @@ if (typeof Vue === 'function') {
 
     computed: {
       infoItem() {
-        return this.information[this.productCollection];
+        return this.information[Object.keys(this.information)[0]];
       },
     },
 
@@ -94,7 +98,8 @@ if (typeof Vue === 'function') {
 
     computed: {
       infoItem() {
-        return this.information[this.productCollection] ? this.information[this.productCollection].video : [];
+        const obj = this.information[Object.keys(this.information)[0]];
+        return obj ? obj.video : false;
       },
 
       getUrls() {
@@ -116,9 +121,11 @@ if (typeof Vue === 'function') {
     },
 
     template: `
-      <div v-if="infoItem && infoItem.length > 0" class="media-video__iframe-wrapper">
+      <div v-if="infoItem && infoItem.length > 0" class="media-video__iframe-wrapper js-on-show"
+        data-onshow-target=".animation--on-show"
+        data-onshow-class="animation--fade-up animated">
         <script :src="getUrls.js" async></script>
-        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+        <div class="wistia_responsive_padding animation--on-show" style="padding:56.25% 0 0 0;position:relative;">
           <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
             <div :class="getUrls.class" style="height:100%;position:relative;width:100%">
               <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
@@ -146,7 +153,8 @@ if (typeof Vue === 'function') {
 
     computed: {
       infoItem() {
-        return this.information[this.productCollection] ? this.information[this.productCollection].images : [];
+        const obj = this.information[Object.keys(this.information)[0]];
+        return obj ? obj.images : [];
       },
     },
 
@@ -162,6 +170,29 @@ if (typeof Vue === 'function') {
     `,
   });
 
+  Vue.component('product-media-info', {
+    name: 'productMediaInfo',
+
+    data: function () {
+      return {
+        information: window.productMediaInfo,
+      };
+    },
+
+    template: `
+      <header class="layout-section__header product-media__carousel-header">
+        <h2 v-if="information.title"
+          class="layout-section__title product-media__carousel-title">
+          {{ information.title }}
+        </h2>
+        <p v-if="information.description"
+          class="layout-section__description product-media__carousel-description">
+          {{ information.description }}
+        </p>
+      </header>
+    `,
+  });
+
   Vue.component('product-faq', {
     name: 'productFaq',
 
@@ -174,7 +205,7 @@ if (typeof Vue === 'function') {
 
     computed: {
       infoItem() {
-        return this.information[this.productCollection];
+        return this.information[Object.keys(this.information)[0]];
       },
     },
 
