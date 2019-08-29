@@ -76,15 +76,18 @@
   @media (min-width: $desktop) {
     justify-content: flex-end;
     padding-top: 8px;
-    width: 55%;
+    width: 61%;
   }
 }
 
 .product-toolbar__variants {
   align-items: center;
   display: flex;
-  flex-direction: row-reverse;
   width: 100%;
+
+  &--reverse {
+    flex-direction: row-reverse;
+  }
 }
 
 .product-toolbar__variant {
@@ -112,7 +115,7 @@
 }
 
 .product-toolbar__title {
-  font-size: 35px;
+  font-size: 30px;
   margin-right: 70px;
 }
 
@@ -162,7 +165,7 @@
   }
 
   .color-picker {
-    padding-bottom: 3px;
-    padding-top: 18px;
+    padding-bottom: 9px;
+    padding-top: 9px;
   }
 }

@@ -20,7 +20,7 @@ if ($('body').hasClass('page--collection')) {
 $('.js-filter-item').on('click', function(e) {
   e.preventDefault();
   e.stopPropagation();
-
+  
   let pathFolders = window.location.pathname.split('/');
   const tags = pathFolders.length > 3 ? pathFolders[3].split('+') : [];
   let newTags = [];
@@ -41,11 +41,18 @@ $('.js-filter-item').on('click', function(e) {
   window.location.pathname = pathFolders;
 });
 
+$(window).on('load', function() {
+  const activeFilterEl = $('.all-products__filter-item.is-active');
+
+  activeFilterEl.each((index, item) => {
+    const filterName = $(item).parents('.all-products__filter').find('.js-filter-name');
+    filterName.text($(item).find('.js-filter-item').data('name'));
+  });
+});
+
 $('.js-product-grid-color').on('change', function() {
-  console.log($(this).attr('name'));
   var target = $(`#${$(this).data('target')}`);
   var pImages = target.data('images').split(',');
   var color = $(`[name="${$(this).attr('name')}"]:checked`).val();
   target.attr('src', filterColorImages(pImages, color)[0]);
-  console.log(pImages, color, filterColorImages(pImages, color)[0]);
 });

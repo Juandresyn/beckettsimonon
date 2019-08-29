@@ -29,11 +29,12 @@
       {% assign downcase_name = name | downcase %}
 
       <div class="all-products__filter">
-        <span class="all-products__filter-title js-product-filter">{{ name }} <span class="all-products__filter-icon icon icon--chevron-down"></span></span>
+        <span class="all-products__filter-title js-product-filter"><span class="js-filter-name">{{ name }}</span> <span class="all-products__filter-icon icon icon--chevron-down"></span></span>
         <ul class="all-products__filter-list js-product-filter-list">
           <li class="all-products__filter-item {% unless current_tags_string contains downcase_name %}is-active{% endunless %}">
               <a href="{{ collection.url }}/"
               data-action="remove"
+              data-name="{{ name }}"
               data-type="{{ downcase_name }}_"
               class="all-products__filter-link js-filter-item">
               View All
@@ -47,6 +48,7 @@
                 target="_self"
                 data-type="{{ downcase_name }}_"
                 data-tag="{{ itemTag | replace: ' ', '-'}}"
+                data-name="{{ option | split: ':' | first }}"
                 class="all-products__filter-link js-filter-item">
                 {{ option | split: ':' | first }}
               </a>

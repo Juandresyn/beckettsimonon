@@ -1,0 +1,60 @@
+.cart__wrapper form #nudge-offer {
+    &.custom {
+        background-color: $light-gray-3;
+        color: $king-blue;
+        padding: 13px 10px;
+        width: 100%;
+
+        .product-title-wrapper {
+            align-items: center;
+            display: flex;
+            justify-content: space-between; 
+        }
+    }
+
+    &.multi {
+        .product-price {
+            float: right;
+            padding-right: 0;
+        }
+    }
+
+    &.multi.stack {
+        .offer-collection {
+            width: 100%;
+        }
+
+        .offer-collection .product-wrapper .details {
+            display: flex;
+            flex-direction: column;
+            padding-right: 10px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .offer-collection .product-wrapper .product-image-wrapper img {
+            padding-right: 0;
+        }
+    }
+
+    .offer-text {
+        display: none;
+    }
+
+    .product-price-wrapper {
+        font-family: $font-secondary;
+        font-size: 15px;
+        line-height: 46px;
+    }
+}
+
+.has-upsell,
+.cart-modal .has-upsell {
+    .cart__list {
+        margin-bottom: 200px;
+    }
+
+    .cart__actions {
+        bottom: 140px;
+    }
+}

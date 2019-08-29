@@ -1,6 +1,6 @@
 .collection-masonery {
   .layout-section__header {
-    @media screen and (max-width: $tablet-small) {
+    @media (max-width: $tablet-small) {
       margin-bottom: 0;
     }
   }
@@ -10,12 +10,12 @@
   margin-bottom: 60px;
 
   &.layout-section {
-    @media screen and (max-width: $tablet-small) {
+    @media (max-width: $tablet-small) {
       padding-bottom: 0;
     }
   }
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     margin: 64px 0 29px 0;
   }
 }
@@ -28,7 +28,7 @@
   padding: 8px 0 50px 0;
   width: 100%;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     padding-bottom: 40px;
   }
 }
@@ -45,15 +45,25 @@
   margin: 15px 0;
   width: 280px;
 
-  @media screen and (min-width: $desktop) {
+  @media (min-width: $desktop) {
     height: 250px;
     margin: 20px;
     min-width: 365px;
   }
 
+  &:hover {
+    .collection-masonery__list-item__cta {
+      opacity: 1;
+    }
+
+    .collection-masonery__list-item__title {
+      margin-top: 0px;
+    }
+  } 
+
   &:nth-child(1),
   &:nth-child(4) {
-    @media screen and (min-width: $desktop) {
+    @media (min-width: $desktop) {
       height: 465px;
       max-width: 465px;
     }
@@ -73,20 +83,20 @@
 
   &:nth-child(2),
   &:nth-child(3) {
-    @media screen and (min-width: $desktop) {
+    @media (min-width: $desktop) {
       height: 365px;
       max-width: 365px;
     }
   }
 
   &:nth-child(2) {
-    @media screen and (min-width: $desktop) {
+    @media (min-width: $desktop) {
       margin-top: 200px;
     }
   }
 
   &:nth-child(3) {
-    @media screen and (min-width: $desktop) {
+    @media (min-width: $desktop) {
       margin-left: 100px;
       margin-top: -60px;
     }
@@ -103,6 +113,8 @@
   font-size: 35px;
   line-height: 48px;
   margin-bottom: 6px;
+  margin-top: 40px;
+  transition: margin-top .3s ease;
 }
 
 .collection-masonery__list-item__cta {
@@ -110,4 +122,6 @@
   display: flex;
   font-family: $font-secondary;
   font-size: 20px;
+  opacity: 0;
+  transition: opacity .6s ease;
 }

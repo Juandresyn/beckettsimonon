@@ -26,9 +26,9 @@ production:
     - "*.sublime-project"
     - "package.json"
 test:
-  theme_id: 123456789
-  password: PRIVATE_APP_PASSWORD
-  store: store-name.myshopify.com
+  theme_id: 76386467915
+  password: e93eae5327d12904ebedbdbf04eebd0c
+  store: beckett-simonon-sandbox.myshopify.com
   concurrency: 4
   timeout: 60s
   ignore_files:

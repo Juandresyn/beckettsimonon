@@ -45,6 +45,7 @@
 .all-products__filters {
   background-color: $white;
   padding: 0 25px;
+  transition: top .1s ease;
 
   .all-products__content {
     display: flex;
@@ -58,6 +59,10 @@
   width: 100%;
   z-index: 2;
 }
+
+.main-sticky-visible .all-products__filters--fixed {
+  top: 71px;
+} 
 
 .all-products__filter {
   border-bottom: 1px solid transparent;

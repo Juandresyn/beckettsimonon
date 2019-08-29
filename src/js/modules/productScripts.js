@@ -71,6 +71,18 @@ $(window).on('load', function() {
     }
   });
 
+  const checkForUpsell = () => {
+    const form = $('form.cart__form');
+
+    setTimeout(() => {
+      if (form.find('#nudge-offer').length > 0) {
+        form.addClass('has-upsell');
+      } else {
+        checkForUpsell();
+      }
+    }, 1000);
+  };
+
   $('.js-add-to-cart').on('submit', function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -81,6 +93,8 @@ $(window).on('load', function() {
 
     $('html').toggleClass('modal--open');
     $('html').toggleClass('cart-is-open');
+
+    checkForUpsell();
   });
 });
 
@@ -100,3 +114,5 @@ const ajaxAddToCart = (id, quantity, cb = () => null) => {
     cb();
   });
 };
+
+console.log('app is working');

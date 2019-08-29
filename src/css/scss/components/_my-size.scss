@@ -149,6 +149,16 @@
     }
   }
 
+  &-animation {
+    align-items: center;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: relative;
+    opacity: 1;
+  }
+
   &-heading {
     line-height: 44px;
     margin-bottom: 21px;

@@ -7,13 +7,29 @@
 
   <div class="cart-item__info">
     <h2 class="cart-item__title">{{ item.title | split: ' -' | first }}</h2>
+
+    {% assign itemColor = blank %}
+    {% for opt in item.options_with_values %}
+      {% assign name = opt.name | downcase %}
+      {% if name contains 'color' %}
+        {% assign itemColor = opt.value %}
+      {% endif %}
+    {% endfor %}
+
+    {% capture colorTemplate %}{% if itemColor != blank%} - {{ itemColor }}{% endif %}{% endcapture %}
+
     {% for tag in item.product.tags %}
       {% if tag contains 'material_' %}
-        <small class="cart-item__small">{{ tag | remove: 'material_' }}</small>
+        <small class="cart-item__small">{{ tag | remove: 'material_' }}{{ colorTemplate }}</small>
+      {% else %}
+        <small class="cart-item__small">{{ itemColor }}</small>
       {% endif %}
     {% endfor %}
     {% for opt in item.options_with_values %}
-      <small class="cart-item__small">{{ opt.name }}: {{ opt.value }}</small>
+      {% assign name = opt.name | downcase %}
+      {% unless name contains 'color' %}
+        <small class="cart-item__small">{{ opt.name }}: {{ opt.value }}</small>
+      {% endunless %}
     {% endfor %}
 
     <div class="cart-item__quantity">

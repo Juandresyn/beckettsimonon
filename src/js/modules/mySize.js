@@ -79,6 +79,7 @@ if (typeof Vue === 'function') {
         hasError: false,
         errorCode: null,
         isMobile: window.innerWidth < 1025,
+        directionClass: '',
       };
     },
 
@@ -90,6 +91,7 @@ if (typeof Vue === 'function') {
           ['my-size--started']: this.started && !this.finished,
           ['my-size--done']: this.finished,
           ['my-size--has-errors']: this.hasError,
+          [this.directionClass]: true,
         };
       },
 
@@ -156,6 +158,12 @@ if (typeof Vue === 'function') {
         this.toggleModal();
         window.history.replaceState(null, null, window.location.pathname);
       }
+
+      document.addEventListener("keyup", e => {
+        if (e.keyCode === 27 && $('html').hasClass('my-size-modal--open')) {
+          document.documentElement.classList.toggle('my-size-modal--open');
+        }
+      });
     },
 
     updated() {
@@ -172,6 +180,14 @@ if (typeof Vue === 'function') {
         document.documentElement.classList.toggle('my-size-modal--open');
       },
 
+      setDirection(prev) {
+        this.directionClass = prev ? 'going-backwards' : 'going-forward';
+
+        setTimeout(function() {
+          this.directionClass = '';
+        }, 1500);
+      },
+
       nextStep() {
         if (this.step === 4 && !this.valuePicked.size) {
           this.showErrors();
@@ -182,10 +198,14 @@ if (typeof Vue === 'function') {
         } else {
           this.step++;
         }
+
+        this.setDirection();
       },
 
       prevStep() {
         this.step = this.step > 0 ? this.step - 1 : this.step;
+
+        this.setDirection(true);
       },
 
       reset() {
@@ -302,68 +322,77 @@ if (typeof Vue === 'function') {
                   <p @click="prevStep" class="my-size__step-paragraph">We ask you a few simple questions, crunch the numbers and calculate the best size for you. It’s simple and extremely accurate! {{ step }}</p>
                   <span @click="nextStep" class="btn btn--scarlet my-size__step-btn">Start</span>
                 </template>
+                
+                <transition name="slide">
+                  <div v-if="step == 1 && !hasError" class="my-size__step-animation">
+                    <h2 class="my-size__step-heading my-size__step-heading--small">Do you know your Brannock device size?</h2>
 
-                <template v-if="step == 1">
-                  <h2 class="my-size__step-heading my-size__step-heading--small">Do you know your Brannock device size?</h2>
-
-                  <div class="my-size__sizes-wrapper">
-                    <span v-for="(size, index) in sizeOptions"
-                      :key="index"
-                      @click="handleSizeClick('size1', size.name)"
-                      :class="['my-size__size', {'is-active': activeItems.size1 === size.name }]">{{ size.name }}</span>
-                  </div>
-                </template>
-
-                <template v-if="step == 2">
-                  <h2 class="my-size__step-heading my-size__step-heading--small">What size do you wear the most in dress shoe brands?</h2>
-                  <p class="my-size__step-subtitle">i.e. Allen Edmonds, Johnston & Murphy or Cole Haan</p>
-
-                  <div class="my-size__sizes-wrapper">
-                    <span v-for="(size, index) in sizeOptions"
-                      :key="index"
-                      @click="handleSizeClick('size2', size.name)"
-                      :class="['my-size__size', {'is-active': activeItems.size2 === size.name }]">{{ size.name }}</span>
-                  </div>
-                </template>
-
-                <template v-if="step == 3">
-                  <h2 class="my-size__step-heading my-size__step-heading--small">What size do you wear the most in sneaker brands?</h2>
-                  <p class="my-size__step-subtitle">i.e. Adidas and Nike</p>
-
-                  <div class="my-size__sizes-wrapper">
-                    <span v-for="(size, index) in sizeOptions"
-                      :key="index"
-                      @click="handleSizeClick('size3', size.name, true)"
-                      :class="['my-size__size', {'is-active': activeItems.size3 === size.name }]">{{ size.name }}</span>
-                  </div>
-                </template>
-
-                <template v-if="step == 4 && !hasError">
-                  <h2 class="my-size__step-heading my-size__step-heading--small">What is the most common shoe size in your closet today?</h2>
-
-                  <div class="my-size__sizes-wrapper">
-                    <span v-for="(size, index) in sizeOptions"
-                      :key="index"
-                      @click="handleSizeClick('size4', size.name)"
-                      :class="['my-size__size', {'is-active': activeItems.size4 === size.name }]">{{ size.name }}</span>
-                  </div>
-                </template>
-
-                <template v-if="step == 5 && !hasError">
-                  <h2 class="my-size__step-heading my-size__step-heading--small">How would you describe your foot shape?</h2>
-
-                  <div class="my-size__shape-wrapper">
-                    <div v-for="(shape, index) in shapeTypes"
-                      :key="index"
-                      @click="handleShapeClick(shape.value)"
-                      :class="['my-size__shape', {'is-active': valuePicked.shape === shape.value }]">
-
-                      <img :src="generateImgUrl(shape.icon)" class="svg my-size__shape-icon" />
-                      <span class="my-size__shape-name">{{ shape.text }}</span>
-                      <small v-if="shape.popular" class="my-size__shape-small">Most popular</small>
+                    <div class="my-size__sizes-wrapper">
+                      <span v-for="(size, index) in sizeOptions"
+                        :key="index"
+                        @click="handleSizeClick('size1', size.name)"
+                        :class="['my-size__size', {'is-active': activeItems.size1 === size.name }]">{{ size.name }}</span>
                     </div>
                   </div>
-                </template>
+                </transition>
+
+                <transition name="slide">
+                  <div v-if="step == 2 && !hasError" class="my-size__step-animation">
+                    <h2 class="my-size__step-heading my-size__step-heading--small">What size do you wear the most in dress shoe brands?</h2>
+                    <p class="my-size__step-subtitle">i.e. Allen Edmonds, Johnston & Murphy or Cole Haan</p>
+
+                    <div class="my-size__sizes-wrapper">
+                      <span v-for="(size, index) in sizeOptions"
+                        :key="index"
+                        @click="handleSizeClick('size2', size.name)"
+                        :class="['my-size__size', {'is-active': activeItems.size2 === size.name }]">{{ size.name }}</span>
+                    </div>
+                </transition>
+
+                <transition name="slide">
+                  <div v-if="step == 3 && !hasError" class="my-size__step-animation">
+                    <h2 class="my-size__step-heading my-size__step-heading--small">What size do you wear the most in sneaker brands?</h2>
+                    <p class="my-size__step-subtitle">i.e. Adidas and Nike</p>
+
+                    <div class="my-size__sizes-wrapper">
+                      <span v-for="(size, index) in sizeOptions"
+                        :key="index"
+                        @click="handleSizeClick('size3', size.name, true)"
+                        :class="['my-size__size', {'is-active': activeItems.size3 === size.name }]">{{ size.name }}</span>
+                    </div>
+                  </div>
+                </transition>
+
+                <transition name="slide">
+                  <div v-if="step == 4 && !hasError" class="my-size__step-animation">
+                    <h2 class="my-size__step-heading my-size__step-heading--small">What is the most common shoe size in your closet today?</h2>
+
+                    <div class="my-size__sizes-wrapper">
+                      <span v-for="(size, index) in sizeOptions"
+                        :key="index"
+                        @click="handleSizeClick('size4', size.name)"
+                        :class="['my-size__size', {'is-active': activeItems.size4 === size.name }]">{{ size.name }}</span>
+                    </div>
+                  </div>
+                </transition>
+
+                <transition name="slide">
+                  <div v-if="step == 5 && !hasError" class="my-size__step-animation">
+                    <h2 class="my-size__step-heading my-size__step-heading--small">How would you describe your foot shape?</h2>
+
+                    <div class="my-size__shape-wrapper">
+                      <div v-for="(shape, index) in shapeTypes"
+                        :key="index"
+                        @click="handleShapeClick(shape.value)"
+                        :class="['my-size__shape', {'is-active': valuePicked.shape === shape.value }]">
+
+                        <img :src="generateImgUrl(shape.icon)" class="svg my-size__shape-icon" />
+                        <span class="my-size__shape-name">{{ shape.text }}</span>
+                        <small v-if="shape.popular" class="my-size__shape-small">Most popular</small>
+                      </div>
+                    </div>
+                  </div>
+                </transition>
 
                 <template v-if="finished">
                   <h2 v-if="isMobile" class="my-size__step-heading">All done, thank you! We told you it was quick. </h2>

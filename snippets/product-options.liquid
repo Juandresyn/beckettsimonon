@@ -1,5 +1,13 @@
 {% if helperBar %}
-  <div class="product-toolbar__variants">
+  {% assign reverseClass = '' %}
+  {% for product_option in product.options_with_values %}
+    {% assign optionNameTemp = product_option.name | downcase %}
+    {% if forloop.index == 1 and optionNameTemp != 'color' %}
+      {% assign reverseClass = 'product-toolbar__variants--reverse' %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="product-toolbar__variants {{ reverseClass }}">
     {% for product_option in product.options_with_values %}
       {% assign optionName = product_option.name | downcase %}
 
@@ -38,14 +46,14 @@
                     title="{{ value }}">
                     <div>
                       {% for i in (1..limit) %}
-                        <span class="color-{{ colorsStrings[forloop.index0] | remove: ' ' }}"></span>
+                        <span class="color-{{ colorsStrings[forloop.index0] | remove: ' ' | downcase }}"></span>
                       {% endfor %}
                     </div>
                   </label>
               </div>
             {% endfor %}
           </div>
-          <span class="product-header__variant-instructions product-toolbar__variants-small js-product-color-label">{{ product_option.selected_value }}</span>
+          <span class="product-header__variant-instructions product-toolbar__variants-small">Color: <span class="js-product-color-label">{{ product_option.selected_value }}</span></span>
         </div>
       {% endif %}
 
@@ -112,7 +120,7 @@
                     title="{{ value }}">
                     <div>
                       {% for i in (1..limit) %}
-                        <span class="color-{{ colorsStrings[forloop.index0] | remove: ' ' }}"></span>
+                        <span class="color-{{ colorsStrings[forloop.index0] | remove: ' ' | downcase }}"></span>
                       {% endfor %}
                     </div>
                   </label>

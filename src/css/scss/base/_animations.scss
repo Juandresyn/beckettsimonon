@@ -31,3 +31,44 @@
     opacity: 0;
   }
 }
+
+// .fade-enter-active, .fade-leave-active {
+//   transition: opacity .5s;
+// }
+// .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+//   opacity: 0;
+// }
+
+.slide-enter-active, .slide-leave-active {
+  transition: opacity .5s ease,
+              left .5s ease;
+}
+
+.slide-enter {
+  left: 40% !important;
+  opacity: 1 !important;
+  position: absolute;
+}
+
+.slide-leave-to {
+  left: -40% !important;
+  opacity: 0 !important;
+  position: absolute !important;
+}
+
+.going-backwards {
+  .slide-leave-to {
+    left: calc(100% - 230px) !important;
+    opacity: 0 !important;
+    position: absolute;
+  } 
+
+  .slide-enter {
+    left: -40% !important;
+    opacity: 0 !important;
+    position: absolute !important;
+  }
+}
+
+// slide-leave-active slide-leave-to
+// slide-enter-active slide-enter
