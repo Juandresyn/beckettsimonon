@@ -4,3 +4,15 @@
     position: relative;
   }
 }
+
+
+.home__shipping-details {
+  @media (max-width: $tablet) {
+    padding-bottom: 3px;
+    padding-top: 80px;
+  }
+
+  .layout-section__title {
+    margin-bottom: 0;
+  }
+}

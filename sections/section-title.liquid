@@ -1,0 +1,61 @@
+<header class="layout-section__header {{ section.settings.css_class }}" style="background-color: {{ section.settings.color_bg }}; text-align: {{ section.settings.position }}; padding: {{ section.settings.padding_top }}px 10px {{ section.settings.padding_bottom }}px">
+  <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+  <p class="layout-section__description">{{ section.settings.description }}</p>
+</header>
+
+{% schema %}
+{
+  "name": "Section Title",
+  "settings": [
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "Css Class"
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+        "type": "select",
+        "id": "position",
+        "options": [
+          { "value": "center", "label": "Centered"},
+          { "value": "left", "label": "Left"},
+          { "value": "right", "label": "Right"}
+        ],
+        "label": "Title position",
+        "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Desktop paddings"
+    },
+    {
+      "type": "number",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "default": 10
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Title",
+      "category": "Layout"
+    }
+  ]
+}
+{% endschema %}
