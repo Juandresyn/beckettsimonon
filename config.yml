@@ -13,13 +13,14 @@
 # -----------------------------------------
 
 production:
-  theme_id: 123456789
-  password: PRIVATE_APP_PASSWORD
-  store: store-name.myshopify.com
+  theme_id: 75905859663
+  password: 6635cdb15f95c5c445bf6ea5d3e5fa4a
+  store: beckett-simonon.myshopify.com
   concurrency: 4
   timeout: 60s
   ignore_files:
     - "node_modules/*"
+    - "config/settings_data.json"
     - "src/*"
     - .jshintignore
     - "*.sublime-workspace"
@@ -33,6 +34,7 @@ test:
   timeout: 60s
   ignore_files:
     - "node_modules/*"
+    - "config/settings_data.json"
     - "src/*"
     - .jshintignore
     - "*.sublime-workspace"
