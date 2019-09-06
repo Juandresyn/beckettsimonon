@@ -35,7 +35,7 @@
   .cart__list {
     overflow-y: scroll;
     height: 100vh;
-    margin-bottom: 160px;
+    margin-bottom: 220px;
     max-width: 100%;
   }
 
@@ -62,7 +62,7 @@
   }
 
   .cart__actions {
-    bottom: 0;
+    bottom: 40px;
     max-width: none;
     padding-top: 25px;
     position: fixed;

@@ -128,7 +128,7 @@
             alt="Beckett Simonon Logo" />
 
           <img class="header-main__logo header-main__logo--dark"
-            src="{{ section.settings.logo_black }}"
+            src="{{ 'logo_black.svg' | asset_url }}"
             alt="Beckett Simonon Logo Black" />
         </a>
       </div>
@@ -290,16 +290,6 @@
 {
   "name": "Header",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo_black",
-      "label": "Logo"
-    },
     {
       "type": "link_list",
       "id": "main_linklist_left",
