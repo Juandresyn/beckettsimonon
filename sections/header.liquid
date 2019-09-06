@@ -79,10 +79,10 @@
   or template contains 'page.affiliates'
   or template contains 'page.information' %}
   {% assign themeColor = "nav--white" %}
-  {% assign header_logo = section.settings.logo %}
+  {% capture header_logo %}{{ 'logo.svg' | asset_url }}{% endcapture %}
 {% else %}
   {% assign themeColor = "nav--black" %}
-  {% assign header_logo = section.settings.logo_black %}
+  {% capture header_logo %}{{ 'logo_black.svg' | asset_url }}{% endcapture %}
 {% endif %}
 
 {% unless is_product
@@ -124,11 +124,11 @@
       <div class="header-main__logo-wrapper">
         <a href="/">
           <img class="header-main__logo"
-            src="{{ header_logo | img_url: 'master' }}"
+            src="{{ header_logo }}"
             alt="Beckett Simonon Logo" />
 
           <img class="header-main__logo header-main__logo--dark"
-            src="{{ section.settings.logo_black | img_url: 'master' }}"
+            src="{{ section.settings.logo_black }}"
             alt="Beckett Simonon Logo Black" />
         </a>
       </div>
