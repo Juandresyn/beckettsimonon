@@ -114,5 +114,3 @@ const ajaxAddToCart = (id, quantity, cb = () => null) => {
     cb();
   });
 };
-
-console.log('app is working');

@@ -22,7 +22,6 @@ $(document).on('ready', function() {
 
 var setOptions = function(options) {
   return options.map(function(option) {
-    console.log(option);
     return `<option value="${option.id}"
       data-options='${option.title.replace(' / ', '-').split('/').join('')}-'>${option.title}</option>`;
   }).join('');

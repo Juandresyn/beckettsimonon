@@ -17,18 +17,26 @@
     {% endfor %}
 
     {% capture colorTemplate %}{% if itemColor != blank%} - {{ itemColor }}{% endif %}{% endcapture %}
+    {% assign test = item.product.tags | json %}
 
-    {% for tag in item.product.tags %}
-      {% if tag contains 'material_' %}
-        <small class="cart-item__small">{{ tag | remove: 'material_' }}{{ colorTemplate }}</small>
-      {% else %}
-        <small class="cart-item__small">{{ itemColor }}</small>
-      {% endif %}
-    {% endfor %}
+    {% if test contains 'material_' %}
+      {% for tag in item.product.tags %}
+        {% if tag contains 'material_' %}
+          <small class="cart-item__small">{{ tag | remove: 'material_' }}{{ colorTemplate }}</small>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% for tag in item.product.tags %}
+        {% unless tag contains 'material_' and hasMaterial %}
+          <small class="cart-item__small">{{ itemColor }}</small>
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+
     {% for opt in item.options_with_values %}
       {% assign name = opt.name | downcase %}
       {% unless name contains 'color' %}
-        <small class="cart-item__small">{{ opt.name }}: {{ opt.value }}</small>
+        <small class="cart-item__small">{{ name }}: {{ opt.value }}</small>
       {% endunless %}
     {% endfor %}
 

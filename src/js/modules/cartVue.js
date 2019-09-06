@@ -133,8 +133,10 @@ if (typeof Vue === 'function') {
         })
         .done((data) => {
           const material = data.tags.filter(m => m.includes('material_'));
+          const getColor = this.cart[index].options_with_values.filter(c => c.name.toLowerCase() === 'color');
+          const color = getColor.length > 0 ? ` - ${getColor[0].value}` : '';
 
-          this.cart[index].material = material.length > 0 ? material[0].replace('material_', '') : '';
+          this.cart[index].material = material.length > 0 ? `${material[0].replace('material_', '')}${color}` : '';
         });
       },
     },
@@ -157,7 +159,14 @@ if (typeof Vue === 'function') {
 
             <small class="cart-item__small">{{ getMaterial(item.handle, index) }} {{ item.material }}</small>
             <small v-for="(opt, ind) in item.options_with_values" :key="ind" class="cart-item__small">
-              {{ opt.name }} {{ opt.value }}
+              <template v-if="item.material !== ''">
+                <template v-if="opt.name.toLowerCase() !== 'color'">
+                  {{ opt.name }} {{ opt.value }}
+                </template>
+              </template>
+              <template v-else>
+                {{ opt.name }} {{ opt.value }}
+              </template>
             </small>
 
             <div class="cart-item__quantity">

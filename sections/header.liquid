@@ -109,7 +109,7 @@
           <div class="top-bar__content" style="color: {{ section.settings.top_bar_color_text }};">
             <div class="top-bar__message desktop--only">{{ section.settings.top_bar_message_desktop }}</div>
             <div class="top-bar__message mobile--only">{{ section.settings.top_bar_message_mobile }}</div>
-            <div class="top-bar__contact desktop--only"><span class="icon icon--phone"></span> {{ section.settings.top_bar_phone }}</div>
+            <div class="top-bar__contact desktop--only"><span class="icon icon--phone"></span> <a href="tel:{{ section.settings.top_bar_phone }}">{{ section.settings.top_bar_phone }}</a></div>
           </div>
       </section>
     {% endif %}
