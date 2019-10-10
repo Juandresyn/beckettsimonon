@@ -249,8 +249,8 @@ if (typeof Vue === 'function') {
         this.setSize(size);
         handleProductChanges();
 
-        const addTocart = document.querySelector('#add-to-cart');
-        addTocart.click();
+        // const addTocart = document.querySelector('#add-to-cart');
+        // addTocart.click();
       },
 
       showResults() {
@@ -319,10 +319,10 @@ if (typeof Vue === 'function') {
               <div class="my-size__step-wrapper">
                 <template v-if="step == 0">
                   <h2 class="my-size__step-heading my-size__step-heading-initial">Find out your Beckett Simonon size <br />in 30 seconds or less.</h2>
-                  <p @click="prevStep" class="my-size__step-paragraph">We ask you a few simple questions, crunch the numbers and calculate the best size for you. It’s simple and extremely accurate! {{ step }}</p>
+                  <p @click="prevStep" class="my-size__step-paragraph">We ask you a few simple questions, crunch the numbers and calculate the best size for you. It’s simple and extremely accurate!</p>
                   <span @click="nextStep" class="btn btn--scarlet my-size__step-btn">Start</span>
                 </template>
-                
+
                 <transition name="slide">
                   <div v-if="step == 1 && !hasError" class="my-size__step-animation">
                     <h2 class="my-size__step-heading my-size__step-heading--small">Do you know your Brannock device size?</h2>
@@ -330,7 +330,7 @@ if (typeof Vue === 'function') {
                     <div class="my-size__sizes-wrapper">
                       <span v-for="(size, index) in sizeOptions"
                         :key="index"
-                        @click="handleSizeClick('size1', size.name)"
+                        @click="() => { handleSizeClick('size1', size.name); activeItems.size1 === size.name}"
                         :class="['my-size__size', {'is-active': activeItems.size1 === size.name }]">{{ size.name }}</span>
                     </div>
                   </div>
@@ -399,7 +399,7 @@ if (typeof Vue === 'function') {
                   <h2 class="my-size__step-heading my-size__step-heading--small">Your Beckett Simonon size is:</h2>
                   <span class="my-size__step-final-size">{{ valuePicked.size }}</span>
                   <p class="my-size__step-description">Still have doubts? No problem! Remember shipping, returns and size <br /> exchanges are completely free in the contiguous US.</p>
-                  <span @click="shopNow(valuePicked.size)" class="btn btn--scarlet my-size__step-btn">Shop now</span>
+                  <span @click="shopNow(valuePicked.size)" class="btn btn--scarlet my-size__step-btn">Select This Size</span>
                 </template>
 
                 <template v-if="errorCode === 1 && hasError">

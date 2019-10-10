@@ -63,7 +63,8 @@
   });
 
   pressSlider.on('init', function(event, slick, currentSlide, nextSlide) {
-    handleDescription(slick.$slides[0].dataset.description);
+    const activeSlide = Array.from(slick.$slides).filter(i => i.className.includes('active'));
+    handleDescription(activeSlide[0].dataset.description);
   });
 
   pressSlider.slick({

@@ -1,17 +1,26 @@
 <section class="end-of-page" style="background-color: {{ section.settings.color_bg }};">
   <div class="end-of-page__wrapper">
     <p class="end-of-page__description">{{ section.settings.description }}</p>
-    <form class="end-of-page__form">
-      <textarea name="message"
+    {% assign formId = 'end-of-page' %}
+    {% form 'contact', id: formId, class: 'end-of-page__form' %}
+      <input type="hidden" value="End of Page" name="contact[Form Type]">
+
+      <textarea name="contact[Message]"
         placeholder="{{ section.settings.message_placeholder }}"></textarea>
-      <div class="end-of-page__group">
-        <input type="email"
-          name="email"
-          placeholder="{{ section.settings.email_placeholder }}"
-          required>
-        <button class="btn btn--dark">{{ section.settings.button_placeholder }}</button>
-      </div>
-    </form>
+
+        <div class="end-of-page__group">
+          <input type="email"
+            name="contact[email]"
+            placeholder="{{ section.settings.email_placeholder }}"
+            required>
+          <button class="btn btn--dark">{{ section.settings.button_placeholder }}</button>
+        </div>
+
+        {% if form.posted_successfully? %}
+          <span class="newsletter-form__message end-of-page__message"><img src="{{ 'check.svg' | asset_url }}" /> THANK YOU FOR CONTACTING US. WE’LL GET BACK TO YOU SHORTLY.</span>
+        {% endif %}
+    {% endform %}
+
   </div>
 </section>
 

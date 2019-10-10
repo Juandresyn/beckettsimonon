@@ -35,7 +35,7 @@
       <div class="product-header__images-wrapper js-product-images js-slick-product-images">
         {% for image in product.images %}
           <img class="product-header__image lazyload"
-            src="{{ image | img_url: '50x50' }}"
+            src="{{ image | img_url: '30x30' }}"
             data-src="{{ image | img_url: '650x650' }}, {{ image | img_url: '450x450' }}, {{ image | img_url: '150x150' }}"
             alt="{{ product.title }}" />
         {% endfor %}
@@ -64,7 +64,7 @@
 
     <div class="product-header__details">
       <div class="product-header__title-wrapper">
-        <h1 class="product-header__title">{{ product.title }}</h1>
+        <h1 class="product-header__title">{{ product.title | split: ' -' | first }}</h1>
         {% for tag in product.tags %}
           {% if tag contains 'material_' %}
             <span class="product-header__type">{{ tag | remove: 'material_' }}</span>
@@ -81,9 +81,7 @@
         {% if compare_at_price %}
           <div class="product-header__price-item">
             <span class="product-header__price product-header__price--retail">{{ compare_at_price | money_without_trailing_zeros }}</span>
-            <span class="js-on-click product-header__price-label"
-              data-onclick-target="html"
-              data-onclick-class="modal--open product-is-open">
+            <span class="js-open-retail-info product-header__price-label">
               Traditional Retail <span class="icon icon--circle-info product-header__price-label-icon"></span>
             </span>
           </div>
@@ -97,19 +95,14 @@
           <button id="add-to-cart"
             type="submit"
             name="add"
-            {% unless current_variant.available %}disabled="disabled"{% endunless %}
-            class="btn {{ section.settings.button_type }} product-header__button">
-            <span id="AddToCartText-{{ section.id }}">
-              {% unless current_variant.available %}
-                {{ 'products.product.sold_out' | t }}
-              {% else %}
-                {{ 'products.product.add_to_cart' | t }}
-              {% endunless %}
+            class="btn {{ section.settings.button_type }} product-header__button js-add-to-cart-btn">
+            <span>
+              {{ 'products.product.add_to_cart' | t }}
             </span>
           </button>
         </div>
 
-        <p class="product-header__shipping-info">Pre-order now at a discounted price. Shipping: {{ shipping_date }}.<br /><span>Free shipping, free returns, free exchanges.</span></p>
+        <p class="product-header__shipping-info">{% comment %}Pre-order now at a discounted price. Shipping: {{ shipping_date }}.<br />{% endcomment %}<span>Free shipping, free returns, free exchanges.</span></p>
 
         <select id="product-variants" name="id" class="js-product-variants product-variants-selector">
           {% for variant in product.variants %}

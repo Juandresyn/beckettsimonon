@@ -23,7 +23,7 @@ $(document).on('ready', function() {
 var setOptions = function(options) {
   return options.map(function(option) {
     return `<option value="${option.id}"
-      data-options='${option.title.replace(' / ', '-').split('/').join('')}-'>${option.title}</option>`;
+      data-options='${option.title.replace(' / ', '-').split('/').join('').toLowerCase()}-'>${option.title.toLowerCase()}</option>`;
   }).join('');
 };
 
@@ -49,23 +49,23 @@ var setColors = function(options) {
       const colorName = colorsArray.join(' / ');
       const colorClass = colorsArray.length > 1 ? (colorsArray.length === 2 ? 'color--double' : 'color--triple') : '';
       const colorTemplate = (arr) => arr.map(c => `
-        <span class="color-${c.replace(' ', '')}"></span>
+        <span class="color-${c.replace(' ', '').toLowerCase()}"></span>
       `).join('');
 
       return `
         <div class="color-item">
-          <input id="mega-menu-color-${colorSlug}"
+          <input id="mega-menu-color-${colorSlug.toLowerCase()}"
             type="radio"
             name="color"
-            value="${colorSlug}"
-            data-name="${colorName}"
+            value="${colorSlug.toLowerCase()}"
+            data-name="${colorName.toLowerCase()}"
             class="color-item__input js-mega-menu-options-color-radio"
             ${index === 0 ? 'checked="checked"' : ''}>
 
-          <label for="mega-menu-color-${colorSlug}"
+          <label for="mega-menu-color-${colorSlug.toLowerCase()}"
             class="js-mega-menu-options-color color-item__label ${colorClass}"
-            data-color="${colorSlug}"
-            title="${colorName}">
+            data-color="${colorSlug.toLowerCase()}"
+            title="${colorName.toLowerCase()}">
             <div>
               ${colorTemplate(colorsArray)}
             </div>
@@ -158,10 +158,9 @@ $('.js-mega-menu-color-picker').on('click', '.js-mega-menu-options-color', funct
 
 $('.js-mega-menu__cart').on('click', function() {
   var variantId = $('.js-mega-menu-product-variants').val();
-
+  AddToCartLoading(true, '.js-mega-menu__cart');
   ajaxAddToCart(variantId, 1, function(data) {
-    $('html').toggleClass('modal--open');
-    $('html').toggleClass('cart-is-open');
+    AddToCartLoading(false, '.js-mega-menu__cart');
   });
 });
 

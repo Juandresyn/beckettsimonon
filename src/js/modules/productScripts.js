@@ -89,15 +89,30 @@ $(window).on('load', function() {
 
     const id = $('#product-variants').val();
 
-    ajaxAddToCart(id, 1);
-
-    $('html').toggleClass('modal--open');
-    $('html').toggleClass('cart-is-open');
+    AddToCartLoading(true);
+    ajaxAddToCart(id, 1, () => {
+    });
 
     checkForUpsell();
   });
 });
 
+const AddToCartLoading = (state = false, btnEl = '.js-add-to-cart-btn') => {
+  const btn = $(btnEl);
+  const loading = '<div class="add-to-cart-loading"></div>';
+  const original = '<span>Add to cart</span>';
+
+  btn.html(state ? loading : original);
+
+  if (!state) {
+    $('html').addClass('modal--open');
+    $('html').addClass('cart-is-open');
+  } else {
+    $('html').removeClass('modal--open');
+    $('html').removeClass('cart-is-open');
+
+  }
+}
 
 const ajaxAddToCart = (id, quantity, cb = () => null) => {
   $.ajax({

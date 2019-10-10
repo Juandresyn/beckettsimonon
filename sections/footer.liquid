@@ -55,20 +55,21 @@
 <section class="newsletter-form layout-section">
   <h3 class="newsletter-form__label">{{ section.settings.newsletter_label }}</h3>
   <h2 class="newsletter-form__title">{{ section.settings.newsletter_title }}</h2>
-
-  <form action="//beckettsimonon.us12.list-manage.com/subscribe/post?u=192a9525318e91231988ae830&amp;id=e727baad50"
-    id="subForm"
-    class="newsletter-form__form"
-    method="post"
-    name="mc-embedded-subscribe-form"
+  <form id="email_signup"
+    class="newsletter-form__form klaviyo_gdpr_embed_KjMtQr"
+    action="//manage.kmail-lists.com/subscriptions/subscribe"
+    data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe"
+    method="GET"
     target="_blank"
-    novalidate="" >
-    <label for="mce-EMAIL"
+    novalidate="novalidate">
+    <input type="hidden" name="g" value="KjMtQr">
+    <label for="k_id_email"
       class="visually-hidden">Subscribe Email</label>
-    <input id="mce-EMAIL"
+    <input
+      id="k_id_email"
+      name="email"
       type="email"
       value=""
-      name="EMAIL"
       class="newsletter-form__input"
       placeholder="{{ section.settings.newsletter_placeholder}}" />
 
@@ -78,6 +79,24 @@
       <span class="icon icon--arrow animation--go-to"></span>
     </button>
   </form>
+
+  <span class="newsletter-form__message"><img src="{{ 'check.svg' | asset_url }}" /> Thanks for subscribing!<br />Please check your inbox.</span>
+
+  <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+  <script type="text/javascript">
+    KlaviyoSubscribe.attachToForms('#email_signup', {
+      hide_form_on_success: true,
+      success: function ($form) {
+        console.log('_______');
+
+        $form[0].classList.toggle('newsletter-form--success');
+
+        setTimeout(() => {
+          $form[0].classList.toggle('newsletter-form--success');
+        }, 10000);
+      }
+    });
+  </script>
 </section>
 
 <div class="site-footer--prefooter desktop--only">

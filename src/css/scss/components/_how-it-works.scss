@@ -3,7 +3,7 @@
 
   &.layout-section {
     @media (max-width: $tablet-small) {
-      padding-top: 25px;
+      padding: 25px 25px 100px;
     }
   }
 
@@ -41,6 +41,16 @@
 
   @media (min-width: $desktop) {
     margin-bottom: 0;
+  }
+}
+
+.how-it-works__container {
+  &.page-block {
+    padding: 0;
+
+    @media (min-width: $desktop) {
+      padding: 0 25px;
+    }
   }
 }
 

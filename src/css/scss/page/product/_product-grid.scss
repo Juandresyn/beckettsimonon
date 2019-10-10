@@ -38,11 +38,17 @@
 
 .product-grid__item-link {
   display: inline-block;
+  position: relative;
 }
 
 .product-grid__item-image {
   margin-bottom: 27px;
+  max-width: 100%;
   transition: opacity ease 0.5s;
+
+  @media (min-width: $desktop-large) {
+    max-width: 230px;
+  }
 }
 
 .product-grid__item-image--primary {
@@ -54,11 +60,12 @@
   max-width: 100%;
   padding: 0 5%;
   position: absolute;
-  right: calc(50% - 86px);
+  right: 0;
   top: 0;
 
   @media (min-width: $desktop-large) {
     left: calc(50% - 115px);
+    max-width: 230px;
     padding: 0;
     right: calc(50% - 115px);
   }
@@ -119,6 +126,6 @@
 
     &.color--double span {
       height: 5.5px;
-    } 
+    }
   }
 }

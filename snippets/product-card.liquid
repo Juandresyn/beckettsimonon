@@ -1,12 +1,41 @@
+{% assign firstColorList = '' %}
+
+{% for product_option in product.options_with_values %}
+    {% assign optionName = product_option.name | downcase %}
+    {% if optionName == 'color' %}
+      {% capture colorName %}color_{{ product_option.values[0] }}_{% endcapture %}
+      {% for value in product.images %}
+        {% if value contains colorName %}
+          {% capture firstColorList %}{{ firstColorList }}{{ value | img_url: '460x460', crop: 'center' }},{% endcapture %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+{% endfor %}
+
+{% assign firstColorArray = firstColorList | split: ',' %}
+{% assign firstColor = '' %}
+{% assign secondColor = '' %}
+
+{% if firstColorList != blank %}
+  {% assign firstColor = firstColorArray[0] %}
+  {% assign secondColor = firstColorArray[1] %}
+{% else %}
+  {% assign firstColor = product.images[0] | img_url: '460x460', crop: 'center' %}
+  {% assign secondColor = product.images[1] | img_url: '460x460', crop: 'center' %}
+{% endif %}
+
 <li class="product-grid__item">
-  <a class="product-grid__item-link"
+  <a id="card-{{ product.handle }}"
+    class="product-grid__item-link"
     href="{{ product.url }}">
     <img id="product-grid-image-{{ product.id }}"
       class="product-grid__item-image product-grid__item-image--primary"
-      src="{{ product.featured_image | img_url: '230x230', crop: 'center' }}"
-      data-images='{% for img in product.images %}{{ img | img_url: '230x230' }}{% unless forloop.last %},{% endunless %}{% endfor %}'/>
-      <img class="product-grid__item-image product-grid__item-image--secondary"
-      src="{{ product.images[1] | img_url: '230x230', crop: 'center' }}" />
+      src="{{ firstColor }}"
+      data-list="{{ firstColorList }}"
+      data-images='{% for img in product.images %}{{ img | img_url: '460x460' }}{% unless forloop.last %},{% endunless %}{% endfor %}'/>
+      <img id="product-grid-image-secondary-{{ product.id }}"
+      class="product-grid__item-image product-grid__item-image--secondary"
+      src="{{ secondColor }}" />
   </a>
 
   {% for product_option in product.options_with_values %}
@@ -31,6 +60,10 @@
                 {% assign colorClass = ' ' %}
               {% endif %}
 
+              {% if forloop.index0 == 0 %}
+                {% capture initialInput %}pg-color-{{ value | downcase | remove: ' ' | remove: '/' }}-{{ product.id }}{% endcapture %}
+              {% endif %}
+
             <div class="color-item">
               <input id="pg-color-{{ value | downcase | remove: ' ' | remove: '/' }}-{{ product.id }}"
                 type="radio"
@@ -38,7 +71,9 @@
                 value="{{ value | downcase | remove: ' ' | remove: '/' }}"
                 data-name="{{ value | downcase | replace: '/', ' / ' }}"
                 class="color-item__input js-product-grid-color"
+                data-handle="{{ product.handle }}"
                 data-target="product-grid-image-{{ product.id }}"
+                data-target-secondary="product-grid-image-secondary-{{ product.id }}"
                 {% if product_option.selected_value == value %} checked="checked" {% endif %}>
                 <!-- <label for="pg-color-{{ value | downcase | remove: ' ' | remove: '/' }}-{{ product.id }}" class="color-item__label color-{{ value | downcase | remove: ' ' }}"></label> -->
                 <label for="pg-color-{{ value | downcase | remove: ' ' | remove: '/' }}-{{ product.id }}"
@@ -67,4 +102,10 @@
     {% endfor %}
     <span class="product-grid__item-price">{{ product.price | money_without_trailing_zeros }}</span>
   </a>
+
+  <script>
+    $(document).on('ready', function() {
+      $('[for="{{ initialInput }}"]').click()
+    });
+  </script>
 </li>

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.browser_color }}">
   <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
   {% if settings.favicon != blank %}
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
@@ -68,6 +69,11 @@
     {{ settings.product_colors_css }}
   </style>
   <!-- End Product Colors -->
+
+  <!-- Okendo Reviews Css -->
+    {{ shop.metafields.okendo.ReviewsWidgetStyleTag }}
+    {{ shop.metafields.okendo.StyleCustomizations }}
+  <!-- Okendo Reviews Css -->
 </head>
 
 {% unless template contains 'product'

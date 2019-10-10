@@ -1,18 +1,23 @@
-<header class="layout-section__header three-items-section__header">
-  <h2 class="layout-section__title">{{ section.settings.title }}.</h2>
-  <p class="layout-section__description">{{ section.settings.description }}</p>
-</header>
-<div class="three-items-section__list">
-    {% for block in section.blocks %}
-      <article class="three-items-section__item">
-        <img class="three-items-section__item-icon"
-          src="{{ block.settings.icon | img_url: 'master' }}"
-          alt="{{ block.settings.title }}" />
-        <h3 class="three-items-section__item-title">{{ block.settings.title }}</h3>
-        <p class="three-items-section__item-description">{{ block.settings.description }}</p>
-      </article>
-    {% endfor %}
-</div>
+<span class="js-on-show"
+  data-onshow-target=".three-items-section__list, .layout-section__header"
+  data-onshow-class="animation--fade-up animated">
+  <header class="layout-section__header three-items-section__header animation--on-show">
+    <h2 class="layout-section__title">{{ section.settings.title }}.</h2>
+    <p class="layout-section__description">{{ section.settings.description }}</p>
+  </header>
+
+  <div class="three-items-section__list animation--on-show">
+      {% for block in section.blocks %}
+        <article class="three-items-section__item">
+          <img class="three-items-section__item-icon"
+            src="{{ block.settings.icon | img_url: 'master' }}"
+            alt="{{ block.settings.title }}" />
+          <h3 class="three-items-section__item-title">{{ block.settings.title }}</h3>
+          <p class="three-items-section__item-description">{{ block.settings.description }}</p>
+        </article>
+      {% endfor %}
+  </div>
+</span>
 
 {% schema %}
 {

@@ -48,6 +48,11 @@
       background-color: $scarlet;
       color: $white;
     }
+
+    &:focus {
+      background-color: $white;
+      color: $scarlet;
+    }
   }
 
   &__footer {
@@ -114,6 +119,83 @@
 
   &__trigger {
     cursor: pointer;
+  }
+}
+
+.my-size {
+  @media (max-width: $tablet-large) {
+    .my-size__sizes-wrapper {
+      margin-top: 10px;
+      width: 85%;
+    }
+
+    .my-size__footer {
+      bottom: unset;
+      top: calc(88% - 30px);
+    }
+
+    .my-size__size {
+      margin: 5px;
+
+      &:hover {
+        background-color: $white;
+        color: $black;
+      }
+    }
+
+    .my-size__arrow--left {
+      left: 15px;
+    }
+
+    .my-size__arrow--right {
+      right: 15px;
+    }
+
+    .my-size__shape-wrapper {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .my-size__shape-icon {
+      height: 50px;
+      margin-bottom: 15px;
+    }
+
+    .my-size__shape {
+      margin: 10px;
+      position: relative;
+      width: 75px;
+
+      &:hover {
+        .my-size__shape-icon path {
+          fill: $icon-gray;
+        }
+      }
+    }
+
+    .my-size__shape-name {
+      white-space: normal;
+    }
+
+    .my-size__shape-small {
+      position: absolute;
+      top: -25px;
+      white-space: nowrap;
+    }
+
+    .my-size--done {
+      .my-size__step-heading {
+        line-height: 38px;
+        font-size: 28px;
+        text-align: center !important;
+      }
+
+      .my-size__step-heading--small {
+        font-size: 18px;
+        line-height: 20px;
+      }
+    }
   }
 }
 
@@ -367,5 +449,31 @@
       top: 0;
       max-height: 100vh;
     }
+  }
+}
+
+.ios {
+  .my-size--done {
+    .my-size-modal .modal__header {
+      padding-bottom: 30px;
+    }
+
+    .my-size__step-heading {
+      margin-bottom: 15px;
+    }
+
+    .my-size__step-wrapper .my-size__step-heading:not(.my-size__step-heading-initial):not(.my-size__step-heading--small) {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .my-size__step-heading--small {
+      font-size: 18px;
+    }
+  }
+
+  .my-size__step-final-size {
+    font-size: 50px;
+    margin-bottom: 35px;
   }
 }

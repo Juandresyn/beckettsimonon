@@ -4,33 +4,37 @@
   }
 </style>
 
-<header class="layout-section__header">
-  <h2 class="layout-section__title">{{ section.settings.title }}</h2>
-  <p class="layout-section__description">{{ section.settings.description }}</p>
-</header>
+<span class="js-on-show"
+  data-onshow-target=".philosophy__items, .layout-section__header"
+  data-onshow-class="animation--fade-up animated">
+  <header class="layout-section__header animation--on-show">
+    <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+    <p class="layout-section__description">{{ section.settings.description }}</p>
+  </header>
 
-<div class="philosophy__items">
-  {% for block in section.blocks %}
-    <div class="philosophy-items__item">
-      <h3 class="philosophy-item__title">{{ block.settings.title }}</h3>
+  <div class="philosophy__items animation--on-show">
+    {% for block in section.blocks %}
+      <div class="philosophy-items__item">
+        <h3 class="philosophy-item__title">{{ block.settings.title }}</h3>
 
-      {% for i in (1..5) %}
-        {% capture itemSmallKey %}article_small_{{i}}{% endcapture %}
-        {% capture itemDescriptionKey %}article_description_{{i}}{% endcapture %}
-        {% assign itemSmall = block.settings[itemSmallKey] %}
-        {% assign itemDescription = block.settings[itemDescriptionKey] %}
+        {% for i in (1..5) %}
+          {% capture itemSmallKey %}article_small_{{i}}{% endcapture %}
+          {% capture itemDescriptionKey %}article_description_{{i}}{% endcapture %}
+          {% assign itemSmall = block.settings[itemSmallKey] %}
+          {% assign itemDescription = block.settings[itemDescriptionKey] %}
 
-        {% if itemSmall != blank and itemDescription != blank %}
-          <article class="philosophy-item__article">
-            <small class="layout-section__eyebrow philosophy-item__eyebrow">{{ itemSmall }}</small>
-            <p class="layout-section__description philosophy-item__description">{{ itemDescription }}</p>
-            <span class="separator"></span>
-          </article>
-        {% endif %}
-      {% endfor %}
-    </div>
-  {% endfor %}
-</div>
+          {% if itemSmall != blank and itemDescription != blank %}
+            <article class="philosophy-item__article">
+              <small class="layout-section__eyebrow philosophy-item__eyebrow">{{ itemSmall }}</small>
+              <p class="layout-section__description philosophy-item__description">{{ itemDescription }}</p>
+              <span class="separator"></span>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</span>
 
 {% schema %}
 {

@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: column;
   max-width: 100%;
+  min-height: 100vw;
   width: 100%;
 
   .product-header__images-actions {
@@ -42,6 +43,7 @@
 
   @media (min-width: $desktop) {
     max-width: 660px;
+    min-height: 700px;
   }
 }
 
@@ -49,6 +51,12 @@
   cursor: zoom-in;
   margin-bottom: 10px;
   width: 100%;
+}
+
+.slick-slider {
+  .product-header__image.lazyload:not(.loaded) {
+    filter: blur(0);
+  }
 }
 
 .product-header__video {
@@ -233,7 +241,11 @@
   }
 
   &.rte {
-    margin-top: 100px;
+    margin-top: 20px;
+
+    @media (min-width: $desktop) {
+      margin-top: 100px;
+    }
 
     h2:first-of-type {
       margin-top: 0;
@@ -244,3 +256,42 @@
     }
   }
 }
+
+.add-to-cart-loading {
+  box-sizing: border-box;
+  display: inline-block;
+  line-height: 1.25;
+  padding: 0;
+  position: relative;
+  width: 1.25rem;
+}
+.add-to-cart-loading:after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.25rem;
+  margin: -.75rem auto 0;
+  border: .125rem solid hsla(0,0%,100%,.6);
+  border-right-color: rgba(0,0,0,0);
+  border-radius: 50%;
+  -webkit-animation-name: addtocartloading;
+  animation-name: addtocartloading;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation-direction: normal;
+  animation-direction: normal;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-duration: .8s;
+  animation-duration: .8s;
+}
+
+@keyframes addtocartloading{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}

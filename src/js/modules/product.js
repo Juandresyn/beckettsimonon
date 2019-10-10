@@ -133,8 +133,8 @@ const handleProductChanges = function() {
         $('.js-slick-product-images').slick('unslick');
       }
 
-      color = $('.js-product-options-color').filter(':checked').val();
-      var colorName = $('.js-product-options-color').filter(':checked').data('name');
+      color = $('.js-product-options-color:checked').val();
+      var colorName = $('.js-product-options-color:checked').data('name');
       $('.js-product-color-label').html(colorName);
 
       reRenderImages(color);
@@ -154,12 +154,13 @@ const handleProductChanges = function() {
   $('.js-product-options-size, .js-product-options-color').on('change', function() {
     const variantsSelector = $('.js-product-variants');
     const size = $('.js-product-options-size').val();
+    const colorOpt = $('.js-product-options-color:checked').val();
 
     variantsSelector.find('option').each(function() {
       $(this).attr('selected', false);
 
       const singleOption = $(this).data('options');
-      if (singleOption.includes(!!color ? `${color}-${size}-` : `${size}-`) || singleOption.includes(!!color ? `${size}-${color}-` : `${size}-`)) {
+      if (singleOption.includes(!!colorOpt ? `${colorOpt}-${size}-` : `${size}-`) || singleOption.includes(!!colorOpt ? `${size}-${colorOpt}-` : `${size}-`)) {
         $(this).attr('selected','selected');
       }
     });
@@ -255,3 +256,7 @@ $(window).on('resize', function() {
     createProductGallery();
   }
 });
+
+$('.js-open-retail-info').on('click', function () {
+  $('html').addClass('modal--open product-is-open');
+})

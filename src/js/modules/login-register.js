@@ -142,9 +142,9 @@ if (typeof Vue === 'function') {
                   </div>
 
                   <div class="input-control input-control--action">
-                      <button class="btn btn--scarlet login-form-modal__btn"> Send Email </button>
-                      <span class="btn btn--dark login-form-modal__btn" @click="isRecover = !isRecover">Login Instead</span>
-                    </div>
+                    <button class="btn btn--scarlet login-form-modal__btn"> Send Email </button>
+                    <span class="btn btn--dark login-form-modal__btn" @click="isRecover = !isRecover">Login Instead</span>
+                  </div>
                 </form>
               </transition>
 
@@ -172,6 +172,8 @@ if (typeof Vue === 'function') {
                     <button class="btn btn--scarlet login-form-modal__btn">Login Now</button>
                     <span class="login-form-modal__forgot" @click="isRecover = !isRecover">Forgot your password?</span>
                   </div>
+
+                  <div class='oxi-social-login'></div>
                 </form>
               </transition>
 
@@ -213,6 +215,8 @@ if (typeof Vue === 'function') {
               <div v-if="!isRecover" class="login-form-modal__footer">
                 <span @click="toggleForm()" class="login-form-modal__toggle" v-html="footerText"></span>
               </div>
+
+              <div class='oxi-social-login'></div>
             </div>
           </div>
         </div>

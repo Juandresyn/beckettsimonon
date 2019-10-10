@@ -20,7 +20,7 @@ if ($('body').hasClass('page--collection')) {
 $('.js-filter-item').on('click', function(e) {
   e.preventDefault();
   e.stopPropagation();
-  
+
   let pathFolders = window.location.pathname.split('/');
   const tags = pathFolders.length > 3 ? pathFolders[3].split('+') : [];
   let newTags = [];
@@ -50,9 +50,35 @@ $(window).on('load', function() {
   });
 });
 
-$('.js-product-grid-color').on('change', function() {
-  var target = $(`#${$(this).data('target')}`);
+const defineVariantUrl = async (productHandle, color) => {
+  let item = null;
+  await $.ajax({
+    url: '/products/'+productHandle+'.js',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      const firstItem = data.variants.find(i => (i.option1.toLowerCase() === color || i.option2.toLowerCase() === color));
+      console.log('__', firstItem);
+      item = `${data.url}?variant=${firstItem.id}`;
+      return item;
+    }
+  });
+
+  return item;
+};
+
+$('.js-product-grid-color').on('change', async function() {
+  var handle = $(this).data('handle');
+  var targetStr = $(this).data('target');
+  var target = $(`#${targetStr}`);
+  var targetSecondary = $(`#${$(this).data('target-secondary')}`);
   var pImages = target.data('images').split(',');
   var color = $(`[name="${$(this).attr('name')}"]:checked`).val();
+  var url = await defineVariantUrl(handle, color);
+
+  $(`#card-${handle}`).attr('href', url);
   target.attr('src', filterColorImages(pImages, color)[0]);
+  if (filterColorImages(pImages, color)[1]) {
+    targetSecondary.attr('src', filterColorImages(pImages, color)[1]);
+  }
 });

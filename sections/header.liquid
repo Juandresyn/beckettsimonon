@@ -77,7 +77,8 @@
   or template contains 'list-collections'
   or template contains 'collection'
   or template contains 'page.affiliates'
-  or template contains 'page.information' %}
+  or template contains 'page.information'
+  or template contains 'page.reviews' %}
   {% assign themeColor = "nav--white" %}
   {% capture header_logo %}{{ 'logo.svg' | asset_url }}{% endcapture %}
 {% else %}
@@ -92,7 +93,7 @@
 
   <style>
     .header-main {
-      background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url({% if header_image_str != '' %}{{ header_image_str }}{% else %}{{ header_image | img_url: 'master' }}{% endif %});
+      background-image: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url({% if header_image_str != '' %}{{ header_image_str }}{% else %}{{ header_image | img_url: 'master' }}{% endif %});
     }
   </style>
 {% endunless %}
@@ -158,9 +159,13 @@
         </span>
       </div>
     </div>
-    {% if header_title %}
+
+    {% unless template contains 'product' or
+      template contains 'contact' or
+      template contains 'customer' or
+      template contains 'cart' %}
       <section class="header-main__content">
-        <h1 class="header-main__title">{{ header_title }}</h1>
+        <h1 class="header-main__title">{% if header_title %}{{ header_title }}{% endif %}</h1>
 
         {% if header_description %}
           <p class="header-main__description">{{ header_description }}</p>
@@ -182,11 +187,12 @@
           {% include 'page-information-nav' with currentHandle: page.handle %}
         {% endif %}
       </section>
-    {% endif %}
+    {% endunless %}
 
     {% if is_search %}
       <div class="header-main__search">
         <form action="/search" method="get" role="search" class="header-main__search-form">
+          <input type="hidden" name="type" value="product" />
           <input type="search"
             id="SearchInput"
             class="input-group__field search__input"
@@ -207,7 +213,7 @@
     <div class="header-main__modal--header">
       <a href="/">
         <img class="header-main__logo"
-          src="{{ section.settings.logo_black | img_url: 'master' }}"
+          src="{{ 'logo_black.svg' | asset_url }}"
           alt="Beckett Simonon Logo" />
       </a>
 

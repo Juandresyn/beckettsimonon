@@ -4,9 +4,22 @@ $(window).scroll(function(){
     var targetClass = $(this).data('onshow-class');
 
     if (isScrolledIntoView($(this))) {
-      $(this).find(target).addClass(targetClass || 'animate');
+      setTimeout(() => {
+        $(this).find(target).addClass(targetClass || 'animate');
+      }, 200);
     }
   });
+});
+
+$(document).on('ready', function() {
+  var target = $(this).data('onshow-target');
+  var targetClass = $(this).data('onshow-class');
+
+  if (isScrolledIntoView($(this))) {
+    setTimeout(() => {
+      $(this).find(target).addClass(targetClass || 'animate');
+    }, 350);
+  }
 });
 
 function isScrolledIntoView(elem){

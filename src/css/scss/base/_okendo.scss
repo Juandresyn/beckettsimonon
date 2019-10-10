@@ -1,0 +1,17 @@
+.okeReviews-reviewsWidget-header {
+  display: none !important;
+}
+
+.okeReviews.okeReviews--theme .okeReviews-badge--rating,
+.okeReviews.okeReviews--theme .okeReviews-badge--recommended {
+  background-color: $black !important;
+}
+
+.okeReviews .okeReviews-review-recommendation--yes::before,
+.okeReviews.okeReviews--theme .okeReviews-review-reviewer-profile-status--verified {
+  color: $black !important;
+}
+
+.okeReviews-starRating-indicator-layer.okeReviews-starRating-indicator-layer--foreground {
+  filter: brightness(0%) !important;
+}

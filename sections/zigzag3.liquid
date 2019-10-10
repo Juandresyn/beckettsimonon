@@ -4,23 +4,27 @@
   }
 </style>
 
-<header class="layout-section__header">
-  <h2 class="layout-section__title">{{ section.settings.title }}</h2>
-  <p class="layout-section__description">{{ section.settings.description }}</p>
-</header>
+<span class="js-on-show"
+  data-onshow-target=".zigzag__wrapper, .layout-section__header"
+  data-onshow-class="animation--fade-up animated">
+  <header class="layout-section__header animation--on-show">
+    <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+    <p class="layout-section__description">{{ section.settings.description }}</p>
+  </header>
 
-<div class="zigzag__wrapper">
-  {% for block in section.blocks %}
-    <article class="zigzag__item">
-      <div class="zigzag-item__info">
-        <h3 class="zigzag-item__title">{{ block.settings.title }}</h3>
-        <p class="zigzag-item__description">{{ block.settings.description }}</p>
-      </div>
-      <img src="{{ block.settings.image | img_url: 'master' }}"
-        class="zigzig-item__image" />
-    </article>
-  {% endfor %}
-</div>
+  <div class="zigzag__wrapper animation--on-show">
+    {% for block in section.blocks %}
+      <article class="zigzag__item">
+        <div class="zigzag-item__info">
+          <h3 class="zigzag-item__title">{{ block.settings.title }}</h3>
+          <p class="zigzag-item__description">{{ block.settings.description }}</p>
+        </div>
+        <img src="{{ block.settings.image | img_url: 'master' }}"
+          class="zigzig-item__image" />
+      </article>
+    {% endfor %}
+  </div>
+</span>
 
 {% schema %}
 {

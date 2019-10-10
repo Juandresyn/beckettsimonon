@@ -1,20 +1,29 @@
+
 <div class="affiliates__perks">
-  <h2 class="affiliates-perks__title">{{ section.settings.title }}</h2>
+  <span class="js-on-show"
+    data-onshow-target=".affiliates-perks__title"
+    data-onshow-class="animation--fade-up animated">
+    <h2 class="affiliates-perks__title animation--on-show">{{ section.settings.title }}</h2>
+  </span>
 
   <div class="affiliates-perks__wrapper">
     {% for block in section.blocks %}
-      <article class="affiliates__perk">
-        <div class="affiliates-perk__icon-wrapper">
-          <img class="affiliates-perk__icon"
-            src="{{ block.settings.icon | img_url: 'master' }}"
-            alt="{{ block.settings.title }}" />
-        </div>
+      <span class="js-on-show"
+        data-onshow-target=".affiliates__perk"
+        data-onshow-class="animation--fade-up-m animated">
+        <article class="affiliates__perk animation--on-show">
+          <div class="affiliates-perk__icon-wrapper">
+            <img class="affiliates-perk__icon"
+              src="{{ block.settings.icon | img_url: 'master' }}"
+              alt="{{ block.settings.title }}" />
+          </div>
 
-        <div class="affiliates-perk__info">
-          <h3 class="affiliates-perk__title">{{ block.settings.title }}</h3>
-          <p class="affiliates-perk__description">{{ block.settings.description }}</p>
-        </div>
-      </article>
+          <div class="affiliates-perk__info">
+            <h3 class="affiliates-perk__title">{{ block.settings.title }}</h3>
+            <p class="affiliates-perk__description">{{ block.settings.description }}</p>
+          </div>
+        </article>
+      </span>
     {% endfor %}
   </div>
 

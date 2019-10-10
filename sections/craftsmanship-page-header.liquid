@@ -1,0 +1,29 @@
+<script>
+  const page_header_title = `{{ section.settings.header_title }}`;
+  const page_header_img = `{{ section.settings.header_image | img_url: 'master' }}`;
+
+  $('.header-main').css('background-image', `linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url(${page_header_img})`);
+  $('.header-main__title').html(page_header_title);
+</script>
+
+{% schema %}
+  {
+    "name": "Craftsmanship Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header Data"
+      },
+      {
+        "type": "text",
+        "id": "header_title",
+        "label": "Header copy"
+      },
+      {
+        "type": "image_picker",
+        "id": "header_image",
+        "label": "Header Image"
+      }
+    ]
+  }
+{% endschema %}

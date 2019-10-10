@@ -259,6 +259,7 @@ input,
 optgroup,
 select,
 textarea {
+  appearance: none;
   font-family: sans-serif; /* 1 */
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */

@@ -29,8 +29,7 @@
   </section>
 
   <script>
-    $('html').addClass('modal--open');
-
+    const currentUrl = window.location.href;
     function closeFormModal() {
       $('.form-info__success').fadeOut('fast', function(e) {
         $(this).remove();
@@ -38,15 +37,19 @@
       });
     };
 
-    $('.js-form-info-modal-close').on('click', function() {
-      closeFormModal();
-    });
+    // if (currentUrl.includes('/pages/')) {
+      $('html').addClass('modal--open');
 
-    $(window).on('keyup', function(e) {
-      if (e.keyCode === 27) {
+      $('.js-form-info-modal-close').on('click', function() {
         closeFormModal();
-      }
-    });
+      });
+
+      $(window).on('keyup', function(e) {
+        if (e.keyCode === 27) {
+          closeFormModal();
+        }
+      });
+    // };
   </script>
 {% else %}
   {%- comment -%}<p class="form-info__error">{{ form.errors | default_errors }}</p>{%- endcomment -%}

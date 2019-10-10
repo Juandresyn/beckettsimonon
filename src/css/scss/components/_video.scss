@@ -3,6 +3,12 @@
     margin-bottom: 35px;
   }
 
+  &.layout-section {
+    @media (max-width: $tablet-small) {
+      padding: 70px 25px 100px;
+    }
+  }
+
   .layout-section__title {
     @media (min-width: $desktop) {
       margin-bottom: 20px;

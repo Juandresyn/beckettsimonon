@@ -123,7 +123,7 @@ if (typeof Vue === 'function') {
     template: `
       <div v-if="infoItem && infoItem.length > 0" class="media-video__iframe-wrapper js-on-show"
         data-onshow-target=".animation--on-show"
-        data-onshow-class="animation--fade-up animated">
+        data-onshow-class="animation--fade-up-m animated">
         <script :src="getUrls.js" async></script>
         <div class="wistia_responsive_padding animation--on-show" style="padding:56.25% 0 0 0;position:relative;">
           <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
@@ -185,10 +185,8 @@ if (typeof Vue === 'function') {
           class="layout-section__title product-media__carousel-title">
           {{ information.title }}
         </h2>
-        <p v-if="information.description"
-          class="layout-section__description product-media__carousel-description">
-          {{ information.description }}
-        </p>
+        <div v-if="information.description"
+          class="layout-section__description product-media__carousel-description" v-html="information.description"></div>
       </header>
     `,
   });

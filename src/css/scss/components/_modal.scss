@@ -59,6 +59,10 @@
   .modal--right__container {
     animation: show-modal 0.3s;
   }
+
+  #olark-wrapper button.olark-launch-button {
+    display: none !important;
+  }
 }
 
 @keyframes show-modal {

@@ -121,7 +121,7 @@ if (typeof Vue === 'function') {
           this.cart_count = items.length;
           this.updateGlobalCartCount(items.length);
           this.updateInlineCartTotalPrice();
-
+          AddToCartLoading();
         });
       },
 

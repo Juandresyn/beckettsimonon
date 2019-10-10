@@ -1,37 +1,43 @@
-<div class="collection-masonery" style="background-color: {{ section.settings.color_bg }};">
-  <header class="layout-section__header">
-    <h2 class="layout-section__title">{{ section.settings.title }}</h2>
-  </header>
-  <div class="collection-masonery__content">
-    <div class="collection-masonery__list">
-      {% for i in (1..6) %}
-        {% capture item_id %}collection_id_{{ i }}{% endcapture %}
-        {% capture use_custom_image %}collection_{{ i }}_custom_image{% endcapture %}
-        {% capture custom_image %}collection_image_{{ i }}{% endcapture %}
+<span class="js-on-show"
+  data-onshow-target=".collection-masonery"
+  data-onshow-class="animation--fade-up animated">
+  <div class="collection-masonery animation--on-show"
+    style="background-color: {{ section.settings.color_bg }};">
+    <header class="layout-section__header">
+      <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+    </header>
 
-        {% if section.settings[item_id] != "" %}
-          {% assign collection = collections[section.settings[item_id]] %}
+    <div class="collection-masonery__content">
+      <div class="collection-masonery__list">
+        {% for i in (1..6) %}
+          {% capture item_id %}collection_id_{{ i }}{% endcapture %}
+          {% capture use_custom_image %}collection_{{ i }}_custom_image{% endcapture %}
+          {% capture custom_image %}collection_image_{{ i }}{% endcapture %}
 
-          {% if section.settings[use_custom_image] %}
-            {% assign collection_image = collection.image.src %}
-          {% else %}
-            {% assign collection_image = section.settings[custom_image] %}
+          {% if section.settings[item_id] != "" %}
+            {% assign collection = collections[section.settings[item_id]] %}
+
+            {% if section.settings[use_custom_image] %}
+              {% assign collection_image = collection.image.src %}
+            {% else %}
+              {% assign collection_image = section.settings[custom_image] %}
+            {% endif %}
+
+            <a href="{{ collection.url }}"
+              class="collection-masonery__list-item__link collection-masonery__list-item-wrapper animation-parent"
+              style="background-image: url({{ collection_image | img_url: 'master' }});" >
+              <article id="{{ collection.handle }}" class="collection-masonery__list-item">
+                <h3 class="collection-masonery__list-item__title">{{ collection.title }}</h3>
+                <span class="collection-masonery__list-item__cta">{{ section.settings.collections_cta }} <span class="animation--go-to icon icon--arrow"></span></span>
+              </article>
+            </a>
           {% endif %}
-
-          <a href="{{ collection.url }}"
-            class="collection-masonery__list-item__link collection-masonery__list-item-wrapper animation-parent"
-            style="background-image: url({{ collection_image | img_url: 'master' }});" >
-            <article id="{{ collection.handle }}" class="collection-masonery__list-item">
-              <h3 class="collection-masonery__list-item__title">{{ collection.title }}</h3>
-              <span class="collection-masonery__list-item__cta">{{ section.settings.collections_cta }} <span class="animation--go-to icon icon--arrow"></span></span>
-            </article>
-          </a>
-        {% endif %}
-      {% endfor %}
+        {% endfor %}
+      </div>
+      <a href="{{ section.settings.cta_link }}" class="btn {{ section.settings.button_type }}">{{ section.settings.cta_text }}</a>
     </div>
-    <a href="{{ section.settings.cta_link }}" class="btn {{ section.settings.button_type }}">{{ section.settings.cta_text }}</a>
   </div>
-</div>
+</span>
 
 {% schema %}
 {

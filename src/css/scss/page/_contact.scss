@@ -48,7 +48,7 @@
 
 .contact-info {
   &__title {
-    font: 30px/1 $font-primary--bold;
+    font: 30px/1 $font-heading--bold;
     margin-bottom: 30px;
   }
 
@@ -76,6 +76,7 @@
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 9;
 
   @media (min-width: $desktop) {
     align-items: center;

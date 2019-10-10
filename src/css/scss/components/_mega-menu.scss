@@ -51,12 +51,12 @@ $mega-menu-width: calc(((100vw - 1280px) / 2) + 410px);
 
   &__fade {
     background: rgba(246,41,12,0);
-    background: -moz-linear-gradient(top, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(246,41,12,0)), color-stop(20%, rgba(255,255,255,0.35)), color-stop(57%, rgba(255,255,255,1)));
-    background: -webkit-linear-gradient(top, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
-    background: -o-linear-gradient(top, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
-    background: -ms-linear-gradient(top, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
-    background: linear-gradient(to bottom, rgba(246,41,12,0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255,255,255,0.35) 20%, rgba(255,255,255,1) 57%);
     bottom: 0;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6290c', endColorstr='#ffffff', GradientType=0 );
     height: 15vh;
@@ -104,7 +104,7 @@ $mega-menu-width: calc(((100vw - 1280px) / 2) + 410px);
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin-top: calc(((100vh - 40px) - 600px) / 2);
+    margin-top: calc(((100vh - 40px) - 680px) / 2);
   }
 
   &__product-info-wrapper {
@@ -209,5 +209,9 @@ $mega-menu-width: calc(((100vw - 1280px) / 2) + 410px);
 
   .mega-menu__overlay {
     display: block;
+  }
+
+  #olark-wrapper button.olark-launch-button {
+    display: none !important;
   }
 }

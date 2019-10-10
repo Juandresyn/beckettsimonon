@@ -48,7 +48,11 @@
 }
 
 .blog__search-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border-bottom: 1px solid $black;
+  border-radius: 0;
   font-family: $font-secondary;
   font-size: 15px;
   line-height: 36px;

@@ -13,14 +13,9 @@
         <button type="submit"
           id="product-toolbar__cta"
           name="add"
-          {% unless current_variant.available %}disabled="disabled"{% endunless %}
-          class="btn {{ section.settings.button_type }} product-header__button js-product-toolbar__cta">
+          class="btn {{ section.settings.button_type }} product-header__button js-product-toolbar__cta js-add-to-cart-btn">
           <span id="AddToCartText-{{ section.id }}-toolbar">
-            {% unless current_variant.available %}
-              {{ 'products.product.sold_out' | t }}
-            {% else %}
-              {{ 'products.product.add_to_cart' | t }}
-            {% endunless %}
+            {{ 'products.product.add_to_cart' | t }}
           </span>
         </button>
         <p class="product-header__shipping-info">Free shipping. Free returns. Free exchanges!</p>

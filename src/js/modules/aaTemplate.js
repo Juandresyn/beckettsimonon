@@ -87,6 +87,32 @@ var handleSvg = function() {
   });
 };
 
+function iOS() {
+
+  var iDevices = [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ];
+
+  if (!!navigator.platform) {
+    while (iDevices.length) {
+      if (navigator.platform === iDevices.pop()){ return true; }
+    }
+  }
+
+  return false;
+}
+
+// $(document).on('ready', () => {
+// });
+if(iOS()) {
+  $('html').addClass('ios');
+}
+
 $(window).on('load', function() {
   handleSvg();
   $('html').css("overflow", "");

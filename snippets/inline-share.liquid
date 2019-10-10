@@ -6,10 +6,18 @@
       </li>
     {% endif %}
 
+    {% if shareUrl %}
+      {% capture formatUrl %}{{ shop.url | append: shareUrl }}{% endcapture %}
+      {% assign urlToShare = formatUrl %}
+    {% else %}
+      {% capture formatUrl %}{{ shop.url | append: share_permalink }}{% endcapture %}
+      {% assign urlToShare = formatUrl %}
+    {% endif %}
+
     {% if settings.share_facebook %}
       <li class="article__social-sharing__item has-icon">
         <a target="_blank"
-          href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}"
+          href="//www.facebook.com/sharer.php?u={{ urlToShare }}"
           class="">
           <span class="icon icon--facebook"></span>
           <span class="visually-hidden">Share on Facebook</span>
@@ -20,7 +28,7 @@
     {% if settings.share_twitter %}
       <li class="article__social-sharing__item has-icon">
         <a target="_blank"
-          href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}"
+          href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ urlToShare }}"
           class="">
           <span class="icon icon--twitter"></span>
           <span class="visually-hidden">Share on Twitter</span>
@@ -29,7 +37,7 @@
     {% endif %}
 
     <li class="article__social-sharing__item has-icon">
-      <a href="mailto:?subject={{ share_title | url_param_escape }}&body={{ shop.url | append: share_permalink }}."
+      <a href="mailto:?subject={{ share_title | url_param_escape }}&body={{ urlToShare }}."
         class="">
         <span class="icon icon--envelope"></span>
         <span class="visually-hidden">Share by Email</span>

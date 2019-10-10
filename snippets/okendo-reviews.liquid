@@ -1,0 +1,14 @@
+{% comment %}
+  Product Reviews Widget
+{% endcomment %}
+<div data-oke-reviews-widget data-oke-reviews-product-id="shopify-{{ product.id }}">
+  {{ product.metafields.okendo.ProductReviewsWidgetSnippet }}
+</div>
+
+{% comment %}
+  Product Rating Summary
+
+  <div data-oke-reviews-product-listing-rating>
+    {{ product.metafields.okendo.ProductListingSnippet }}
+  </div>
+{% endcomment %}

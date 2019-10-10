@@ -5,5 +5,5 @@
     {% endfor %}
   </div>
 
-  {% include 'inline-share' with hasPre: true %}
+  {% include 'inline-share' with { hasPre: true, shareUrl: article.url }  %}
 </section>
