@@ -44,7 +44,7 @@
 
           <div class="article__grid-meta{% if article.image %} article__grid-meta--has-image{% endif %}">
             {% if section.settings.blog_show_author %}
-              <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+              <span class="article__author">Written by: {{ 'blogs.article.by_author' | t: author: article.author }}</span>
             {% endif %}
 
             {% if section.settings.blog_show_date %}
@@ -102,7 +102,7 @@
             </h3>
 
             {% if section.settings.blog_show_author %}
-              <span class="article__author">{{ 'homepage.onboarding.blog_author' | t }}</span>
+              <span class="article__author">Written by: {{ 'homepage.onboarding.blog_author' | t }}</span>
             {% endif %}
 
             <div class="rte article__grid-excerpt">

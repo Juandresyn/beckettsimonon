@@ -3,9 +3,11 @@
 {% endcomment %}
 
 {% section 'product-template' %}
-{% section 'product-information' %}
-{% section 'product-more-details' %}
-{% section 'product-media' %}
+{% unless product.tags contains 'Gift' %}
+  {% section 'product-information' %}
+  {% section 'product-more-details' %}
+  {% section 'product-media' %}
+{% endunless %}
 {% section 'product-faq' %}
 {% section 'product-popup' %}
 

@@ -51,6 +51,10 @@
   &__title {
     font-size: 15px;
     line-height: 28px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    width: 90%;
   }
 
   &__small {

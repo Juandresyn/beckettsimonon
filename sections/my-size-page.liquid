@@ -1,0 +1,34 @@
+<div class="{{ section.class }}">
+  <my-size label="{{ section.settings.label }}"
+    :auto-open="!!true"
+    :stand-alone="!!true"
+    label-class="my-size__page-label modal__trigger js-my-size-trigger"
+    image-url="{{ 'shape1.svg' | asset_url }}"></my-size>
+
+  <p class="my-size__resume js-my-size-resume-wrapper">Your size is: <br> <span class="js-my-size-resume">13</span></p>
+</div>
+
+<script>
+  window.productSizes = [{{ section.settings.sizes }}];
+</script>
+
+{% schema %}
+{
+  "name": "My Size Page",
+  "class": "my-size__stand-alone",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label"
+    },
+    {
+      "type": "text",
+      "id": "sizes",
+      "label": "sizes",
+      "info": "space comma separated: 1, 2, 3, 4, etc",
+      "default": "7, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14"
+    }
+  ]
+}
+{% endschema %}

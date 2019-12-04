@@ -5,7 +5,8 @@ var navClass = 'main-nav--sticky';
 
 if ($('body').hasClass('has-sticky-nav')) {
   $(window).scroll(function() {
-    if (window.innerWidth > 1023) {
+    if (true) {
+    // if (window.innerWidth > 1023) {
       var scroll = $(window).scrollTop();
       if(window.scrollY < 80) {
         navElem.removeClass(navClass);

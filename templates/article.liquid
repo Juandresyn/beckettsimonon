@@ -13,28 +13,30 @@
 
 {% if blog.comments_enabled? %}
   {% if number_of_comments > 0 %}
-    <h2 class="h3">{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h2>
+  <div class="comments">
+      <h2 class="comments__counter">{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h2>
 
-    {% paginate article.comments by 5 %}
+      {% paginate article.comments by 5 %}
 
-      {% comment %}
-        #comments is required, it is used as an anchor link by Shopify.
-      {% endcomment %}
-      <div id="comments">
-        <ul class="article__comments">
-          {% for comment in article.comments %}
-            <li id="{{ comment.id }}" class="comment">
-              {% include 'comment' %}
-            </li>
-          {% endfor %}
-        </ul>
+        {% comment %}
+          #comments is required, it is used as an anchor link by Shopify.
+        {% endcomment %}
+        <div id="comments" class="comments__wrapper">
+          <ul class="article__comments">
+            {% for comment in article.comments %}
+              <li id="{{ comment.id }}" class="comment">
+                {% include 'comment' %}
+              </li>
+            {% endfor %}
+          </ul>
 
-        {% if paginate.pages > 1 %}
-          {% include 'pagination' %}
-        {% endif %}
+          {% if paginate.pages > 1 %}
+            {% include 'pagination' %}
+          {% endif %}
 
-      </div>
-    {% endpaginate %}
+        </div>
+      {% endpaginate %}
+    </div>
   {% endif %}
 
   {% form 'new_comment', article %}

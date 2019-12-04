@@ -97,12 +97,13 @@
             name="add"
             class="btn {{ section.settings.button_type }} product-header__button js-add-to-cart-btn">
             <span>
-              {{ 'products.product.add_to_cart' | t }}
+              Add To Cart
             </span>
           </button>
         </div>
-
-        <p class="product-header__shipping-info">{% comment %}Pre-order now at a discounted price. Shipping: {{ shipping_date }}.<br />{% endcomment %}<span>Free shipping, free returns, free exchanges.</span></p>
+        {% unless product.tags contains 'Gift' %}
+          <p class="product-header__shipping-info">{% comment %}Pre-order now at a discounted price. Shipping: {{ shipping_date }}.<br />{% endcomment %}<span>Free shipping. Free returns. Free exchanges.</span></p>
+        {% endunless %}
 
         <select id="product-variants" name="id" class="js-product-variants product-variants-selector">
           {% for variant in product.variants %}
@@ -112,7 +113,7 @@
             {% endfor %}
             <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}
               value="{{ variant.id | downcase | replace: '"', "'" | replace: ' ', '' | remove: "/" }}"
-              data-options="{{ scapedValue }}"
+              data-options="-{{ scapedValue }}"
               data-object="{{ variant }}">
               {{ variant.title }}
             </option>
@@ -134,17 +135,19 @@
 </div>
 
 <span id="product-info">
-  {% include 'product-information' with product %}
+  {% unless product.tags contains 'Gift' %}
+    {% include 'product-information' with product %}
 
-  {% include 'product-more-details' with product %}
+    {% include 'product-more-details' with product %}
 
-  {% include 'product-shipping-details' with shipping_date, { shipping: section.settings } %}
+    {% include 'product-shipping-details' with shipping_date, { shipping: section.settings } %}
 
-  {% include 'product-media' with product %}
+    {% include 'product-media' with product %}
 
-  {% include 'product-reviews' with { productId: product.id } %}
+    {% include 'product-reviews' with { productId: product.id } %}
 
-  {% include 'product-faq' %}
+    {% include 'product-faq' %}
+  {% endunless %}
 </span>
 
 {% unless product == empty %}

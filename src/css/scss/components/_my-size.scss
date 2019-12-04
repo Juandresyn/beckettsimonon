@@ -120,6 +120,48 @@
   &__trigger {
     cursor: pointer;
   }
+
+  &__page {
+    margin: 90px auto 50px;
+    max-width: 690px;
+    text-align: center;
+  }
+
+  &__page-label {
+    color: $scarlet;
+    font-family: $font-secondary--bold;
+    font-size: 30px;
+    line-height: 50px;
+
+    &:hover {
+      color: $black;
+    }
+  }
+
+  &__stand-alone {
+    margin: 40px;
+
+    .my-size__footer {
+      left: 15px;
+
+      @media (min-width: $desktop) {
+        left: 30px;
+      }
+    }
+  }
+
+  &__resume {
+    color: $black;
+    display: none;
+    padding-top: 20px;
+
+    span {
+      color: $scarlet;
+      font-size: 50px;
+      font-family: $font-primary--bold;
+      line-height: 65px;
+    }
+  }
 }
 
 .my-size {

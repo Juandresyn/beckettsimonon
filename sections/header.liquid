@@ -57,11 +57,17 @@
     {% assign header_classes = "header-main--small" %}
   {% endif %}
 
-{% elsif template contains 'account' or
-  template contains 'order' or
-  template contains 'customer' %}
+{% elsif template contains 'account'
+  or template contains 'order'
+  or template contains 'customer' %}
 
   {% assign is_customer = true %}
+  {% assign header_classes = "header-main--small" %}
+
+{% elsif template == 'page' %}
+
+  {% assign header_image = '' %}
+  {% assign header_image_str = '' %}
   {% assign header_classes = "header-main--small" %}
 
 {% elsif template contains '404' %}
@@ -78,6 +84,7 @@
   or template contains 'collection'
   or template contains 'page.affiliates'
   or template contains 'page.information'
+  or template contains 'page.mysize'
   or template contains 'page.reviews' %}
   {% assign themeColor = "nav--white" %}
   {% capture header_logo %}{{ 'logo.svg' | asset_url }}{% endcapture %}

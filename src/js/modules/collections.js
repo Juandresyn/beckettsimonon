@@ -50,15 +50,18 @@ $(window).on('load', function() {
   });
 });
 
-const defineVariantUrl = async (productHandle, color) => {
+const defineVariantUrl = async (productHandle, color, removeSlash = false) => {
   let item = null;
+  const colorWithoutSlash = (i) => splitAndJoin(i.option1.toLowerCase(), '/', '') === color || (i.option2 ? splitAndJoin(i.option2.toLowerCase(), '/', '') === color : false);
+  const colorWithSlash = (i) => i.option1.toLowerCase() === color || (i.option2 ? i.option2.toLowerCase() === color : false);
+  const productColor = (i) => removeSlash ? colorWithoutSlash(i) : colorWithSlash(i);
   await $.ajax({
     url: '/products/'+productHandle+'.js',
     method: 'GET',
     dataType: 'json',
     success: function(data) {
-      const firstItem = data.variants.find(i => (i.option1.toLowerCase() === color || i.option2.toLowerCase() === color));
-      console.log('__', firstItem);
+      const firstItem = data.variants.find(i => productColor(i));
+      console.log('__', color);
       item = `${data.url}?variant=${firstItem.id}`;
       return item;
     }
@@ -74,7 +77,7 @@ $('.js-product-grid-color').on('change', async function() {
   var targetSecondary = $(`#${$(this).data('target-secondary')}`);
   var pImages = target.data('images').split(',');
   var color = $(`[name="${$(this).attr('name')}"]:checked`).val();
-  var url = await defineVariantUrl(handle, color);
+  var url = await defineVariantUrl(handle, color, true);
 
   $(`#card-${handle}`).attr('href', url);
   target.attr('src', filterColorImages(pImages, color)[0]);

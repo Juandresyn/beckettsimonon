@@ -1,3 +1,4 @@
+{% assign productType = product.type | downcase %}
 <section class="product-toolbar">
   <div class="product-toolbar__wrapper">
     <div class="product-toolbar__info">
@@ -5,7 +6,7 @@
       <p class="product-header__price product-toolbar__price">{{ price | money_without_trailing_zeros }}</p>
     </div>
 
-    <div class="product-toolbar__actions">
+    <div class="product-toolbar__actions {% if productType == 'bags' %}product-toolbar__actions--single{% endif %}">
       <div class="product-toolbar__variants-wrapper">
         {% include 'product-options' with: { helperBar: true }%}
       </div>
@@ -15,10 +16,10 @@
           name="add"
           class="btn {{ section.settings.button_type }} product-header__button js-product-toolbar__cta js-add-to-cart-btn">
           <span id="AddToCartText-{{ section.id }}-toolbar">
-            {{ 'products.product.add_to_cart' | t }}
+            Add To Cart
           </span>
         </button>
-        <p class="product-header__shipping-info">Free shipping. Free returns. Free exchanges!</p>
+        <p class="product-header__shipping-info">Free shipping. Free returns. Free exchanges.</p>
       </div>
     </div>
   </div>

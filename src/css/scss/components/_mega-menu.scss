@@ -19,7 +19,7 @@ $mega-menu-width: calc(((100vw - 1280px) / 2) + 410px);
   &__wrapper {
     height: 100%;
     overflow-y: scroll;
-    padding: 0 40px 15vh 25px;
+    padding: 0 40px 20vh 25px;
 
     // Basically, when the screen is at least 1320px
     // because 25px of padding os the sides are 50px.

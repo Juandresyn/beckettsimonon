@@ -1,0 +1,28 @@
+.comments {
+  margin: 0 auto 70px;
+  max-width: 650px;
+
+  &__counter {
+    color: $gray;
+    font: 14px/18px $font-secondary--bold;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+  }
+}
+
+.comment {
+  &__content {
+    border-bottom: 1px solid $dark-gray-2;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+  }
+
+  &__meta {
+    color: $gray;
+    display: inline-block;
+    font: 13px/15px $font-secondary--light;
+    font-style: italic;
+    padding-top: 15px;
+    text-transform: capitalize;
+  }
+}

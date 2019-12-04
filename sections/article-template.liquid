@@ -9,7 +9,7 @@
       {% endif %}
 
       {% if section.settings.blog_show_author %}
-        <p class="article__author">{{ article.author }}</p>
+        <p class="article__author">Written by: <span>{{ article.author }}</span></p>
       {% endif %}
 
       {% if section.settings.blog_show_date %}
@@ -30,6 +30,18 @@
     </div>
   </div>
 </div>
+
+<script>
+  if (window.innerWidth > 650) {
+    const images = document.querySelectorAll('.article__description img');
+    images.forEach(i => {
+      if (i.width > 650) {
+        i.style.marginLeft = '-15%';
+        i.style.marginRight = '-15%';
+      }
+    });
+  }
+</script>
 
 {% schema %}
   {

@@ -113,7 +113,15 @@ if (typeof Vue === 'function') {
 
       handleRerender() {
         this.ajaxGetCart(({ items }) => {
+          items.forEach((item, index) => {
+            item.material = this.getMaterial(item.handle, index, false);
+          });
+
           this.cart = items;
+
+          console.log(this.cart);
+
+
           if (this.cart_count === 0) {
             $('.js-empty-template').toggle();
           }
@@ -125,7 +133,7 @@ if (typeof Vue === 'function') {
         });
       },
 
-      getMaterial(handle, index) {
+      getMaterial(handle, index, cb = true) {
         $.ajax({
           method: 'GET',
           url: `/products/${handle}.js`,
@@ -135,8 +143,16 @@ if (typeof Vue === 'function') {
           const material = data.tags.filter(m => m.includes('material_'));
           const getColor = this.cart[index].options_with_values.filter(c => c.name.toLowerCase() === 'color');
           const color = getColor.length > 0 ? ` - ${getColor[0].value}` : '';
+          const finalMaterial = material.length > 0 ? `${material[0].replace('material_', '')}${color}` : '';
 
-          this.cart[index].material = material.length > 0 ? `${material[0].replace('material_', '')}${color}` : '';
+          if (!cb) {
+            this.cart[index].material = finalMaterial;
+          } else {
+            return finalMaterial;
+          }
+
+          console.log(color, material);
+
         });
       },
     },
@@ -157,10 +173,10 @@ if (typeof Vue === 'function') {
           <div class="cart-item__info">
             <h2 class="cart-item__title">{{ cleanTitle(item.title) }}</h2>
 
-            <small class="cart-item__small">{{ getMaterial(item.handle, index) }} {{ item.material }}</small>
+            <small class="cart-item__small" :data-material="item.material">{{ getMaterial(item.handle, index) }} {{ item.material }}</small>
             <small v-for="(opt, ind) in item.options_with_values" :key="ind" class="cart-item__small">
               <template v-if="item.material !== ''">
-                <template v-if="opt.name.toLowerCase() !== 'color'">
+                <template v-if="opt.name.toLowerCase() == 'size'">
                   {{ opt.name }} {{ opt.value }}
                 </template>
               </template>
@@ -186,7 +202,7 @@ if (typeof Vue === 'function') {
             </div>
           </div>
 
-          <p class="cart-item__price">$ {{ cleanPrice(item.line_price) }}</p>
+          <p class="cart-item__price">$ {{ cleanPrice(item.price * item.quantity) }}</p>
           <span @click="handleRemoveItem(index)" class="cart-item__remove">Remove</span>
         </div>
       </div>

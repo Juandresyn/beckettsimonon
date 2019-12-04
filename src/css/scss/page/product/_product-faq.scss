@@ -1,21 +1,25 @@
 .product-faq {
   background-color: $light-gray-3;
   padding: 80px 0 90px 0;
-}
 
-.product-faq__wrapper {
-  margin: 0 auto;
-  max-width: 600px;
+  &__wrapper {
+    margin: 0 auto;
+    max-width: 600px;
 
-  @media (max-width: $desktop) {
-    padding: 0 20px;
+    @media (max-width: $desktop) {
+      padding: 0 20px;
+    }
   }
-}
 
-.product-faq__header {
-  margin-bottom: 40px;
-}
+  &__header {
+    margin-bottom: 40px;
+  }
 
-.product-faq__title {
-  text-align: center;
+  &__title {
+    text-align: center;
+  }
+
+  &__item-description a {
+    color: $scarlet;
+  }
 }

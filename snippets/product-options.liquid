@@ -133,10 +133,32 @@
       {% if optionName == 'size' %}
         <div class="product-header__variant">
           <h2 class="product-header__variants-title">{{ section.settings.size_label }}
-            <my-size label="{{ section.settings.size_link_label }}"
-              label-class="product-header__variant-instructions modal__trigger js-my-size-trigger"
-              image-url="{{ 'shape1.svg' | asset_url }}"></my-size>
+            {% unless product.tags contains 'category_accessories' %}
+              <my-size label="{{ section.settings.size_link_label }}"
+                label-class="product-header__variant-instructions modal__trigger js-my-size-trigger"
+                image-url="{{ 'shape1.svg' | asset_url }}"></my-size>
+            {% endunless %}
           </h2>
+
+          <div class="select-wrapper">
+            <select id="product-option-{{ optionName }}" name="{{ optionName }}" class="select product-header__variant-select js-product-options-size">
+              {% for value in product_option.values %}
+                {% assign scapedValue = value | replace: '"', "'" | replace: ' ', '' %}
+                <option {% if product_option.selected_value == value %}selected{% endif %}
+                  value="{{ scapedValue }}">
+                  {{ value }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <script> window.productSizes = {{ product_option.values | json }}</script>
+      {% endif %}
+
+      {% if optionName != 'size' and optionName != 'color' %}
+        <div class="product-header__variant">
+          <h2 class="product-header__variants-title">{{ optionName }}</h2>
 
           <div class="select-wrapper">
             <select id="product-option-{{ optionName }}" name="{{ optionName }}" class="select product-header__variant-select js-product-options-size">

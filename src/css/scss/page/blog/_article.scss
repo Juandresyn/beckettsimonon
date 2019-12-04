@@ -36,7 +36,10 @@
     font: 13px/18px $font-secondary--bold;
     margin: 40px 0 80px;
     text-align: center;
-    text-transform: uppercase;
+
+    span {
+      text-transform: uppercase;
+    }
   }
 
   &__image {
@@ -57,6 +60,7 @@
     }
 
     .separator {
+      border-bottom: 1px solid $icon-gray;
       padding: 20px 0;
 
       @media (min-width: $desktop) {
@@ -70,21 +74,17 @@
     }
 
     .article__social-sharing {
-      padding-top: 40px;
+      padding-top: 20px;
 
       .icon {
         font-size: 20px;
       }
     }
   }
-
-  &__comments {
-    max-width: 570px;
-  }
 }
 
 .article__content {
-  max-width: 570px;
+  max-width: 690px;
   margin: 0 auto;
 
   &:last-of-type .article__description {
@@ -189,6 +189,7 @@
 }
 
 .article__social-sharing__item {
+  display: inline-block;
   margin-right: 20px;
 
   &:not(.has-icon) {
@@ -207,10 +208,8 @@
   &:last-of-type {
     margin-right: 0;
   }
-}
 
-.article__social-sharing {
-  &__item {
-    display: inline-block;
+  a {
+    text-decoration: none;
   }
 }

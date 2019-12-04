@@ -1,3 +1,15 @@
+.page-generic {
+  &__wrapper {
+    margin: 75px auto;
+    max-width: 720px;
+  }
+
+  &__title {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+}
+
 .page-block {
   max-width: $site-max-width + 50px;
   margin: 0 auto;

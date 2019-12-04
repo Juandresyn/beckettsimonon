@@ -8,6 +8,10 @@
   .header-main {
     height: auto;
   }
+
+  .color-item__label span:nth-child(2) {
+    top: 11px;
+  }
 }
 
 .product__container {
@@ -178,6 +182,7 @@
   font-family: $font-secondary;
   font-size: 15px;
   margin-bottom: 10px;
+  text-transform: capitalize;
 }
 
 .product-header__variants-small {

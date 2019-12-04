@@ -80,6 +80,16 @@
   }
 }
 
+.product-toolbar__actions--single {
+  .product-toolbar__variants-wrapper {
+    display: none;
+
+    @media (min-width: $desktop) {
+      display: block;
+    }
+  }
+}
+
 .product-toolbar__variants {
   align-items: center;
   display: flex;

@@ -32,12 +32,20 @@ if (typeof Vue === 'function') {
       labelClass: {
         default: '',
         type: String,
-      }
+      },
+      autoOpen: {
+        default: false,
+        type: Boolean,
+      },
+      standAlone: {
+        default: false,
+        type: Boolean,
+      },
     },
 
     data: function () {
       return {
-        isOpen: false,
+        isOpen: true,
         modalDefaultClasses: 'modal my-size-modal my-size',
         step: 0,
         stepCount: 5,
@@ -164,6 +172,10 @@ if (typeof Vue === 'function') {
           document.documentElement.classList.toggle('my-size-modal--open');
         }
       });
+
+      if (this.autoOpen) {
+        this.toggleModal()
+      }
     },
 
     updated() {
@@ -246,8 +258,18 @@ if (typeof Vue === 'function') {
       },
 
       shopNow(size) {
-        this.setSize(size);
-        handleProductChanges();
+        if (this.standAlone) {
+          const resumeWrapper = document.querySelector('.js-my-size-resume-wrapper');
+          const resume = document.querySelector('.js-my-size-resume');
+
+          resumeWrapper.style.display = 'block'
+          resume.innerHTML = this.valuePicked.size;
+
+          this.toggleModal();
+        } else {
+          this.setSize(size);
+          handleProductChanges();
+        }
 
         // const addTocart = document.querySelector('#add-to-cart');
         // addTocart.click();

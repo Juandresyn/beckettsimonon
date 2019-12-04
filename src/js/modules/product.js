@@ -154,13 +154,28 @@ const handleProductChanges = function() {
   $('.js-product-options-size, .js-product-options-color').on('change', function() {
     const variantsSelector = $('.js-product-variants');
     const size = $('.js-product-options-size').val();
-    const colorOpt = $('.js-product-options-color:checked').val();
+    const colorOptChecked = $('.js-product-options-color:checked');
+    const colorOpt = colorOptChecked.length > 0 ? colorOptChecked.val().toLowerCase() : null;
 
     variantsSelector.find('option').each(function() {
       $(this).attr('selected', false);
 
       const singleOption = $(this).data('options');
-      if (singleOption.includes(!!colorOpt ? `${colorOpt}-${size}-` : `${size}-`) || singleOption.includes(!!colorOpt ? `${size}-${colorOpt}-` : `${size}-`)) {
+      let itemCondition = '';
+      let itemConditionReverse = '';
+
+      if (!!colorOpt && size) {
+        itemCondition = `-${colorOpt}-${size}-`
+        itemConditionReverse = `-${size}-${colorOpt}-`
+      } else if (!colorOpt && size) {
+        itemCondition = `-${size}-`
+        itemConditionReverse = `-${size}-`
+      } else if (!!colorOpt && !size) {
+        itemCondition = `-${colorOpt}-`
+        itemConditionReverse = `-${colorOpt}-`
+      }
+
+      if (singleOption.includes(itemCondition) || singleOption.includes(itemConditionReverse)) {
         $(this).attr('selected','selected');
       }
     });

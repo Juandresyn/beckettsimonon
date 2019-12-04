@@ -55,7 +55,7 @@ if (typeof Vue === 'function') {
 
     computed: {
       infoItem() {
-        return this.information[Object.keys(this.information)[0]];
+        return this.information[Object.keys(this.information)[0]].filter(i => i.eyebrow != '' && i.description != '');
       },
     },
 
@@ -220,7 +220,7 @@ if (typeof Vue === 'function') {
         <template v-for="(item, index) in infoItem">
           <h2 class="accordion__header product-faq__item-header">{{ item.question }}</h2>
           <div class="accordion__content product-faq__item-contnet">
-            <p class="accordion__text product-faq__item-description">{{ item.answer }}</p>
+            <div class="accordion__text product-faq__item-description" v-html="item.answer"></div>
           </div>
         </template>
       </div>
