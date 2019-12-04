@@ -105,12 +105,9 @@ const AddToCartLoading = (state = false, btnEl = '.js-add-to-cart-btn') => {
   btn.html(state ? loading : original);
 
   if (!state) {
-    $('html').addClass('modal--open');
-    $('html').addClass('cart-is-open');
+    simply.miniCartOpen();
   } else {
-    $('html').removeClass('modal--open');
-    $('html').removeClass('cart-is-open');
-
+    simply.miniCartClose();
   }
 }
 

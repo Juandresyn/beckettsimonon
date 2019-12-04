@@ -75,6 +75,17 @@
         "default": "#930303"
       },
       {
+        "type": "text",
+        "id": "inline_cart_upsell_text",
+        "label": "Upsell Products Text",
+        "default": "Make your order even better"
+      }, {
+        "type": "color",
+        "id": "inline_cart_upsell_text_color",
+        "label": "Upsell Products Text color",
+        "default": "#930303"
+      },
+      {
         "type": "header",
         "content": "Inline Cart Empty"
       },

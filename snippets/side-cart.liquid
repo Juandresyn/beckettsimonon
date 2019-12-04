@@ -1,0 +1,125 @@
+<div class="Fixed cart-modal" id="side_cart">
+  <div class="modal__container modal--right__container">
+    <div class="modal__header modal--right__header">
+      <p class="cart-modal__info-text" style="color: {{ settings.inline_cart_top_text_color }}">{{ settings.inline_cart_top_text }}</p>
+      <span class="js-on-click-disabled modal__close modal--right__close close" data-onclick-class="modal--open cart-is-open" data-onclick-target="html">
+        <span class="icon icon--close"></span>
+      </span>
+    </div>
+    <div class="modal__content modal--right__content">
+      <div class="cart__wrapper">
+
+        <form class="mini_cart cart__form">
+          <div class="cart_is_empty hide">
+            {% include 'cart-empty' %}
+          </div>
+          <div class="cart__list cart_data">
+            {% assign got_upsell = false %}
+            {% for item in cart.items %}
+
+            {%- comment -%}
+              // checking - if there is any product in cart that has upsell property, set a flag so that we dont show upsell in side-cart
+            {%- endcomment -%}
+            {% if item.properties['_upsell'] != blank  %}
+            {% assign got_upsell = true %}
+            {% endif %}
+
+            {%- comment -%} individual item in side-cart {%- endcomment -%}
+            <div class="cart__item items">
+              <a href="{{ item.url | within: collections.all }}" class="cart__image">
+                {%- assign src_name = item -%}
+                {%- assign src_alt = item.product.title -%}
+                <img src="{{src_name | img_url:small}}" alt="{{src_alt}}" class="cart-item__image">
+              </a>
+              <div class="cart-item__info">
+                <h2 class="cart-item__title">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h2>
+
+                {%- comment -%} show selected options {%- endcomment -%}
+                {% for opt in item.options_with_values %}
+                {% assign name = opt.name | downcase %}
+                {% if name contains 'color' %}
+                <small class="cart-item__small e">{{ name }}
+                {{ opt.value }}</small>
+                {% else %}
+                <small class="cart-item__small e">{{ name }}:
+                {{ opt.value }}</small>
+                {% endif %}
+                {% endfor %}
+
+                <label class="visually-hidden" for="updates_{{ item.key }}">{{ 'cart.label.quantity' | t }}</label>
+
+                <div class="spinner cart-item__quantity">
+                  <div class="min cart-item__quantity-button">-</div>
+                  <input type="number" name="updates[]" id="updates_{{ item.key }}" class="product_qty cart-item__quantity-input" value="{{ item.quantity }}" min="0" data-id="{{ item.key }}">
+                  <div class="plus cart-item__quantity-button">+</div>
+                </div>
+              </div>
+              <p class="cart-item__price">{{- item.price | money_without_trailing_zeros -}}</p>
+              <span class="remove cart-item__remove">
+                <a>
+                  {{ 'cart.general.remove' | t }}
+                </a>
+              </span>
+            </div>
+            <!-- end cart__item -->
+            {% endfor %}
+          </div>
+          
+          <!-- end cart_data -->
+          <div class="cart__actions hide">
+            <div class="cart__prices">
+              <div class="cart__price">
+                <p class="cart-price__label">Subtotal</p>
+                <p class="cart-price__total js-inline-cart-total">{{ cart.total_price | money_without_trailing_zeros }}</p>
+              </div>
+
+              <div class="cart__price">
+                <p class="cart-price__label">Shipping</p>
+                <p class="cart-price__total cart-price__total--red">FREE</p>
+              </div>
+            </div>
+
+            <a href='/checkout' class="btn btn--scarlet" >Checkout</a>
+          </div>
+        </form>
+       
+        {% assign upsell_found = false %}
+        
+        {%- comment -%}
+          // as per the flag we set for the cart items,
+          // if there is no upsell found, then only show upsell
+          // if upsell found dont show anything
+        {%- endcomment -%}
+        {% if got_upsell == false %}
+        
+        {% for item in cart.items  %}
+        {% assign product = item.product %}
+        {% unless upsell_found == true %}
+        {% for tag in product.tags %}
+        {% if tag contains 'upsell_' %}
+        {% assign upsell_found = true %}
+        {% assign upsell_found_in = item.id %}
+        {% assign upsell_handle = tag | remove: 'upsell_' %}
+        {% for option in item.options_with_values %}
+        {% if option.name == 'Color' %}
+        {% assign upsell_color = option.value %}
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+        {% endunless %}
+        {% endfor %}
+
+        {% include 'side-cart-upsell' %}
+
+        {% endif %}
+
+      </div>
+      <div class="count hide">
+        {{ cart.item_count }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,129 +1,131 @@
 <div class="all-products js-all-products">
-  <div class="all-products__container">
-    {% include 'all-products-filters' %}
-    <div class="all-products__overlay js-all-products-overlay"></div>
-    <div class="all-products__content">
-      {% paginate collections[collection.handle].products by section.settings.products_per_page %}
-        <ul class="product-grid">
-          {% assign productCount = 0 %}
-          {% for product in collections[collection.handle].products %}
-            {% assign product_tags_string = product.tags | join: ' ' %}
-            {% assign current_tags_string = current_tags | join: ' ' %}
-            {% assign current_tags_size = current_tags | size %}
-            {% assign tagsCount = 0 %}
+    <div class="all-products__container">
+      {% include 'all-products-filters' %}
+      <div class="all-products__overlay js-all-products-overlay"></div>
+      <div class="all-products__content">
+        {% paginate collections[collection.handle].products by section.settings.products_per_page %}
+          <ul class="product-grid">
+            {% assign productCount = 0 %}
+            {% for product in collections[collection.handle].products %}
+              {% if product.template_suffix != 'none' %}
+              {% assign product_tags_string = product.tags | join: ' ' %}
+              {% assign current_tags_string = current_tags | join: ' ' %}
+              {% assign current_tags_size = current_tags | size %}
+              {% assign tagsCount = 0 %}
 
-            {% for ptag in current_tags %}
-              {% if product_tags_string contains ptag %}
-                {% assign tagsCount = tagsCount | plus: 1 %}
-              {% endif %}
-            {% endfor %}
+              {% for ptag in current_tags %}
+                {% if product_tags_string contains ptag %}
+                  {% assign tagsCount = tagsCount | plus: 1 %}
+                {% endif %}
+              {% endfor %}
 
-            {% if current_tags_string != blank %}
-              {% if tagsCount == current_tags_size %}
+              {% if current_tags_string != blank %}
+                {% if tagsCount == current_tags_size %}
+                  {% assign productCount = productCount | plus: 1 %}
+                  {% include 'product-card' %}
+                {% endif %}
+              {% else %}
                 {% assign productCount = productCount | plus: 1 %}
                 {% include 'product-card' %}
               {% endif %}
-            {% else %}
-              {% assign productCount = productCount | plus: 1 %}
-              {% include 'product-card' %}
-            {% endif %}
-          {% endfor %}
-        </ul>
+              {% endif %}
+            {% endfor %}
+          </ul>
 
-        {% if productCount >= section.settings.products_per_page or paginate.current_page > 1 %}
-          {% include 'pagination' %}
-        {% endif %}
-      {% endpaginate %}
+          {% if productCount >= section.settings.products_per_page or paginate.current_page > 1 %}
+            {% include 'pagination' %}
+          {% endif %}
+        {% endpaginate %}
+      </div>
     </div>
   </div>
-</div>
 
-{% schema %}
-{
-  "name": "All products page",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Page header title"
-    },
-    {
-      "type": "text",
-      "id": "description",
-      "label": "Page header description"
-    },
-    {
-      "type": "image_picker",
-      "id": "header_image",
-      "label": "Page header image"
-    },
-    {
-      "type": "range",
-      "id": "products_per_page",
-      "label": "Products per page",
-      "default": 12,
-      "min": 8,
-      "max": 50,
-      "step": 1
-    }
-  ],
-  "blocks": [
-    {
-      "type": "Filter",
-      "name": "filter Item",
-      "settings": [
-        {
-          "type": "collection",
-          "id": "filter_collection",
-          "label": "Collection"
-        },
-        {
-          "type": "header",
-          "content": "Filter 1"
-        },
-        {
-          "type": "text",
-          "id": "filter_name_1",
-          "label": "Filter Name"
-        },
-        {
-          "type": "textarea",
-          "id": "filter_options_1",
-          "label": "Filter Options",
-          "info": "Format: Name:Tag. ---------------- IE. Oxford:type_oxford"
-        },
-        {
-          "type": "header",
-          "content": "Filter 2"
-        },
-        {
-          "type": "text",
-          "id": "filter_name_2",
-          "label": "Filter Name"
-        },
-        {
-          "type": "textarea",
-          "id": "filter_options_2",
-          "label": "Filter Options",
-          "info": "Format: Name:Tag. ---------------- IE. Oxford:type_oxford"
-        },
-        {
-          "type": "header",
-          "content": "Filter 3"
-        },
-        {
-          "type": "text",
-          "id": "filter_name_3",
-          "label": "Filter Name"
-        },
-        {
-          "type": "textarea",
-          "id": "filter_options_3",
-          "label": "Filter Options",
-          "info": "Format: Name:Tag. ---------------- IE. Oxford:type_oxford"
-        }
-      ]
-    }
-  ]
-}
-{% endschema %}
+  {% schema %}
+  {
+    "name": "All products page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Page header title"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Page header description"
+      },
+      {
+        "type": "image_picker",
+        "id": "header_image",
+        "label": "Page header image"
+      },
+      {
+        "type": "range",
+        "id": "products_per_page",
+        "label": "Products per page",
+        "default": 12,
+        "min": 8,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "blocks": [
+      {
+        "type": "Filter",
+        "name": "filter Item",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "filter_collection",
+            "label": "Collection"
+          },
+          {
+            "type": "header",
+            "content": "Filter 1"
+          },
+          {
+            "type": "text",
+            "id": "filter_name_1",
+            "label": "Filter Name"
+          },
+          {
+            "type": "textarea",
+            "id": "filter_options_1",
+            "label": "Filter Options",
+            "info": "Format: Name:Tag. ---------------- IE. Oxford:type_oxford"
+          },
+          {
+            "type": "header",
+            "content": "Filter 2"
+          },
+          {
+            "type": "text",
+            "id": "filter_name_2",
+            "label": "Filter Name"
+          },
+          {
+            "type": "textarea",
+            "id": "filter_options_2",
+            "label": "Filter Options",
+            "info": "Format: Name:Tag. ---------------- IE. Oxford:type_oxford"
+          },
+          {
+            "type": "header",
+            "content": "Filter 3"
+          },
+          {
+            "type": "text",
+            "id": "filter_name_3",
+            "label": "Filter Name"
+          },
+          {
+            "type": "textarea",
+            "id": "filter_options_3",
+            "label": "Filter Options",
+            "info": "Format: Name:Tag. ---------------- IE. Oxford:type_oxford"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}

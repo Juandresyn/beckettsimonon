@@ -2,6 +2,13 @@
 
 {% capture output %}
   {% for result in search.results limit: 10 %}
+
+    {% if result.types == product %}
+      {% if result.template_suffix == 'none' %}
+        {% continue %}
+      {% endif %}
+    {% endif %}
+
     {% assign resultPrice = result.price | money_without_trailing_zeros %}
     {% assign thumbURL = result.images[0] | product_img_url: '75x75' %}
     {% assign resultTitle = result.title | split: ' -' | first %}

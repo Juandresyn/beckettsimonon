@@ -1,20 +1,32 @@
 <!doctype html>
 <html class="no-js" lang="{{ shop.locale }}">
 <head>
-
   <!-- Hotjar Tracking Code for https://www.beckettsimonon.com/ -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1549162,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:1549162,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+  <!-- END Hotjar Tracking code -->
 
-    <!-- END Hotjar Tracking code -->
+  <!-- Begin SHOPIFY SIMPLY upsell inclusion -->
+  <script>
+    window.simply = window.simply || {};
+    window.cn = function(o){return"undefined"==typeof o||null==o||""==o.toString().trim()};
+    window.cb = function(o){if(o == 'true'){return true}else{return false}};
+    simply.money_format = "{{ shop.money_format }}";
+    simply.translations = {
+        addToCart : {{ 'products.product.add_to_cart' | t | json }},
+        soldOut : {{ 'products.product.sold_out' | t | json }},
+        unavailable : {{ 'products.product.unavailable' | t | json }}
+      };
+  </script>
+  <!-- END SHOPIFY SIMPLY upsell inclusion -->
 
   <meta name="google-site-verification" content="6PtsEEDcLG2JNxkSvss435wJGoRefHY6qT1Wg7y_Spw" />
   <meta charset="utf-8">
@@ -55,6 +67,7 @@
 
   <!-- Site Css -->
   {{ 'shop.min.css' | asset_url | stylesheet_tag }}
+  {{ 'bundle.scss' | asset_url | stylesheet_tag }}
   <!-- END Site Css -->
 
   {% if template.directory == 'customers' %}
@@ -67,6 +80,7 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+  <script src="{{ 'bundle.js' | asset_url }}" defer="defer"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
   <!-- Slick Slider -->
@@ -201,6 +215,7 @@
   {% include 'inline-cart' %}
   {% include 'search-modal' %}
   {% include 'mega-menu' %}
+  {%- include 'side-cart' -%}
 
   <script type="text/javascript">
     var initTemplate = function() {
@@ -227,5 +242,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+  <div class="black_bg Fixed"></div>
 </body>
 </html>

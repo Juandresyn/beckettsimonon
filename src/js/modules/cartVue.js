@@ -112,25 +112,7 @@ if (typeof Vue === 'function') {
       },
 
       handleRerender() {
-        this.ajaxGetCart(({ items }) => {
-          items.forEach((item, index) => {
-            item.material = this.getMaterial(item.handle, index, false);
-          });
-
-          this.cart = items;
-
-          console.log(this.cart);
-
-
-          if (this.cart_count === 0) {
-            $('.js-empty-template').toggle();
-          }
-
-          this.cart_count = items.length;
-          this.updateGlobalCartCount(items.length);
-          this.updateInlineCartTotalPrice();
-          AddToCartLoading();
-        });
+        simply.miniCartInit("open",AddToCartLoading); 
       },
 
       getMaterial(handle, index, cb = true) {

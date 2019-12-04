@@ -17,7 +17,7 @@
 
         <ul class="mega-menu__item-products">
           {% for p in collProducts %}
-            {% if p.available %}
+            {% if p.available and p.template_suffix != 'none' %}
               <li class="mega-menu__item-product">
                 <a href="{{ p.url }}"
                   class="mega-menu__item-link js-mega-menu-product"

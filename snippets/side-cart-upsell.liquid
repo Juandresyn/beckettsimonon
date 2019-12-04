@@ -1,0 +1,87 @@
+
+<div class="upsell-wrapper v-hide-co">
+  <p class="upsell_products_title" style="color: {{ settings.inline_cart_upsell_text_color }}">{{ settings.inline_cart_upsell_text }}</p>
+  <div class="upsell_product_list upsell_collection_{{upsell_handle}}">
+    
+    {%- comment -%}
+      // check thru all proucts in upsell collection
+      // if there is any product that has image with mathcing color of product in cart
+      // show first of that image as upsell product image
+      // else dont show that product in upsell
+    {%- endcomment -%}
+    {% for product in collections[upsell_handle].products %}
+      {% assign upsell_color_down = upsell_color | downcase %}
+      {%- for image in product.images -%}
+      {% if image contains upsell_color_down %}
+      {% assign upsell_image = image %}
+      {% break %}
+      {% endif %}
+      {%- endfor -%}
+      {% if upsell_image != blank %}
+      <div class="upsell_product_item product_card" data-id={{product.id}} data-image="{{upsell_image}}">
+        <div class="upsell_product_item_img {{upsell_color}}">
+          <img src="{{ upsell_image | img_url: '100x100' }}" alt="{{ product.image.alt }}" class="upsell_product_item_thumb">
+        </div>
+        <div class="upsell_product_item_info">
+          <p class="upsell_product_item_price">{{ product.price | money_without_trailing_zeros }}</p>
+          <h2 class="upsell_product_item_title">{{ product.title | escape }}</h2>
+
+          {%- comment -%}
+            // show material of product if available
+          {%- endcomment -%}
+          <p class="upsell_product_item_detail">
+            {% for tag in product.tags %}
+            {% if tag contains 'material_' %}
+            <span class="">{{ tag | remove: 'material_' }}</span>
+            {% endif %}
+            {% endfor %}
+          </p>
+          <div class="bottom-wrapper">
+            <div class="ajaxCart" >
+              <div class="flex_wrap">
+                {% comment %} Option selector {% endcomment %}
+                <input name="properties[_upsell]" type="hidden" class="upsell_found_in" value="{{upsell_found_in}}">
+
+                <div class="option_select_box {{upsell_found_in}}">
+    
+                  {% for option in product.options_with_values %}
+                    <div class="radio-wrapper js product-form__item{% if option.name == 'Color' %} hide{% endif %}">
+                      <label class="single-option-radio__label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %} hide"
+                      for="ProductSelect-option-{{ forloop.index0 }}">{{ option.name | escape }}</label>
+                      <div class="upsell_product_item_select_wrapper select-wrapper">
+                        <select class="single-option-selector single-option-selector-{{ section.id }} product-form__input upsell_product_item_select select" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
+                          {% for value in option.values %}
+                          <option value="{{ value | escape }}"{% if value == upsell_color %} selected="selected"{% endif %}>{{ value | escape }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  <select name="id" data-productid="{{product.id}}" id="ProductSelect_{{product.id}}" class="single_variants hide">
+                    {% for variant in product.variants %}
+                    {% if variant.available %}
+                    <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                    {% else %}
+                    <option {% unless hide_sold %}disabled="disabled"{% endunless %}>
+                      {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                    </option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+                {% comment %} end of option selector {% endcomment %}
+                <button class="btn add_to_cart_btn product_add_to_cart" type="button" >
+                  + Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <script type="text/json" id="upsell_json_{{product.id}}">
+            {{product | json}}
+          </script>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

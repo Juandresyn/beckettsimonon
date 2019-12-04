@@ -44,10 +44,10 @@
 
       {% if hasCart %}
         <li class="site-menu__list-item {{ class }}__list-item site-menu__list-search">
-          <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click"
+          <span class="site-menu__link site-menu__link--icon {{ class }}__list-link js-on-click-disabled header-cart-link side_cart cart"
             data-onclick-target="html"
             data-onclick-class="modal--open cart-is-open">
-            <span class="icon icon--shop site-menu__cart"></span> <span class="js-cart-count site-menu__cart-count">{{ cart.item_count }}</span>
+            <span class="icon icon--shop site-menu__cart"></span> <span class="js-cart-count site-menu__cart-count count">{{ cart.item_count }}</span>
           </span>
         </li>
       {% endif %}

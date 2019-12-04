@@ -5,6 +5,15 @@
     {% if search.performed %}
       <ul class="search-results__list">
         {% for item in search.results %}
+
+
+          {% if item.types == product %}
+            {% if item.template_suffix == 'none' %}
+              {% continue %}
+            {% endif %}
+          {% endif %}
+
+
           {% assign image = blank %}
           {% if item.object_type == 'product' %}
             {% assign action = 'View Product' %}

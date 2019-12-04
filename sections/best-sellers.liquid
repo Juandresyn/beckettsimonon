@@ -1,56 +1,58 @@
 <div class="best-sellers" style="background-color: {{ section.settings.color_bg }};">
-  <header class="layout-section__header">
-    <h2 class="layout-section__title">{{ section.settings.title }}</h2>
-  </header>
-  <div class="best-sellers__content">
-    {% assign collection = collections[section.settings.collection] %}
-    <ul class="product-grid">
-      {% for product in collection.products %}
-        {% unless forloop.index > section.settings.max %}
-        {% include 'product-card' %}
-        {% endunless %}
-      {% endfor %}
-    </ul>
+    <header class="layout-section__header">
+      <h2 class="layout-section__title">{{ section.settings.title }}</h2>
+    </header>
+    <div class="best-sellers__content">
+      {% assign collection = collections[section.settings.collection] %}
+      <ul class="product-grid">
+        {% for product in collection.products %}
+        {% if product.template_suffix != 'none' %}
+          {% unless forloop.index > section.settings.max %}
+          {% include 'product-card' %}
+          {% endunless %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
   </div>
-</div>
 
-{% schema %}
-{
-  "name": "Best Sellers",
-  "class": "layout-section section--best-sellers",
-  "settings": [
-    {
-      "type": "color",
-      "id": "color_bg",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title"
-    },
-    {
-      "type": "range",
-      "id": "max",
-      "min": 4,
-      "max": 40,
-      "step": 1,
-      "unit": "pdt",
-      "label": "Max products count",
-      "default": 8
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection to show"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Best Sellers",
-      "category": "Layout"
-    }
-  ]
-}
-{% endschema %}
+  {% schema %}
+  {
+    "name": "Best Sellers",
+    "class": "layout-section section--best-sellers",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "range",
+        "id": "max",
+        "min": 4,
+        "max": 40,
+        "step": 1,
+        "unit": "pdt",
+        "label": "Max products count",
+        "default": 8
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection to show"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Best Sellers",
+        "category": "Layout"
+      }
+    ]
+  }
+  {% endschema %}
