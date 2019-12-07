@@ -74,6 +74,16 @@ $mega-menu-width: calc(((100vw - 1280px) / 2) + 410px);
     }
   }
 
+  &__item-type {
+    font: 17px/30px $font-secondary--bold;
+    padding-bottom: 12px;
+    text-transform: capitalize;
+  }
+
+  &__item-products {
+    margin-bottom: 27px;
+  }
+
   &__item-link {
     border-bottom: 1px solid transparent;
     display: inline-block;

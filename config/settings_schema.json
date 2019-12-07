@@ -35,9 +35,19 @@
         "label": "Collection 1"
       },
       {
+        "type": "textarea",
+        "id": "collection_1_types",
+        "label": "Collection 1 Types"
+      },
+      {
         "type": "collection",
         "id": "collection_2",
         "label": "Collection 2"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_2_types",
+        "label": "Collection 2 Types"
       },
       {
         "type": "collection",
@@ -45,14 +55,29 @@
         "label": "Collection 3"
       },
       {
+        "type": "textarea",
+        "id": "collection_3_types",
+        "label": "Collection 3 Types"
+      },
+      {
         "type": "collection",
         "id": "collection_4",
         "label": "Collection 4"
       },
       {
+        "type": "textarea",
+        "id": "collection_4_types",
+        "label": "Collection 4 Types"
+      },
+      {
         "type": "collection",
         "id": "collection_5",
         "label": "Collection 5"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_5_types",
+        "label": "Collection 5 Types"
       }
     ]
   },

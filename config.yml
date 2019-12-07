@@ -9,7 +9,7 @@
 # `theme download --env=production`
 # `theme watch --env=develop`
 # `theme deploy --env=test`
-# 
+#
 # -----------------------------------------
 
 production:
@@ -27,11 +27,11 @@ production:
     - "*.sublime-project"
     - "package.json"
 test:
-  theme_id: 76386467915
-  password: e93eae5327d12904ebedbdbf04eebd0c
-  store: beckett-simonon-sandbox.myshopify.com
+  theme_id: 80062087215
+  password: db3c441942a5c40d9af682e649c9659f
+  store: development-beckett-simonon.myshopify.com
   concurrency: 4
-  timeout: 60s
+  timeout: 3000s
   ignore_files:
     - "node_modules/*"
     - "config/settings_data.json"

@@ -1,10 +1,21 @@
 {% assign collectionsArray = '' %}
+{% assign megaMenuTypes = '' %}
 {% for i in (1..5) %}
+{% assign collectionsTypesArray = '' %}
   {% capture collectionHandle %}collection_{{i}}{% endcapture %}
+  {% capture collectionTypesHandle %}collection_{{i}}_types{% endcapture %}
   {% assign collectionItem = settings[collectionHandle] %}
+  {% assign collectionTypesItem = settings[collectionTypesHandle] %}
+
   {% if collectionItem != '' %}
     {% capture collectionItemText %}{% unless forloop.first %},{% endunless %}{{ collectionItem }}{% endcapture %}
     {% assign collectionsArray = collectionsArray | append: collectionItemText %}
+    {% assign collectionsTypesArray = collectionsTypesArray | append: collectionTypesItem %}
     {% assign megaMenuLinks = collectionsArray | split: ',' %}
+
+    {% if collectionTypesItem != '' %}
+      {% capture megaMenuTypesArr %}{% unless forloop.first %}**{% endunless %}collection_{{collectionItem}}_:{{ collectionsTypesArray }}{% endcapture %}
+      {% assign megaMenuTypes = megaMenuTypes | append: megaMenuTypesArr %}
+    {% endif %}
   {% endif %}
 {% endfor %}

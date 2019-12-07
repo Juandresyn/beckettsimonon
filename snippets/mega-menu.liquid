@@ -9,15 +9,48 @@
       data-onclick-class="mega-menu--open"></span>
 
     {% for item in megaMenuLinks %}
+      {% assign mmTypes = megaMenuTypes | split: '**' %}
       {% assign coll = collections[item] %}
       {% assign collProducts = coll.products %}
+      {% assign mmActiveTypes = blank %}
+
+      {% for mmType in mmTypes %}
+        {% capture thisCollectionHandler %}collection_{{item}}_:{% endcapture %}
+        {% if mmType contains thisCollectionHandler %}
+          {% assign mmActiveTypesString = mmType | remove: thisCollectionHandler %}
+          {% assign mmActiveTypes = mmType | remove: thisCollectionHandler | split: ',' %}
+        {% endif %}
+      {% endfor %}
 
       <div class="mega-menu__item js-mega-menu-item" data-item="{{ item }}">
         <a href="{{coll.url}}"><h3 class="mega-menu__item-title animation-parent">View All {{ coll.title }} <span class="icon icon--arrow animation--go-to"></span></h3></a>
 
+        {% for type in mmActiveTypes %}
+          <h2 class="mega-menu__item-type">{{ type | remove: 'type_' }}</h2>
+          <ul class="mega-menu__item-products">
+            {% for p in collProducts %}
+              {% if p.available and p.template_suffix != 'none' and p.tags contains type %}
+                <li class="mega-menu__item-product">
+                  <a href="{{ p.url }}"
+                    class="mega-menu__item-link js-mega-menu-product"
+                    data-handle="{{ p.handle }}">{{ p.title }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endfor %}
+
         <ul class="mega-menu__item-products">
           {% for p in collProducts %}
-            {% if p.available and p.template_suffix != 'none' %}
+            {% assign showP = true %}
+
+            {% for tag in p.tags %}
+              {% if mmActiveTypesString contains tag %}
+                {% assign showP = false %}
+              {% endif %}
+            {% endfor %}
+
+            {% if p.available and p.template_suffix != 'none' and showP == true %}
               <li class="mega-menu__item-product">
                 <a href="{{ p.url }}"
                   class="mega-menu__item-link js-mega-menu-product"
