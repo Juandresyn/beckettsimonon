@@ -11,17 +11,17 @@
 
   h1 {
     font: 35px/48px $font-heading--bold;
-    margin: 80px 0 40px;
+    margin: 40px 0 35px;
   }
 
-  h1 {
+  h2 {
     font: 30px/44px $font-heading--bold;
-    margin: 80px 0 32px;
+    margin: 40px 0 27px;
   }
 
   h3 {
     font: 22px/35px $font-heading--bold;
-    margin: 80px 0 32px;
+    margin: 40px 0 27px;
   }
 
   // h2 {
@@ -41,9 +41,23 @@
     text-decoration: underline;
   }
 
+  ul,
+  ol {
+    margin-left: 20px;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
   li {
+    font: 16px/28px $font-primary;
     margin-bottom: 16px 0;
     margin-top: 16px;
+
+    p {
+      margin: 0;
+    }
   }
 
   img {

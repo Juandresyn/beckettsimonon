@@ -50,6 +50,8 @@ $(window).on('load', function() {
   });
 });
 
+const splitAndJoin = (src, splitBy, joinBy) => src.split(splitBy).join(joinBy);
+
 const defineVariantUrl = async (productHandle, color, removeSlash = false) => {
   let item = null;
   const colorWithoutSlash = (i) => splitAndJoin(i.option1.toLowerCase(), '/', '') === color || (i.option2 ? splitAndJoin(i.option2.toLowerCase(), '/', '') === color : false);
